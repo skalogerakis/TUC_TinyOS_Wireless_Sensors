@@ -5,8 +5,13 @@ import sys ,os
 import random
 
 t=Tossim([])
-f=sys.stdout #open('./logfile.txt','w')
-SIM_END_TIME= 10000 * t.ticksPerSecond()
+#f=sys.stdout #open('./logfile.txt','w')
+f= open('./logfile.txt','w');
+#SIM_END_TIME= 10000 * t.ticksPerSecond()
+SIM_END_TIME= 6000 * t.ticksPerSecond()
+
+#Everything in the terminal will be written in the log file
+sys.stdout = f;
 
 print "TicksPerSecond : ", t.ticksPerSecond(),"\n"
 
