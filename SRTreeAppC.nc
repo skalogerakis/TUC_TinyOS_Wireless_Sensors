@@ -23,9 +23,9 @@ implementation{
 	components new AMReceiverC(AM_NOTIFYPARENTMSG) as NotifyReceiverC;
 
 	//KP Edit
-	//TODO fix struct
-	components new AMSenderC(AM_NOTIFYPARENTMSG) as DistrSenderC;
-	components new AMReceiverC(AM_NOTIFYPARENTMSG) as DistrReceiverC;
+	//TODO check struct
+	components new AMSenderC(AM_DISTRMSG) as DistrSenderC;
+	components new AMReceiverC(AM_DISTRMSG) as DistrReceiverC;
 	components new PacketQueueC(SENDER_QUEUE_SIZE) as DistrSendQueueC;
 	components new PacketQueueC(RECEIVER_QUEUE_SIZE) as DistrReceiveQueueC;
 
@@ -48,12 +48,14 @@ implementation{
 	SRTreeC.RoutingAMPacket->RoutingSenderC.AMPacket;
 	SRTreeC.RoutingAMSend->RoutingSenderC.AMSend;
 	SRTreeC.RoutingReceive->RoutingReceiverC.Receive;
-
+	//DistrReceiveQueue
 	//KP Edit
 	SRTreeC.DistrPacket->DistrSenderC.Packet;
 	SRTreeC.DistrAMPacket->DistrSenderC.AMPacket;
 	SRTreeC.DistrAMSend->DistrSenderC.AMSend;
 	SRTreeC.DistrReceive->DistrReceiverC.Receive;
+	SRTreeC.DistrSendQueue->DistrSendQueueC;
+	SRTreeC.DistrReceiveQueue->DistrReceiveQueueC;
 	
 	SRTreeC.NotifyPacket->NotifySenderC.Packet;
 	SRTreeC.NotifyAMPacket->NotifySenderC.AMPacket;

@@ -6,6 +6,10 @@ enum{
 	SENDER_QUEUE_SIZE=5,
 	RECEIVER_QUEUE_SIZE=3,
 	AM_SIMPLEROUTINGTREEMSG=22,
+
+	//TODO check THAT
+	//KP Edit
+	AM_DISTRMSG=30,
 	AM_ROUTINGMSG=22,
 	AM_NOTIFYPARENTMSG=12,
 	SEND_CHECK_MILLIS=70000,
@@ -29,10 +33,11 @@ typedef nx_struct NotifyParentMsg
 	nx_uint8_t depth;
 } NotifyParentMsg;
 
-typedef nx_struct QMsg{
+//TODO check optimization
+typedef nx_struct DistrMsg{
 	nx_uint16_t count;
 	nx_uint16_t sum;
 	nx_uint16_t max;
-} QueryMessage;
+} DistrMsg;
 
 #endif
