@@ -29,4 +29,10 @@ typedef nx_struct NotifyParentMsg
 	nx_uint8_t depth;
 } NotifyParentMsg;
 
+typedef nx_struct QMsg{
+	nx_uint16_t count;
+	nx_uint16_t sum;
+	nx_uint16_t max;
+} QueryMessage;
+
 #endif
