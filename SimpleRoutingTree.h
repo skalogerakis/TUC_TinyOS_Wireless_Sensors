@@ -16,6 +16,8 @@ enum{
 	TIMER_PERIOD_MILLI=150000,
 	TIMER_FAST_PERIOD=200,
 	TIMER_LEDS_MILLI=1000,
+
+	MAX_CHILDREN = 20,
 };
 /*uint16_t AM_ROUTINGMSG=AM_SIMPLEROUTINGTREEMSG;
 uint16_t AM_NOTIFYPARENTMSG=AM_SIMPLEROUTINGTREEMSG;
@@ -39,5 +41,15 @@ typedef nx_struct DistrMsg{
 	nx_uint16_t sum;
 	nx_uint16_t max;
 } DistrMsg;
+
+/**Initially tried to create multiple arrays in SRTreeC.nc for each element
+Better this way less memory is consumed*/
+typedef nx_struct ChildDistrMsg{
+	//nx_uint16_t parentID;
+	nx_uint16_t senderID;
+	nx_uint16_t count;
+	nx_uint16_t sum;
+	nx_uint16_t max;
+} ChildDistrMsg;
 
 #endif
