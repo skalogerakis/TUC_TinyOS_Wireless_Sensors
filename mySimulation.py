@@ -4,11 +4,13 @@ from TOSSIM import *
 import sys ,os
 import random
 
+gridDimension = 4 ** 2
+
 t=Tossim([])
 #f=sys.stdout #open('./logfile.txt','w')
 f= open('./logfile.txt','w');
 #SIM_END_TIME= 10000 * t.ticksPerSecond()
-SIM_END_TIME= 6000 * t.ticksPerSecond()
+SIM_END_TIME= 3000 * t.ticksPerSecond()
 
 #Everything in the terminal will be written in the log file
 sys.stdout = f;
@@ -23,7 +25,7 @@ t.addChannel("Radio",f)
 t.addChannel("SRTreeC",f)
 #t.addChannel("PacketQueueC",f)
 
-for i in range(0,36):
+for i in range(0,gridDimension):
 	m=t.getNode(i)
 	m.bootAtTime(10*t.ticksPerSecond() + i)
 
@@ -51,10 +53,10 @@ for line in  lines:
 	str1=line.strip()
 	if str1:
 		val=int(str1)
-		for i in range(0,36):
+		for i in range(0,gridDimension):
 			t.getNode(i).addNoiseTraceReading(val)
 noiseF.close()
-for i in range(0,36):
+for i in range(0,gridDimension):
 	t.getNode(i).createNoiseModel()
 	
 ok=False
