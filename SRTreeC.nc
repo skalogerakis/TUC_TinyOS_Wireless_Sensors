@@ -196,7 +196,7 @@ implementation
 			slots as defined by TAG, based on max depth.Then,
 			devide every slot in sub-slots based again on max_depth
 			and current depth and use TOS_NODE_ID to avoid collision
-			between messages. *8 was used after externsive testing.
+			between messages. *25 was used after externsive testing.
 			Also tried to multiply with random value but was not 
 			effective in some cases.
 		*/
@@ -209,13 +209,12 @@ implementation
 			done before the time elapses.
 		*/
 
-		//startPer = ((slotTime / subSlotSplit) * subSlotChoose) + TOS_NODE_ID * 8;
 
-		startPer =  ((slotTime / subSlotSplit) * subSlotChoose) + TOS_NODE_ID * 10;
-
+		startPer =  (slotTime / subSlotSplit * subSlotChoose) + TOS_NODE_ID * 25;
 
 
-		dbg("SRTreeC", "START %d\n", startPer);
+
+		//dbg("SRTreeC", "START %d\n", startPer);
 
 		call DistrMsgTimer.startPeriodicAt(startPer, EPOCH);
 	}
