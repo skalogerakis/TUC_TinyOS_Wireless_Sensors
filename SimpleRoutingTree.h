@@ -30,13 +30,6 @@ typedef nx_struct RoutingMsg
 	nx_uint8_t depth;
 } RoutingMsg;
 
-// typedef nx_struct NotifyParentMsg
-// {
-// 	nx_uint16_t senderID;
-// 	nx_uint16_t parentID;
-// 	nx_uint8_t depth;
-// } NotifyParentMsg;
-
 //TODO check optimization
 typedef nx_struct DistrMsg{
 	nx_uint16_t count;

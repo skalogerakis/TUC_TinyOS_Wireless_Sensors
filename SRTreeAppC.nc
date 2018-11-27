@@ -30,6 +30,9 @@ implementation{
 
 	components new PacketQueueC(SENDER_QUEUE_SIZE) as RoutingSendQueueC;
 	components new PacketQueueC(RECEIVER_QUEUE_SIZE) as RoutingReceiveQueueC;
+
+	//KP Edit
+	components RandomMlcgC as RandomC;
 	
 	
 	SRTreeC.Boot->MainC.Boot;
@@ -55,5 +58,8 @@ implementation{
 	
 	SRTreeC.RoutingSendQueue->RoutingSendQueueC;
 	SRTreeC.RoutingReceiveQueue->RoutingReceiveQueueC;
-	
+
+	//KP Edit
+	SRTreeC.RandomGen -> RandomC;
+	SRTreeC.Seed -> RandomC.SeedInit;
 }

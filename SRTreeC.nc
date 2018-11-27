@@ -31,6 +31,10 @@ module SRTreeC
 	uses interface PacketQueue as DistrSendQueue;
 	uses interface PacketQueue as DistrReceiveQueue;
 	uses interface Receive as DistrReceive;
+
+	uses interface Random as RandomGen;
+	uses interface ParameterInit<uint16_t> as Seed;
+
 }
 implementation
 {
@@ -98,6 +102,16 @@ implementation
 		
 	}
 
+	void rootMsgPrint(DistrMsg* mrpkt){
+		dbg("SRTreeC", "#### Output: \n");
+		dbg("SRTreeC", "#### [count] = %d\n", mrpkt->count);
+		dbg("SRTreeC", "#### [sum] = %d\n", mrpkt->sum);
+		dbg("SRTreeC", "#### [max] = %d\n", mrpkt->max);
+		dbg("SRTreeC", "#### [AVG] = %f\n\n\n", (double)mrpkt->sum / mrpkt->count);
+		//dbg("SRTreeC", "Output: [count] = %d, [sum] = %d, [max] = %d, [avg] = %f\n", mrpkt->count, mrpkt->sum, mrpkt->max, (double)mrpkt->sum / mrpkt->count);
+
+	}
+
 	uint8_t maxFinder(uint16_t a, uint16_t b){
 		return (a > b) ? a : b;
 	}
@@ -105,7 +119,6 @@ implementation
 
 	event void Boot.booted()
 	{
-		/////// arxikopoiisi radio kai serial
 		call RadioControl.start();
 		
 		setRoutingSendBusy(FALSE);
@@ -116,21 +129,28 @@ implementation
 		{
 			curdepth=0;
 			parentID=0;
-			dbg("Boot", "curdepth = %d  ,  parentID= %d \n", curdepth , parentID);
+			//dbg("Boot", "curdepth = %d  ,  parentID= %d \n", curdepth , parentID);
 		}
 		else
 		{
 			curdepth=-1;
 			parentID=-1;
-			dbg("Boot", "curdepth = %d  ,  parentID= %d \n", curdepth , parentID);
+			//dbg("Boot", "curdepth = %d  ,  parentID= %d \n", curdepth , parentID);
 		}
+
+		/**
+			It is advised to pass as init parameter the different TOS_NODE_ID
+			to generate different numbers at every node, as rand is pseudo random
+			and does't always produce random values
+		*/
+		call Seed.init(TOS_NODE_ID);
 	}
 	
 	event void RadioControl.startDone(error_t err)
 	{
 		if (err == SUCCESS)
 		{
-			dbg("Radio" , "Radio initialized successfully!!!\n");
+			//dbg("Radio" , "Radio initialized successfully!!!\n");
 			
 			/**In case the radio was activated successfully then initialize children array */
 			InitChildrenArray();
@@ -140,6 +160,7 @@ implementation
 			/** Routing happens once at the start*/
 			if (TOS_NODE_ID==0)
 			{
+				dbg("SRTreeC", "###########START ROUTING###############\n\n");
 				
 				call RoutingMsgTimer.startOneShot(TIMER_FAST_PERIOD);
 		
@@ -147,7 +168,7 @@ implementation
 		}
 		else
 		{
-			dbg("Radio" , "Radio initialization failed! Retrying...\n");
+			//dbg("Radio" , "Radio initialization failed! Retrying...\n");
 			call RadioControl.start();
 		}
 	}
@@ -163,8 +184,8 @@ implementation
 		slotTime = EPOCH/MAX_DEPTH;
 		subSlotTime = MAX_DEPTH - curdepth;	/** WAS USED IN PREVIOUS IMPLEMENTATION WITH TIMERS*/
 
-		dbg("SRTreeC" , "Finished Rounting in cur node\n");
-		dbg("SRTreeC", " CHECK DEPTH INTI %d\n",curdepth);
+		//dbg("SRTreeC" , "Finished Rounting in cur node\n");
+		//dbg("SRTreeC", " CHECK DEPTH INTI %d\n",curdepth);
 
 
 		/** 
@@ -216,11 +237,11 @@ implementation
 		error_t enqueueDone;
 		
 		RoutingMsg* mrpkt;
-		dbg("SRTreeC", "RoutingMsgTimer fired!  radioBusy = %s \n",(RoutingSendBusy)?"True":"False");
+		//dbg("SRTreeC", "RoutingMsgTimer fired!  radioBusy = %s \n",(RoutingSendBusy)?"True":"False");
 
 		if(call RoutingSendQueue.full())
 		{
-			dbg("SRTreeC", "RoutingSendQueue is FULL!!! \n");
+			//dbg("SRTreeC", "RoutingSendQueue is FULL!!! \n");
 			return;
 		}
 		
@@ -228,7 +249,7 @@ implementation
 		mrpkt = (RoutingMsg*) (call RoutingPacket.getPayload(&tmp, sizeof(RoutingMsg)));
 		if(mrpkt==NULL)
 		{
-			dbg("SRTreeC","RoutingMsgTimer.fired(): No valid payload... \n");
+			//dbg("SRTreeC","RoutingMsgTimer.fired(): No valid payload... \n");
 			return;
 		}
 		atomic{
@@ -236,7 +257,7 @@ implementation
 		mrpkt->depth = curdepth;
 		}
 
-		dbg("SRTreeC" , "Sending RoutingMsg... \n");
+		//dbg("SRTreeC" , "Sending RoutingMsg... \n");
 		
 		call RoutingAMPacket.setDestination(&tmp, AM_BROADCAST_ADDR);
 		call RoutingPacket.setPayloadLength(&tmp, sizeof(RoutingMsg));
@@ -247,30 +268,30 @@ implementation
 		{
 			if (call RoutingSendQueue.size()==1)
 			{
-				dbg("SRTreeC", "SendTask() posted!!\n");
+				//dbg("SRTreeC", "SendTask() posted!!\n");
 				post sendRoutingTask();
 			}
 			
-			dbg("SRTreeC","RoutingMsg enqueued successfully in SendingQueue!!!\n");
+			//dbg("SRTreeC","RoutingMsg enqueued successfully in SendingQueue!!!\n");
 		}
 		else
 		{
-			dbg("SRTreeC","RoutingMsg failed to be enqueued in SendingQueue!!!");
+			//dbg("SRTreeC","RoutingMsg failed to be enqueued in SendingQueue!!!");
 		}		
 	}
 
 	event void RoutingAMSend.sendDone(message_t * msg , error_t err)
 	{
-		dbg("SRTreeC", "A Routing package sent... %s \n",(err==SUCCESS)?"True":"False");
+		//dbg("SRTreeC", "A Routing package sent... %s \n",(err==SUCCESS)?"True":"False");
 
 		
-		dbg("SRTreeC" , "Package sent %s \n", (err==SUCCESS)?"True":"False");
+		//dbg("SRTreeC" , "Package sent %s \n", (err==SUCCESS)?"True":"False");
 
 		setRoutingSendBusy(FALSE);
 		
 		if(!(call RoutingSendQueue.empty()))
 		{
-			dbg("SRTreeC" , "Check what this does!!!!");
+			//dbg("SRTreeC" , "Check what this does!!!!");
 			post sendRoutingTask();
 		}
 	
@@ -286,45 +307,37 @@ implementation
 		error_t enqueueDone;
 		uint16_t randVal;
 
-		
-		//RoutingMsg* mrpkt;
 		DistrMsg* mrpkt;
-		//dbg("SRTreeC", "RoutingMsgTimer fired!  radioBusy = %s \n",(RoutingSendBusy)?"True":"False");
-
-		//call DistrMsgTimer.startPeriodicAt(0, EPOCH);
-		//call DistrMsgTimer.startPeriodicAt(0, EPOCH);
 
 		
 		if(call DistrSendQueue.full())
 		{
-			dbg("SRTreeC", "DistrSendQueue is FULL!!! \n");
+			//dbg("SRTreeC", "DistrSendQueue is FULL!!! \n");
 			return;
 		}
 		
 		
-		//mrpkt = (RoutingMsg*) (call RoutingPacket.getPayload(&tmp, sizeof(RoutingMsg)));
 		mrpkt = (DistrMsg*) (call DistrPacket.getPayload(&tmp, sizeof(DistrMsg)));
 
 		if(mrpkt==NULL)
 		{
-			dbg("SRTreeC","DistrMsgTimer.fired(): No valid payload... \n");
+			//dbg("SRTreeC","DistrMsgTimer.fired(): No valid payload... \n");
 			return;
 		}
 
-		//TODO
-		//make it random and initialize it
-		randVal = 5;
 
-		//TODO fix fields used
+		/** Random value generator.
+			Already initialized and produces random values from 0 to 50
+		*/
+		randVal = call RandomGen.rand16() % 50;
+
+		dbg("SRTreeC", "Random value generated %d\n", randVal);
+
 		atomic{
-		// mrpkt->senderID=TOS_NODE_ID;
-		// mrpkt->depth = curdepth;
 		mrpkt->sum = randVal;
 		mrpkt->count = 1;
 		mrpkt->max = randVal;
 
-		//TODO check statements
-		//uint8_t j;
 
 		//SINATHRISI ASSIGN TO
 		for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
@@ -343,13 +356,14 @@ implementation
 		if(TOS_NODE_ID == 0){
 			roundCounter+=1;
 
-			dbg("SRTreeC", "###Epoch %d completed###", roundCounter);
-			dbg("SRTreeC", "Output: [count] = %d, [sum] = %d, [max] = %d, [avg] = %f", mrpkt->count, mrpkt->sum, mrpkt->max, (double)mrpkt->sum / mrpkt->count);
+			dbg("SRTreeC", "\n\n########################Epoch %d completed#####################\n", roundCounter);
+			rootMsgPrint(mrpkt);
+			//dbg("SRTreeC", "Output: [count] = %d, [sum] = %d, [max] = %d, [avg] = %f\n", mrpkt->count, mrpkt->sum, mrpkt->max, (double)mrpkt->sum / mrpkt->count);
 		}
 		else /** case we don't have root node then sent everything to the parent*/
 		{
 
-			dbg("SRTreeC", "Epoch: %d, Node: %d , Parent: %d, Sum: %d, count: %d, max: %d , depth: %d\n", roundCounter, TOS_NODE_ID,parentID, mrpkt->sum, mrpkt->count, mrpkt->max, curdepth);
+			dbg("SRTreeC", "Node: %d , Parent: %d, Sum: %d, count: %d, max: %d , depth: %d\n",TOS_NODE_ID,parentID, mrpkt->sum, mrpkt->count, mrpkt->max, curdepth);
 			call DistrAMPacket.setDestination(&tmp, parentID);
 			call DistrPacket.setPayloadLength(&tmp, sizeof(DistrMsg));
 
@@ -359,12 +373,11 @@ implementation
 			{
 				if (call DistrSendQueue.size()==1)
 				{
-					dbg("SRTreeC", "SendDistrTask() posted!!\n");
-					//TODO fix sendDistrTask()
+					//dbg("SRTreeC", "SendDistrTask() posted!!\n");
 					post sendDistrTask();
 				}
 			
-				dbg("SRTreeC","DistrMsg enqueued successfully in SendingQueue!!!\n");
+				//dbg("SRTreeC","DistrMsg enqueued successfully in SendingQueue!!!\n");
 			}
 			else
 			{
@@ -377,7 +390,7 @@ implementation
 
 	event void DistrAMSend.sendDone(message_t * msg , error_t err)
 	{
-		dbg("SRTreeC", "A Distribution package sent... %s \n",(err==SUCCESS)?"True":"False");
+		//dbg("SRTreeC", "A Distribution package sent... %s \n",(err==SUCCESS)?"True":"False");
 
 		//setRoutingSendBusy(FALSE);
 		//TODO CHECK STATEMENT BELOW. THEORITICALY IT SHOULD WORK
@@ -397,7 +410,7 @@ implementation
 		
 		msource = call DistrAMPacket.source(msg);
 		
-		dbg("SRTreeC", "### DistrReceive.receive() start ##### \n");
+		//dbg("SRTreeC", "### DistrReceive.receive() start ##### \n");
 		
 		atomic{
 		memcpy(&tmp,msg,sizeof(message_t));
@@ -407,7 +420,7 @@ implementation
 		
 		if( enqueueDone== SUCCESS)
 		{
-			dbg("SRTreeC","posting receiveDistrTask()!!!! \n");
+			//dbg("SRTreeC","posting receiveDistrTask()!!!! \n");
 			post receiveDistrTask();
 		}
 		else
@@ -416,12 +429,11 @@ implementation
 			
 		}
 		
-		dbg("SRTreeC", "### DistrReceive.receive() end ##### \n");
+		//dbg("SRTreeC", "### DistrReceive.receive() end ##### \n");
 		return msg;
 	}
 	
 	
-//	event message_t* Receive.receive(message_t* msg, void* payload, uint8_t len)
 	event message_t* RoutingReceive.receive( message_t * msg , void * payload, uint8_t len)
 	{
 		error_t enqueueDone;
@@ -430,8 +442,8 @@ implementation
 		
 		msource =call RoutingAMPacket.source(msg);
 		
-		dbg("SRTreeC", "### RoutingReceive.receive() start ##### \n");
-		dbg("SRTreeC", "Something received!!!  from %u  %u \n",((RoutingMsg*) payload)->senderID ,  msource);
+		//dbg("SRTreeC", "### RoutingReceive.receive() start ##### \n");
+		//dbg("SRTreeC", "Something received!!!  from %u  %u \n",((RoutingMsg*) payload)->senderID ,  msource);
 		
 		
 		atomic{
@@ -440,7 +452,7 @@ implementation
 		enqueueDone=call RoutingReceiveQueue.enqueue(tmp);
 		if(enqueueDone == SUCCESS)
 		{
-			dbg("SRTreeC","posting receiveRoutingTask()!!!! \n");
+			//dbg("SRTreeC","posting receiveRoutingTask()!!!! \n");
 			post receiveRoutingTask();
 		}
 		else
@@ -450,7 +462,7 @@ implementation
 		
 		//call Leds.led1Off();
 		
-		dbg("SRTreeC", "### RoutingReceive.receive() end ##### \n");
+		//dbg("SRTreeC", "### RoutingReceive.receive() end ##### \n");
 		return msg;
 	}
 	
@@ -465,17 +477,17 @@ implementation
 		uint16_t mdest;
 		error_t sendDone;
 		//message_t radioRoutingSendPkt;
-		dbg("SRTreeC","SendRoutingTask(): Starting....\n");
+		//dbg("SRTreeC","SendRoutingTask(): Starting....\n");
 		if (call RoutingSendQueue.empty())
 		{
-			dbg("SRTreeC","sendRoutingTask(): Q is empty!\n");
+			//dbg("SRTreeC","sendRoutingTask(): Q is empty!\n");
 			return;
 		}
 		
 		
 		if(RoutingSendBusy)
 		{
-			dbg("SRTreeC","sendRoutingTask(): RoutingSendBusy= TRUE!!!\n");
+			//dbg("SRTreeC","sendRoutingTask(): RoutingSendBusy= TRUE!!!\n");
 			setLostRoutingSendTask(TRUE);
 			return;
 		}
@@ -487,7 +499,7 @@ implementation
 
 		if(mlen!=sizeof(RoutingMsg))
 		{
-			dbg("SRTreeC","\t\tsendRoutingTask(): Unknown message!!!\n");
+			//dbg("SRTreeC","\t\tsendRoutingTask(): Unknown message!!!\n");
 
 			return;
 		}
@@ -495,7 +507,7 @@ implementation
 		
 		if ( sendDone== SUCCESS)
 		{
-			dbg("SRTreeC","sendRoutingTask(): Send returned success!!!\n");
+			//dbg("SRTreeC","sendRoutingTask(): Send returned success!!!\n");
 			setRoutingSendBusy(TRUE);
 		}
 		else
@@ -514,11 +526,11 @@ implementation
 		uint16_t mdest;
 		DistrMsg* mpayload;
 		
-		dbg("SRTreeC","SendDistrTask(): going to send one more package.\n");
+		//dbg("SRTreeC","SendDistrTask(): going to send one more package.\n");
 
 		if (call DistrSendQueue.empty())
 		{
-			dbg("SRTreeC","sendDistrTask(): Q is empty!\n");
+			//dbg("SRTreeC","sendDistrTask(): Q is empty!\n");
 			return;
 		}
 		
@@ -537,7 +549,7 @@ implementation
 		
 		if(mlen!= sizeof(DistrMsg))
 		{
-			dbg("SRTreeC", "\t\t sendDistrTask(): Unknown message!!\n");
+			//dbg("SRTreeC", "\t\t sendDistrTask(): Unknown message!!\n");
 			return;
 		}
 		
@@ -551,7 +563,7 @@ implementation
 		
 		if ( sendDone== SUCCESS)
 		{
-			dbg("SRTreeC","sendDistrTask(): Send returned success!!!\n");
+			//dbg("SRTreeC","sendDistrTask(): Send returned success!!!\n");
 
 			//setNotifySendBusy(TRUE);
 		}
@@ -575,13 +587,13 @@ implementation
 		uint8_t len;
 		message_t radioRoutingRecPkt;
 		
-		dbg("SRTreeC","ReceiveRoutingTask():received msg...\n");
+		//dbg("SRTreeC","ReceiveRoutingTask():received msg...\n");
 
 		radioRoutingRecPkt= call RoutingReceiveQueue.dequeue();
 		
 		len= call RoutingPacket.payloadLength(&radioRoutingRecPkt);
 		
-		dbg("SRTreeC","ReceiveRoutingTask(): len=%u \n",len);
+		//dbg("SRTreeC","ReceiveRoutingTask(): len=%u \n",len);
 
 		// processing of radioRecPkt
 		
@@ -591,8 +603,8 @@ implementation
 		{
 			RoutingMsg * mpkt = (RoutingMsg*) (call RoutingPacket.getPayload(&radioRoutingRecPkt,len));
 			
-			dbg("SRTreeC" ,"NodeID= %d , RoutingMsg received! \n",TOS_NODE_ID);
-			dbg("SRTreeC" , "receiveRoutingTask():senderID= %d , depth= %d \n", mpkt->senderID , mpkt->depth);
+			//dbg("SRTreeC" ,"NodeID= %d , RoutingMsg received! \n",TOS_NODE_ID);
+			//dbg("SRTreeC" , "receiveRoutingTask():senderID= %d , depth= %d \n", mpkt->senderID , mpkt->depth);
 
 			/**In that case we don't have a father yet*/
 			if ( (parentID<0)||(parentID>=65535))
@@ -600,27 +612,28 @@ implementation
 
 				parentID= call RoutingAMPacket.source(&radioRoutingRecPkt);//mpkt->senderID;q
 				curdepth= mpkt->depth + 1;
-				dbg("SRTreeC" ,"NodeID= %d : curdepth= %d , parentID= %d \n", TOS_NODE_ID ,curdepth , parentID);
+				// dbg("SRTreeC" ,"NodeID= %d : curdepth= %d , parentID= %d \n", TOS_NODE_ID ,curdepth , parentID);
 
 		
 				if (TOS_NODE_ID!=0)
 				{
-					dbg("SRTreeC" ,"ALERT with NodeID= %d : curdepth= %d , parentID= %d \n", TOS_NODE_ID ,curdepth , parentID);
+					dbg("SRTreeC" ,"NodeID= %d : curdepth= %d , parentID= %d \n", TOS_NODE_ID ,curdepth , parentID);
 					call RoutingMsgTimer.startOneShot(TIMER_FAST_PERIOD);
 				}
 			}
 			/** We already have a parent and we don't need to find
-			a better parent to implement TAG as requested. So just print
-			a message in that case*/
+				a better parent to implement TAG as requested. So just print
+				a message in that case
+			*/
 			else
 			{
-			 	dbg("SRTreeC" ,"Already have a parent with NodeID= %d : curdepth= %d , parentID= %d \n", TOS_NODE_ID ,curdepth , parentID);
+			 	//dbg("SRTreeC" ,"Already have a parent with NodeID= %d : curdepth= %d , parentID= %d \n", TOS_NODE_ID ,curdepth , parentID);
 			}
 			
 		}
 		else
 		{
-			dbg("SRTreeC","receiveRoutingTask():Empty message!!! \n");
+			//dbg("SRTreeC","receiveRoutingTask():Empty message!!! \n");
 
 			setLostRoutingRecTask(TRUE);
 			return;
@@ -637,7 +650,7 @@ implementation
 		uint8_t source;
 		message_t radioDistrRecPkt;
 		
-		dbg("SRTreeC","ReceiveDistrTask():received msg...\n");
+		//dbg("SRTreeC","ReceiveDistrTask():received msg...\n");
 
 		radioDistrRecPkt= call DistrReceiveQueue.dequeue();
 		
@@ -646,7 +659,7 @@ implementation
 		//TODO check that
 		source = call DistrAMPacket.source(&radioDistrRecPkt);
 		
-		dbg("SRTreeC","ReceiveDistrTask(): len=%u \n",len);
+		//dbg("SRTreeC","ReceiveDistrTask(): len=%u \n",len);
 
 		if(len == sizeof(DistrMsg))
 		{
@@ -666,15 +679,19 @@ implementation
 					break;
 
 				}else{
-					dbg("SRTreeC","CHECK IT %d \n",childrenArray[i].senderID);
-					dbg("SRTreeC", "#############SOMETHING........");
+					/**
+						Still haven't found from the children array the right
+						destination
+					*/
+					//dbg("SRTreeC","CHECK IT %d \n",childrenArray[i].senderID);
+					//dbg("SRTreeC", "#############SOMETHING........");
 				}
 			}
 			
 		}
 		else
 		{
-			dbg("SRTreeC","receiveDistrTask():Empty message!!! \n");
+			//dbg("SRTreeC","receiveDistrTask():Empty message!!! \n");
 			//setLostNotifyRecTask(TRUE);
 			return;
 		}
