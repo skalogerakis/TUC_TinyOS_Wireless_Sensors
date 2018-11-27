@@ -52,6 +52,9 @@ implementation
 	uint8_t i;
 	uint16_t startPer;
 
+	uint16_t slotTime;
+	uint16_t subSlotTime;
+
 	//KP Edit
 	/** Create Array of type ChildDristrMsg*/
 	ChildDistrMsg childrenArray[MAX_CHILDREN];
@@ -156,19 +159,35 @@ implementation
 	}
 
 	event void RoutingComplTimer.fired(){
+
+		slotTime = EPOCH/MAX_DEPTH;
+		subSlotTime = MAX_DEPTH - curdepth;	/** WAS USED IN PREVIOUS IMPLEMENTATION WITH TIMERS*/
+
 		dbg("SRTreeC" , "Finished Rounting in cur node\n");
-		//dbg("SRTreeC" , "NodeID = %d, curdepth = %d getNow = %f , gett0 = %f", TOS_NODE_ID, curdepth,RoutingComplTimer.getNow, RoutingComplTimer.gett0 );
-		//call DistrMsgTimer
-		//uint16_t startPer;
-		//startPer =  6000 - (curdepth*6000)/10;
+		dbg("SRTreeC", " CHECK DEPTH INTI %d\n",curdepth);
 
-		//TESTING
-		//startPer =  1/(curdepth+1) * 6000 + (TOS_NODE_ID * 3);
-		//startPer = ((10 - curdepth) * 6000) + (TOS_NODE_ID * 5); ALSO WORKS
-		startPer = 60000/(curdepth+1)  + TOS_NODE_ID *3;
 
-		//startPer = (TOS_NODE_ID * 3) + 6000 - (curdepth*6000)/10; WORKS
-		//startPer = (10 - curdepth) * 200 + (TOS_NODE_ID * 3);
+		/** 
+			Synchronize timers. Divide first the epoch in 
+			slots as defined by TAG, based on max depth.Then,
+			devide every slot in sub-slots based again on max_depth
+			and current depth and use TOS_NODE_ID to avoid collision
+			between messages. *8 was used after externsive testing.
+			Also tried to multiply with random value but was not 
+			effective in some cases.
+		*/
+
+		//startPer = slotTime * subSlotTime + TOS_NODE_ID * 8;
+
+
+		/**
+			Altered synchronization. The previous version would lose
+			1 epoch due to delayed start. The method is similar with the
+			previous implementation with the difference that we use sub slot
+			upper bound so that we will not lose any time
+		*/
+
+		startPer =  slotTime - (curdepth*slotTime)/MAX_DEPTH + (TOS_NODE_ID * 8) ; //WORKS
 
 		call DistrMsgTimer.startPeriodicAt(startPer, EPOCH);
 	}
@@ -261,14 +280,21 @@ implementation
 	//based on RoutingMsgTimer
 	event void DistrMsgTimer.fired()
 	{
+		
+
 		message_t tmp;
 		error_t enqueueDone;
 		uint16_t randVal;
+
 		
 		//RoutingMsg* mrpkt;
 		DistrMsg* mrpkt;
 		//dbg("SRTreeC", "RoutingMsgTimer fired!  radioBusy = %s \n",(RoutingSendBusy)?"True":"False");
 
+		//call DistrMsgTimer.startPeriodicAt(0, EPOCH);
+		//call DistrMsgTimer.startPeriodicAt(0, EPOCH);
+
+		
 		if(call DistrSendQueue.full())
 		{
 			dbg("SRTreeC", "DistrSendQueue is FULL!!! \n");
