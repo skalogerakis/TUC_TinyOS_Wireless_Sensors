@@ -42,7 +42,7 @@ lines = topo.readlines()
 for line in lines:
   s = line.split()
   if (len(s) > 0):
-    print " ", s[0], " ", s[1], " ", s[2];
+    #print " ", s[0], " ", s[1], " ", s[2];
     r.add(int(s[0]), int(s[1]), float(s[2]))
 
 mTosdir = os.getenv("TINYOS_ROOT_DIR")

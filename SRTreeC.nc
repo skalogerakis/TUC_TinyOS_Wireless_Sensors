@@ -57,7 +57,10 @@ implementation
 	uint16_t startPer;
 
 	uint16_t slotTime;
-	uint16_t subSlotTime;
+	uint16_t subSlotSplit;
+	uint16_t subSlotChoose;
+	uint16_t timerCounter;
+
 
 	//KP Edit
 	/** Create Array of type ChildDristrMsg*/
@@ -181,11 +184,11 @@ implementation
 
 	event void RoutingComplTimer.fired(){
 
-		slotTime = EPOCH/MAX_DEPTH;
-		subSlotTime = MAX_DEPTH - curdepth;	/** WAS USED IN PREVIOUS IMPLEMENTATION WITH TIMERS*/
+		
+		slotTime = EPOCH/(MAX_DEPTH+1);
+		subSlotSplit = (MAX_DEPTH);
 
-		//dbg("SRTreeC" , "Finished Rounting in cur node\n");
-		//dbg("SRTreeC", " CHECK DEPTH INTI %d\n",curdepth);
+		subSlotChoose = (MAX_DEPTH - curdepth);
 
 
 		/** 
@@ -198,17 +201,21 @@ implementation
 			effective in some cases.
 		*/
 
-		//startPer = slotTime * subSlotTime + TOS_NODE_ID * 8;
-
 
 		/**
 			Altered synchronization. The previous version would lose
-			1 epoch due to delayed start. The method is similar with the
-			previous implementation with the difference that we use sub slot
-			upper bound so that we will not lose any time
+			1 epoch due to time constraints and had issues when max_depth = curdepth. 
+			What changed is that we added 1 extra slot and subslot at each epoch so that we are
+			done before the time elapses.
 		*/
 
-		startPer =  slotTime - (curdepth*slotTime)/MAX_DEPTH + (TOS_NODE_ID * 8) ; //WORKS
+		//startPer = ((slotTime / subSlotSplit) * subSlotChoose) + TOS_NODE_ID * 8;
+
+		startPer =  ((slotTime / subSlotSplit) * subSlotChoose) + TOS_NODE_ID * 10;
+
+
+
+		dbg("SRTreeC", "START %d\n", startPer);
 
 		call DistrMsgTimer.startPeriodicAt(startPer, EPOCH);
 	}
@@ -309,6 +316,11 @@ implementation
 
 		DistrMsg* mrpkt;
 
+		//KP EDIT
+		// timerCounter++;
+		// if(timerCounter == 1){
+
+		// }
 		
 		if(call DistrSendQueue.full())
 		{
