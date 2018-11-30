@@ -14,7 +14,6 @@ implementation{
 	components MainC, ActiveMessageC;
 	components new TimerMilliC() as RoutingMsgTimerC;
 	components new TimerMilliC() as RoutingComplTimerC;
-	components new TimerMilliC() as LostTaskTimerC;
 	components new TimerMilliC() as DistrMsgTimerC;
 	
 	components new AMSenderC(AM_ROUTINGMSG) as RoutingSenderC;
@@ -42,7 +41,6 @@ implementation{
 	SRTreeC.RoutingMsgTimer->RoutingMsgTimerC;
 	SRTreeC.DistrMsgTimer->DistrMsgTimerC;
 	SRTreeC.RoutingComplTimer->RoutingComplTimerC;
-	SRTreeC.LostTaskTimer->LostTaskTimerC;
 	
 	SRTreeC.RoutingPacket->RoutingSenderC.Packet;
 	SRTreeC.RoutingAMPacket->RoutingSenderC.AMPacket;

@@ -10,7 +10,7 @@ t=Tossim([])
 #f=sys.stdout #open('./logfile.txt','w')
 f= open('./logfile.txt','w');
 #SIM_END_TIME= 10000 * t.ticksPerSecond()
-SIM_END_TIME= 605 * t.ticksPerSecond()
+SIM_END_TIME= 905 * t.ticksPerSecond()
 
 #Everything in the terminal will be written in the log file
 sys.stdout = f;

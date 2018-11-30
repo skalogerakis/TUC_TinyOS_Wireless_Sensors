@@ -21,16 +21,13 @@ enum{
 	MAX_CHILDREN = 20,
 	MAX_DEPTH = 14,
 };
-/*uint16_t AM_ROUTINGMSG=AM_SIMPLEROUTINGTREEMSG;
-uint16_t AM_NOTIFYPARENTMSG=AM_SIMPLEROUTINGTREEMSG;
-*/
+
 typedef nx_struct RoutingMsg
 {
 	nx_uint16_t senderID;
 	nx_uint8_t depth;
 } RoutingMsg;
 
-//TODO check optimization
 typedef nx_struct DistrMsg{
 	nx_uint16_t count;
 	nx_uint16_t sum;
