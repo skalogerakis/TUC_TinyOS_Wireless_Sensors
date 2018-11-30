@@ -77,7 +77,7 @@ implementation
 	void setRoutingSendBusy(bool state)
 	{
 		atomic{
-		RoutingSendBusy=state;
+			RoutingSendBusy=state;
 		}
 		
 	 }
@@ -101,10 +101,10 @@ implementation
 
 	/**Used to print all needed messages when we reach root*/
 	void rootMsgPrint(DistrMsg* mrpkt){
-		dbg("SRTreeC", "#### Output: \n");
-		dbg("SRTreeC", "#### [count] = %d\n", mrpkt->count);
-		dbg("SRTreeC", "#### [sum] = %d\n", mrpkt->sum);
-		dbg("SRTreeC", "#### [max] = %d\n", mrpkt->max);
+		dbg("SRTreeC", "#### OUTPUT: \n");
+		dbg("SRTreeC", "#### [COUNT] = %d\n", mrpkt->count);
+		dbg("SRTreeC", "#### [SUM] = %d\n", mrpkt->sum);
+		dbg("SRTreeC", "#### [MAX] = %d\n", mrpkt->max);
 		dbg("SRTreeC", "#### [AVG] = %f\n\n\n", (double)mrpkt->sum / mrpkt->count);
 	}
 
@@ -128,13 +128,11 @@ implementation
 		{
 			curdepth=0;
 			parentID=0;
-			//dbg("Boot", "curdepth = %d  ,  parentID= %d \n", curdepth , parentID);
 		}
 		else
 		{
 			curdepth=-1;
 			parentID=-1;
-			//dbg("Boot", "curdepth = %d  ,  parentID= %d \n", curdepth , parentID);
 		}
 
 		/**
@@ -231,11 +229,11 @@ implementation
 		error_t enqueueDone;
 		
 		RoutingMsg* mrpkt;
-		//dbg("SRTreeC", "RoutingMsgTimer fired!  radioBusy = %s \n",(RoutingSendBusy)?"True":"False");
+		
 
 		if(call RoutingSendQueue.full())
 		{
-			//dbg("SRTreeC", "RoutingSendQueue is FULL!!! \n");
+			dbg("SRTreeC", "RoutingSendQueue is FULL!!! \n");
 			return;
 		}
 		
@@ -243,7 +241,7 @@ implementation
 		mrpkt = (RoutingMsg*) (call RoutingPacket.getPayload(&tmp, sizeof(RoutingMsg)));
 		if(mrpkt==NULL)
 		{
-			//dbg("SRTreeC","RoutingMsgTimer.fired(): No valid payload... \n");
+			dbg("SRTreeC","RoutingMsgTimer.fired(): No valid payload... \n");
 			return;
 		}
 		atomic{
@@ -251,7 +249,6 @@ implementation
 		mrpkt->depth = curdepth;
 		}
 
-		//dbg("SRTreeC" , "Sending RoutingMsg... \n");
 		
 		call RoutingAMPacket.setDestination(&tmp, AM_BROADCAST_ADDR);
 		call RoutingPacket.setPayloadLength(&tmp, sizeof(RoutingMsg));
@@ -262,15 +259,13 @@ implementation
 		{
 			if (call RoutingSendQueue.size()==1)
 			{
-				//dbg("SRTreeC", "SendTask() posted!!\n");
 				post sendRoutingTask();
 			}
 			
-			//dbg("SRTreeC","RoutingMsg enqueued successfully in SendingQueue!!!\n");
 		}
 		else
 		{
-			//dbg("SRTreeC","RoutingMsg failed to be enqueued in SendingQueue!!!");
+			dbg("SRTreeC","RoutingMsg failed to be enqueued in SendingQueue!!!");
 		}		
 	}
 
@@ -281,11 +276,6 @@ implementation
 		*/
 		setRoutingSendBusy(FALSE);
 		
-		// if(!(call RoutingSendQueue.empty()))
-		// {
-		// 	post sendRoutingTask();
-		// }
-	
 		
 	}
 
@@ -300,10 +290,11 @@ implementation
 
 		DistrMsg* mrpkt;
 
-		
+		/**The simulation never reaches the statements below but will not be deleted
+		for plentitude*/
 		if(call DistrSendQueue.full())
 		{
-			//dbg("SRTreeC", "DistrSendQueue is FULL!!! \n");
+			dbg("SRTreeC", "DistrSendQueue is FULL!!! \n");
 			return;
 		}
 		
@@ -312,7 +303,7 @@ implementation
 
 		if(mrpkt==NULL)
 		{
-			//dbg("SRTreeC","DistrMsgTimer.fired(): No valid payload... \n");
+			dbg("SRTreeC","DistrMsgTimer.fired(): No valid payload... \n");
 			return;
 		}
 
@@ -331,7 +322,7 @@ implementation
 		}	
 
 
-		//Aggregation every time. If a value is lost we always have child value
+		//Aggregation every time for all chilren. If a value is lost we always have child value
 		for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
 			mrpkt->count += childrenArray[i].count;
 			mrpkt->sum += childrenArray[i].sum;
@@ -346,7 +337,6 @@ implementation
 
 			dbg("SRTreeC", "\n\n########################Epoch %d completed#####################\n", roundCounter);
 			rootMsgPrint(mrpkt);
-			//dbg("SRTreeC", "Output: [count] = %d, [sum] = %d, [max] = %d, [avg] = %f\n", mrpkt->count, mrpkt->sum, mrpkt->max, (double)mrpkt->sum / mrpkt->count);
 		}
 		else /** case we don't have root node then sent everything to the parent*/
 		{
@@ -361,11 +351,9 @@ implementation
 			{
 				if (call DistrSendQueue.size()==1)
 				{
-					//dbg("SRTreeC", "SendDistrTask() posted!!\n");
 					post sendDistrTask();
 				}
 			
-				//dbg("SRTreeC","DistrMsg enqueued successfully in SendingQueue!!!\n");
 			}
 			else
 			{
@@ -378,7 +366,6 @@ implementation
 
 	event void DistrAMSend.sendDone(message_t * msg , error_t err)
 	{
-		//dbg("SRTreeC", "A Distribution package sent... %s \n",(err==SUCCESS)?"True":"False");
 
 		setDistrSendBusy(FALSE);
 		
@@ -392,17 +379,14 @@ implementation
 		
 		msource = call DistrAMPacket.source(msg);
 		
-		//dbg("SRTreeC", "### DistrReceive.receive() start ##### \n");
 		
 		atomic{
-		memcpy(&tmp,msg,sizeof(message_t));
-		//tmp=*(message_t*)msg;
+			memcpy(&tmp,msg,sizeof(message_t));
 		}
 		enqueueDone=call DistrReceiveQueue.enqueue(tmp);
 		
 		if( enqueueDone== SUCCESS)
 		{
-			//dbg("SRTreeC","posting receiveDistrTask()!!!! \n");
 			post receiveDistrTask();
 		}
 		else
@@ -411,7 +395,6 @@ implementation
 			
 		}
 		
-		//dbg("SRTreeC", "### DistrReceive.receive() end ##### \n");
 		return msg;
 	}
 	
@@ -424,17 +407,12 @@ implementation
 		
 		msource =call RoutingAMPacket.source(msg);
 		
-		//dbg("SRTreeC", "### RoutingReceive.receive() start ##### \n");
-		//dbg("SRTreeC", "Something received!!!  from %u  %u \n",((RoutingMsg*) payload)->senderID ,  msource);
-		
-		
 		atomic{
 		memcpy(&tmp,msg,sizeof(message_t));
 		}
 		enqueueDone=call RoutingReceiveQueue.enqueue(tmp);
 		if(enqueueDone == SUCCESS)
 		{
-			//dbg("SRTreeC","posting receiveRoutingTask()!!!! \n");
 			post receiveRoutingTask();
 		}
 		else
@@ -442,9 +420,6 @@ implementation
 			dbg("SRTreeC","RoutingMsg enqueue failed!!! \n");			
 		}
 		
-		//call Leds.led1Off();
-		
-		//dbg("SRTreeC", "### RoutingReceive.receive() end ##### \n");
 		return msg;
 	}
 	
@@ -454,22 +429,24 @@ implementation
 	
 	task void sendRoutingTask()
 	{
-		//uint8_t skip;
+
 		uint8_t mlen;
 		uint16_t mdest;
 		error_t sendDone;
-		//message_t radioRoutingSendPkt;
-		//dbg("SRTreeC","SendRoutingTask(): Starting....\n");
+
+
+		/**The simulation never reaches the statements below but will not be deleted
+		for plentitude*/
 		if (call RoutingSendQueue.empty())
 		{
-			//dbg("SRTreeC","sendRoutingTask(): Q is empty!\n");
+			dbg("SRTreeC","sendRoutingTask(): Q is empty!\n");
 			return;
 		}
 		
 		
 		if(RoutingSendBusy)
 		{
-			//dbg("SRTreeC","sendRoutingTask(): RoutingSendBusy= TRUE!!!\n");
+			dbg("SRTreeC","sendRoutingTask(): RoutingSendBusy= TRUE!!!\n");
 			
 			return;
 		}
@@ -481,7 +458,7 @@ implementation
 
 		if(mlen!=sizeof(RoutingMsg))
 		{
-			//dbg("SRTreeC","\t\tsendRoutingTask(): Unknown message!!!\n");
+			dbg("SRTreeC","\t\tsendRoutingTask(): Unknown message!!!\n");
 
 			return;
 		}
@@ -489,7 +466,6 @@ implementation
 		
 		if ( sendDone== SUCCESS)
 		{
-			//dbg("SRTreeC","sendRoutingTask(): Send returned success!!!\n");
 			setRoutingSendBusy(TRUE);
 		}
 		else
@@ -503,21 +479,23 @@ implementation
 
 	task void sendDistrTask()
 	{
-		uint8_t mlen;//, skip;
+		uint8_t mlen;
 		error_t sendDone;
 		uint16_t mdest;
 		DistrMsg* mpayload;
 		
 
+		/**The simulation never reaches the statements below but will not be deleted
+		for plentitude*/
 		if (call DistrSendQueue.empty())
 		{
-			//dbg("SRTreeC","sendDistrTask(): Q is empty!\n");
+			dbg("SRTreeC","sendDistrTask(): Q is empty!\n");
 			return;
 		}
 
 		if(DistrSendBusy == TRUE)
 		{
-			//dbg("SRTreeC", "sendDistrTask(): Q is empty!\n");
+			dbg("SRTreeC", "sendDistrTask(): Q is empty!\n");
 			return;
 		}
 		
@@ -527,12 +505,10 @@ implementation
 		
 		if(mlen!= sizeof(DistrMsg))
 		{
-			//dbg("SRTreeC", "\t\t sendDistrTask(): Unknown message!!\n");
+			dbg("SRTreeC", "\t\t sendDistrTask(): Unknown message!!\n");
 			return;
 		}
 		
-		//TODO check that
-		//dbg("SRTreeC" , " sendDistrTask(): mlen = %u  senderID= %u \n",mlen,mpayload->senderID);
 
 		mdest= call DistrAMPacket.destination(&radioDistrSendPkt);
 		
@@ -540,7 +516,6 @@ implementation
 		
 		if ( sendDone== SUCCESS)
 		{
-			//dbg("SRTreeC","sendDistrTask(): Send returned success!!!\n");
 
 			setDistrSendBusy(TRUE);
 		}
@@ -564,14 +539,11 @@ implementation
 		
 		len= call RoutingPacket.payloadLength(&radioRoutingRecPkt);
 		
-		//dbg("SRTreeC","ReceiveRoutingTask(): len=%u \n",len);
 				
 		if(len == sizeof(RoutingMsg))
 		{
 			RoutingMsg * mpkt = (RoutingMsg*) (call RoutingPacket.getPayload(&radioRoutingRecPkt,len));
 			
-			//dbg("SRTreeC" ,"NodeID= %d , RoutingMsg received! \n",TOS_NODE_ID);
-			//dbg("SRTreeC" , "receiveRoutingTask():senderID= %d , depth= %d \n", mpkt->senderID , mpkt->depth);
 
 			/**In that case we don't have a father yet*/
 			if ( (parentID<0)||(parentID>=65535))
@@ -579,8 +551,6 @@ implementation
 
 				parentID= call RoutingAMPacket.source(&radioRoutingRecPkt);
 				curdepth= mpkt->depth + 1;
-				// dbg("SRTreeC" ,"NodeID= %d : curdepth= %d , parentID= %d \n", TOS_NODE_ID ,curdepth , parentID);
-
 		
 				if (TOS_NODE_ID!=0)
 				{
@@ -597,7 +567,6 @@ implementation
 		else
 		{
 			dbg("SRTreeC","receiveRoutingTask():Empty message!!! \n");
-			//setLostRoutingRecTask(TRUE);
 			return;
 		}
 		
@@ -612,7 +581,6 @@ implementation
 		uint8_t source;
 		message_t radioDistrRecPkt;
 		
-		//dbg("SRTreeC","ReceiveDistrTask():received msg...\n");
 
 		radioDistrRecPkt= call DistrReceiveQueue.dequeue();
 		
@@ -647,7 +615,6 @@ implementation
 		else
 		{
 			dbg("SRTreeC","receiveDistrTask():Empty message!!! \n");
-			//setLostNotifyRecTask(TRUE);
 			return;
 		}
 		
