@@ -84,11 +84,16 @@ typedef nx_struct ChildDistrMsg{
 	nx_uint16_t sumofSquares;
 } ChildDistrMsg;
 
+double TCT = 0.8;
+
 uint8_t numMsgSent;
+
 
 uint8_t numFun=1;
 uint8_t chooseFun1=1;
 uint8_t chooseFun2=1;
 uint8_t chooseFun=1;
+uint8_t chooseProg=1;
+uint8_t oldFlag = 0;
 
 #endif

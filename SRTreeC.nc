@@ -65,6 +65,7 @@ implementation
 	uint16_t subSlotSplit;
 	uint16_t subSlotChoose;
 	uint16_t timerCounter;
+	uint16_t Vold;
 
 
 	//KP Edit
@@ -114,6 +115,23 @@ implementation
 		dbg("SRTreeC", "#### [AVG] = %f\n\n\n", (double)mrpkt->sum / mrpkt->count);
 	}
 
+	/**Used to print all needed messages in the case where we send 1 message*/
+	void rootMsgPrint1(DistrMsg1* mrpkt){
+		dbg("SRTreeC", "#### OUTPUT: \n");
+
+		if(chooseFun == 1){	//min case
+			dbg("SRTreeC", "#### [MIN] = %d\n\n\n", mrpkt->field1a);
+		}else if(chooseFun == 2){	//max case
+			dbg("SRTreeC", "#### [ΜΑΧ] = %d\n\n\n", mrpkt->field1a);
+		}else if(chooseFun == 3){	//count case
+			dbg("SRTreeC", "#### [COUNT] = %d\n\n\n", mrpkt->field1a);
+		}else{	//sum case
+			dbg("SRTreeC", "#### [SUM] = %d\n\n\n", mrpkt->field1a);
+		}
+		
+	}
+
+
 
 	/**Used to print all needed messages in the case where we send 4 messages*/
 	void rootMsgPrint4(DistrMsg4* mrpkt){
@@ -126,6 +144,7 @@ implementation
 			dbg("SRTreeC", "#### [MAX] = %d\n", mrpkt->field4d);
 		}
 		dbg("SRTreeC", "#### [SUM OF SQUARES] = %d\n\n\n", mrpkt->field4c);
+		//TODO ADD VARIANCE
 		
 	}
 
@@ -156,11 +175,13 @@ implementation
 		{
 			curdepth=0;
 			parentID=0;
+			Vold = 0;
 		}
 		else
 		{
 			curdepth=-1;
 			parentID=-1;
+			Vold = 0;
 		}
 
 		/**
@@ -268,59 +289,84 @@ implementation
 					6. VARIANCE
 				*/
 				//TODO RAND
+			chooseProg= 1;
 
-			numFun = 2;
+			if(chooseProg == 1){	//case 2.1 question is chosen
+				numFun = 1;
 
-			if(numFun == 2){
+				if(numFun == 2){
 
-				chooseFun1 = 6;
-				chooseFun2 = 2;
+					chooseFun1 = 6;
+					chooseFun2 = 1;
 	
-				//TODO must check that random numbers always differ
-				if((chooseFun1 == 1 || chooseFun2 == 1) || (chooseFun1 == 2 || chooseFun2 == 2)){	/** Case that one of the given choices is MIN or MAX*/
+					//TODO must check that random numbers always differ
+					if((chooseFun1 == 1 || chooseFun2 == 1) || (chooseFun1 == 2 || chooseFun2 == 2)){	/** Case that one of the given choices is MIN or MAX*/
 		
-					if(chooseFun1 == 6 || chooseFun2 == 6){	//case that one of the choices is VARIANCE
-						//case 4
-						numMsgSent = 4;
-					}
-					else if(chooseFun1 == 4 || chooseFun2 == 4){	//case that one of the choises is AVG
-					//case 3
+						if(chooseFun1 == 6 || chooseFun2 == 6){	//case that one of the choices is VARIANCE
+							//case 4
+							numMsgSent = 4;
+						}
+						else if(chooseFun1 == 4 || chooseFun2 == 4){	//case that one of the choises is AVG
+							//case 3
+							numMsgSent = 3;
+						}
+						else if((chooseFun1 == 3 || chooseFun2 == 3) || (chooseFun1 == 5 || chooseFun2 == 5)){	//case that one of the choises is COUNT, SUM
+							//case 2
+							numMsgSent = 2;
+						}
+
+						if((chooseFun1 == 1 && chooseFun2 == 2) || (chooseFun1 == 2 && chooseFun2 == 1)){
+							//case 1
+							numMsgSent = 2;
+						}
+					}else if(chooseFun1 == 6 || chooseFun2 == 6){ /**case one of the choises is VARIANCE*/
+						//case 3 for all cases
 						numMsgSent = 3;
+
+					}else{	/**Case that the choices are SUM, COUNT or AVG */
+						//case 2 for all cases
+						numMsgSent = 2;
+
 					}
-					else if((chooseFun1 == 3 || chooseFun2 == 3) || (chooseFun1 == 5 || chooseFun2 == 5)){	//case that one of the choises is COUNT, SUM
+
+				}else{
+					chooseFun =2; //chooseFun is when one aggregation is chosen
+					if(chooseFun == 6){	//case that the choice is VARIANCE
+						//case 3
+						numMsgSent = 3;
+					
+					}
+					else if(chooseFun == 4){	//case that the choice is AVG
 					//case 2
 						numMsgSent = 2;
 					}
-
-					if((chooseFun1 == 1 && chooseFun2 == 2) || (chooseFun1 == 2 && chooseFun2 == 1)){
+					else{	//case that the choice is MIN, MAX, COUNT, SUM
 					//case 1
 						numMsgSent = 1;
 					}
-				}else if(chooseFun1 == 6 || chooseFun2 == 6){ /**case one of the choises is VARIANCE*/
-					//case 3 for all cases
-					numMsgSent = 3;
-
-				}else{	/**Case that the choices are SUM, COUNT or AVG */
-					//case 2 for all cases
-					numMsgSent = 2;
-
 				}
-
 			}else{
-				if(chooseFun == 6){	//case that the choice is VARIANCE
-					//case 3
-					numMsgSent = 3;
-					
+
+				/**
+					1. MIN
+					2. MAX
+					3. COUNT
+					5. SUM
+
+					In order to be consistent about our statements, we don't mess with
+					the previous order of the function. We choose a random value from 1 to 4.
+					If 4 is chosen we assign it value 5.
+				*/
+				chooseFun= 3;
+
+				if(chooseFun == 4){
+					chooseFun = 5;
 				}
-				else if(chooseFun == 4){	//case that the choice is AVG
-				//case 2
-					numMsgSent = 2;
-				}
-				else{	//case that the choice is MIN, MAX, COUNT, SUM
-					//case 1
-					numMsgSent = 1;
-				}
+
+				numMsgSent = 1;	
 			}
+
+			
 
 		}
 		
@@ -407,6 +453,34 @@ implementation
 
 		if(numMsgSent == 1){
 			mrpkt1 = (DistrMsg1*) (call DistrPacket.getPayload(&tmp, sizeof(DistrMsg1)));
+
+			if(chooseFun == 3){		/*case COUNT is choosen*/
+				mrpkt1->field1a = 1;
+			}else{	/*In every other case*/
+				mrpkt1->field1a = randVal;
+			}
+
+			//Aggregation every time for all chilren. If a value is lost we always have child value
+			for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
+				if(chooseFun == 1){	//min case
+					mrpkt1->field1a = minFinder(childrenArray[i].min, mrpkt1->field1a);
+				}else if( chooseFun == 2){	//max case
+					mrpkt1->field1a = maxFinder(childrenArray[i].max, mrpkt1->field1a);
+				}else if( chooseFun == 3){	//count case
+					mrpkt1->field1a += childrenArray[i].count; 
+				}else if( chooseFun == 5){	//sum case
+					mrpkt1->field1a += childrenArray[i].sum; 
+				}
+
+			}
+
+			if(mrpkt1==NULL)
+			{
+		 		dbg("SRTreeC","DistrMsgTimer.fired(): No valid payload... \n");
+		 		return;
+		 	}
+
+
 		}else if(numMsgSent == 2){
 			mrpkt2 = (DistrMsg2*) (call DistrPacket.getPayload(&tmp, sizeof(DistrMsg2)));
 		}else if(numMsgSent == 3){
@@ -449,36 +523,6 @@ implementation
 
 		}
 
-		
-		// if(mrpkt==NULL)
-		// {
-		// 	dbg("SRTreeC","DistrMsgTimer.fired(): No valid payload... \n");
-		// 	return;
-		// }
-
-
-		/** Random value generator.
-			Already initialized and produces random values from 0 to 50
-		*/
-		// randVal = call RandomGen.rand16() % 50;
-
-		// dbg("SRTreeC", "Random value generated %d\n", randVal);
-
-		// atomic{
-		// mrpkt->sum = randVal;
-		// mrpkt->count = 1;
-		// mrpkt->max = randVal;
-		// }	
-
-
-		// //Aggregation every time for all chilren. If a value is lost we always have child value
-		// for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
-		// 	mrpkt->count += childrenArray[i].count;
-		// 	mrpkt->sum += childrenArray[i].sum;
-		// 	mrpkt->max = maxFinder(childrenArray[i].max, mrpkt->max);
-		// }
-
-
 	
 		/** root case print everything*/
 		if(TOS_NODE_ID == 0){
@@ -487,7 +531,7 @@ implementation
 			dbg("SRTreeC", "\n\n########################Epoch %d completed#####################\n", roundCounter);
 
 			if(numMsgSent == 1){
-				//rootMsgPrint1(mrpkt1);
+				rootMsgPrint1(mrpkt1);
 			}else if(numMsgSent == 2){
 				//rootMsgPrint2(mrpkt2);
 			}else if(numMsgSent == 3){
@@ -496,7 +540,6 @@ implementation
 				rootMsgPrint4(mrpkt4);
 			}
 
-			//rootMsgPrint(mrpkt);
 		}
 		else /** case we don't have root node then sent everything to the parent*/
 		{
@@ -505,38 +548,83 @@ implementation
 			call DistrAMPacket.setDestination(&tmp, parentID);
 			// call DistrPacket.setPayloadLength(&tmp, sizeof(DistrMsg));
 
-			if(numMsgSent == 1){
+			// if(chooseProg != 2 && ){
+
+			
+
+			if(numMsgSent == 1){	
+
+				//dbg("SRTreeC","Old value %d\n", Vold);
+				/**
+					In that section, we implement TINA. We know as a fact that both numbers
+					are positive,so we can compare their aggregate values not only in the 
+					leaves but in the whole tree. So if the statement below is true, just keep
+					the old values to minimize messages sent. TCT is defined in SimpleRoutingTree.h
+				*/
+				if(chooseProg == 2 && !(abs(mrpkt1->field1a - Vold) > abs(Vold) * TCT)){	//don't change value
+					oldFlag = 1;
+					dbg("SRTreeC","Don't send message with new value %d and old value %d\n", mrpkt1->field1a, Vold);
+				}else if( chooseProg == 2){	//change value and update old
+					oldFlag = 0;
+					Vold = mrpkt1->field1a;
+				}
+
+				if(oldFlag == 0){
+					
+				
 				call DistrPacket.setPayloadLength(&tmp, sizeof(DistrMsg1));
+
+				if(chooseFun == 1){	//min case
+					dbg("SRTreeC", "Node: %d , Parent: %d, min: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt1->field1a,curdepth);
+				}else if( chooseFun == 2){	//max case
+					dbg("SRTreeC", "Node: %d , Parent: %d, max: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt1->field1a,curdepth);
+				}else if(chooseFun == 3){	//count case
+					dbg("SRTreeC", "Node: %d , Parent: %d, count: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt1->field1a,curdepth);
+				}else{	// sum count
+					dbg("SRTreeC", "Node: %d , Parent: %d, sum: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt1->field1a,curdepth);
+				}
+
+				}
+				// 	dbg("SRTreeC","Don't send message with new value %d and old value %d\n", mrpkt1->field1a, Vold);
+				// }
 			}else if(numMsgSent == 2){
 				call DistrPacket.setPayloadLength(&tmp, sizeof(DistrMsg2));
 			}else if(numMsgSent == 3){
 				call DistrPacket.setPayloadLength(&tmp, sizeof(DistrMsg3));
 			}else{
 				call DistrPacket.setPayloadLength(&tmp, sizeof(DistrMsg4));
-			}
-			
-			if(chooseFun1 == 1 || chooseFun2 == 1){
-				dbg("SRTreeC", "Node: %d , Parent: %d, Sum: %d, count: %d, min: %d ,sum of squares %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt4->field4a, mrpkt4->field4b, mrpkt4->field4d,mrpkt4->field4c ,curdepth);
 
-			}else{
-				dbg("SRTreeC", "Node: %d , Parent: %d, Sum: %d, count: %d, max: %d ,sum of squares %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt4->field4a, mrpkt4->field4b, mrpkt4->field4d,mrpkt4->field4c ,curdepth);
+				if(chooseFun1 == 1 || chooseFun2 == 1){	//min case
+					dbg("SRTreeC", "Node: %d , Parent: %d, Sum: %d, count: %d, min: %d ,sum of squares %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt4->field4a, mrpkt4->field4b, mrpkt4->field4d,mrpkt4->field4c ,curdepth);
 
-			}
+				}else{	//max case
+					dbg("SRTreeC", "Node: %d , Parent: %d, Sum: %d, count: %d, max: %d ,sum of squares %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt4->field4a, mrpkt4->field4b, mrpkt4->field4d,mrpkt4->field4c ,curdepth);
 
-			enqueueDone=call DistrSendQueue.enqueue(tmp);
-
-			if( enqueueDone==SUCCESS)
-			{
-				if (call DistrSendQueue.size()==1)
-				{
-					post sendDistrTask();
 				}
+
+			}
 			
-			}
-			else
-			{
+			if(oldFlag == 0){
+				enqueueDone=call DistrSendQueue.enqueue(tmp);
+
+				if( enqueueDone==SUCCESS)
+				{
+					if (call DistrSendQueue.size()==1)
+					{
+						post sendDistrTask();
+					}
+			
+				}
+				else
+				{
 				dbg("SRTreeC","DistrMsg failed to be enqueued in SendingQueue!!!");
+				}
 			}
+			
+
+			// }else{
+			// 	dbg("SRTreeC","Don't send message with new value %d and old value %d\n", mrpkt1->field1a, Vold)
+			// }
 
 		}		
 	}
@@ -814,7 +902,43 @@ implementation
 
 		//TODO ADDED CASES
 		if(numMsgSent == 1){
+			/**Check if received a message*/
+			if(len == sizeof(DistrMsg1))
+			{
 			
+				DistrMsg1* mr = (DistrMsg1*) (call DistrPacket.getPayload(&radioDistrRecPkt,len));
+
+				/** Add new child to cache*/
+				for(i=0; i< MAX_CHILDREN ; i++){
+					if(source == childrenArray[i].senderID || childrenArray[i].senderID == 0){
+						childrenArray[i].senderID = source;
+
+						if(chooseFun == 1){	//min case
+							childrenArray[i].min = mr->field1a;
+						}else if( chooseFun == 2){	//max case
+							childrenArray[i].max = mr->field1a;
+						}else if( chooseFun == 3){	//count case
+							childrenArray[i].count = mr->field1a;
+						}else if(chooseFun == 5){	//sum case
+							childrenArray[i].sum = mr->field1a;
+						}
+						
+						break;
+
+					}
+					/**
+						Still haven't found from the children array the right
+						destination
+					*/
+				
+				}
+			
+			}
+			else
+			{
+				dbg("SRTreeC","receiveDistrTask():Empty message!!! \n");
+				return;
+			}
 
 		}else if(numMsgSent == 2){
 			
@@ -861,89 +985,9 @@ implementation
 		}
 
 		
-		/**Check if received a message*/
-		// if(len == sizeof(DistrMsg))
-		// {
-			
-		// 	DistrMsg* mr = (DistrMsg*) (call DistrPacket.getPayload(&radioDistrRecPkt,len));
-
-		// 	/** Add new child to cache*/
-		// 	for(i=0; i< MAX_CHILDREN ; i++){
-		// 		if(source == childrenArray[i].senderID || childrenArray[i].senderID == 0){
-		// 			childrenArray[i].senderID = source;
-		// 			childrenArray[i].count = mr->count;
-		// 			childrenArray[i].sum = mr->sum;
-		// 			childrenArray[i].max = mr->max;
-		// 			break;
-
-		// 		}
-		// 		/**
-		// 			Still haven't found from the children array the right
-		// 			destination
-		// 		*/
-				
-		// 	}
-			
-		// }
-		// else
-		// {
-		// 	dbg("SRTreeC","receiveDistrTask():Empty message!!! \n");
-		// 	return;
-		// }
 		
 	}
 	 
 	
 }
 
-
-// if(TOS_NODE_ID == 0){
-// 				/**
-// 					1. MIN
-// 					2. MAX
-// 					3. COUNT
-// 					4. AVG
-// 					5. SUM
-// 					6. VARIANCE
-// 				*/
-
-// 			if(numFun == 2){
-	
-// 				//TODO must check that random numbers always differ
-// 				if(chooseFun1 == 1 || chooseFun2 == 2){	/** Case that one of the given choices is MIN or MAX*/
-
-		
-// 					if(chooseFun1 == 6 || chooseFun2 == 6){	//case that one of the choices is VARIANCE
-// 						//case 4
-// 					}
-// 					else if(chooseFun1 == 4 || chooseFun2 == 4){	//case that one of the choises is AVG
-// 					//case 3
-// 					}
-// 					else if((chooseFun1 == 3 || chooseFun2 == 3) || (chooseFun1 == 5 || chooseFun2 == 5)){	//case that one of the choises is COUNT, SUM
-// 					//case 2
-// 					}
-
-// 					if((chooseFun1 == 1 && chooseFun2 == 2) || (chooseFun1 == 2 && chooseFun2 == 1)){
-// 					//case 1
-// 					}
-// 				}else if(chooseFun1 == 6 || chooseFun2 == 6){ /**case one of the choises is VARIANCE*/
-// 					//case 3 for all cases
-
-// 				}else{	/**Case that the choices are SUM, COUNT or AVG */
-// 					//case 2 for all cases
-
-// 				}
-
-// 			}else{
-// 				if(chooseFun == 6){	//case that the choice is VARIANCE
-// 					//case 3
-// 				}
-// 				else if(chooseFun == 4){	//case that the choice is AVG
-// 				//case 2
-// 				}
-// 				else{	//case that the choice is MIN, MAX, COUNT, SUM
-// 					//case 1
-// 				}
-// 			}
-
-// 		}
