@@ -2,558 +2,568 @@ TicksPerSecond :  10000000000
 
 0:0:10.000000010 DEBUG (0): ###########START ROUTING###############
 
-0:0:10.199859622 DEBUG (5): NodeID= 5 : curdepth= 1 , parentID= 0 
-0:0:10.199859622 DEBUG (4): NodeID= 4 : curdepth= 1 , parentID= 0 
-0:0:10.199859622 DEBUG (1): NodeID= 1 : curdepth= 1 , parentID= 0 
-0:0:10.400207516 DEBUG (9): NodeID= 9 : curdepth= 2 , parentID= 4 
-0:0:10.400207516 DEBUG (8): NodeID= 8 : curdepth= 2 , parentID= 4 
-0:0:10.403015117 DEBUG (6): NodeID= 6 : curdepth= 2 , parentID= 1 
-0:0:10.403015117 DEBUG (2): NodeID= 2 : curdepth= 2 , parentID= 1 
-0:0:10.405090300 DEBUG (10): NodeID= 10 : curdepth= 2 , parentID= 5 
-0:0:10.598648079 DEBUG (14): NodeID= 14 : curdepth= 3 , parentID= 9 
-0:0:10.598648079 DEBUG (12): NodeID= 12 : curdepth= 3 , parentID= 9 
-0:0:10.598648079 DEBUG (13): NodeID= 13 : curdepth= 3 , parentID= 9 
-0:0:10.604721070 DEBUG (11): NodeID= 11 : curdepth= 3 , parentID= 10 
-0:0:10.604721070 DEBUG (7): NodeID= 7 : curdepth= 3 , parentID= 10 
-0:0:10.604721070 DEBUG (15): NodeID= 15 : curdepth= 3 , parentID= 10 
-0:0:10.607482883 DEBUG (3): NodeID= 3 : curdepth= 3 , parentID= 2 
-0:1:11.728515635 DEBUG (3): numMsgSent 1
-0:1:11.728515635 DEBUG (3): Random value generated 42
-0:1:11.728515635 DEBUG (3): Node: 3 , Parent: 2, max: 42, depth: 3
-0:1:11.826171885 DEBUG (7): numMsgSent 1
+0:0:10.200683592 DEBUG (5): NodeID= 5 : curdepth= 1 , parentID= 0 
+0:0:10.200683592 DEBUG (4): NodeID= 4 : curdepth= 1 , parentID= 0 
+0:0:10.200683592 DEBUG (1): NodeID= 1 : curdepth= 1 , parentID= 0 
+0:0:10.399078378 DEBUG (9): NodeID= 9 : curdepth= 2 , parentID= 4 
+0:0:10.399078378 DEBUG (8): NodeID= 8 : curdepth= 2 , parentID= 4 
+0:0:10.400558472 DEBUG (10): NodeID= 10 : curdepth= 2 , parentID= 5 
+0:0:10.596893323 DEBUG (12): NodeID= 12 : curdepth= 3 , parentID= 9 
+0:0:10.596893323 DEBUG (6): NodeID= 6 : curdepth= 3 , parentID= 9 
+0:0:10.596893323 DEBUG (13): NodeID= 13 : curdepth= 3 , parentID= 9 
+0:0:10.596893323 DEBUG (14): NodeID= 14 : curdepth= 3 , parentID= 9 
+0:0:10.600936890 DEBUG (7): NodeID= 7 : curdepth= 3 , parentID= 10 
+0:0:10.600936890 DEBUG (15): NodeID= 15 : curdepth= 3 , parentID= 10 
+0:0:10.600936890 DEBUG (11): NodeID= 11 : curdepth= 3 , parentID= 10 
+0:0:10.797607442 DEBUG (3): NodeID= 3 : curdepth= 4 , parentID= 7 
+0:0:10.797607442 DEBUG (2): NodeID= 2 : curdepth= 4 , parentID= 7 
+0:1:11.425781260 DEBUG (2): numMsgSent 3
+0:1:11.425781260 DEBUG (2): Random value generated 21
+0:1:11.425781260 DEBUG (2): Node: 2 , Parent: 7, Sum: 21, count: 1, 3rd parameter: 441, depth: 4
+0:1:11.450195322 DEBUG (3): numMsgSent 3
+0:1:11.450195322 DEBUG (3): Random value generated 42
+0:1:11.450195322 DEBUG (3): Node: 3 , Parent: 7, Sum: 42, count: 1, 3rd parameter: 1764, depth: 4
+0:1:11.801757823 DEBUG (6): numMsgSent 3
+0:1:11.801757823 DEBUG (6): Random value generated 13
+0:1:11.801757823 DEBUG (6): Node: 6 , Parent: 9, Sum: 13, count: 1, 3rd parameter: 169, depth: 3
+0:1:11.826171885 DEBUG (7): numMsgSent 3
 0:1:11.826171885 DEBUG (7): Random value generated 34
-0:1:11.826171885 DEBUG (7): Node: 7 , Parent: 10, max: 34, depth: 3
-0:1:11.923828136 DEBUG (11): numMsgSent 1
+0:1:11.826171885 DEBUG (7): Node: 7 , Parent: 10, Sum: 97, count: 3, 3rd parameter: 3361, depth: 3
+0:1:11.923828136 DEBUG (11): numMsgSent 3
 0:1:11.923828136 DEBUG (11): Random value generated 26
-0:1:11.923828136 DEBUG (11): Node: 11 , Parent: 10, max: 26, depth: 3
-0:1:11.948242198 DEBUG (12): numMsgSent 1
+0:1:11.923828136 DEBUG (11): Node: 11 , Parent: 10, Sum: 26, count: 1, 3rd parameter: 676, depth: 3
+0:1:11.948242198 DEBUG (12): numMsgSent 3
 0:1:11.948242198 DEBUG (12): Random value generated 33
-0:1:11.948242198 DEBUG (12): Node: 12 , Parent: 9, max: 33, depth: 3
-0:1:11.972656261 DEBUG (13): numMsgSent 1
+0:1:11.948242198 DEBUG (12): Node: 12 , Parent: 9, Sum: 33, count: 1, 3rd parameter: 1089, depth: 3
+0:1:11.972656261 DEBUG (13): numMsgSent 3
 0:1:11.972656261 DEBUG (13): Random value generated 40
-0:1:11.972656261 DEBUG (13): Node: 13 , Parent: 9, max: 40, depth: 3
-0:1:11.982421885 DEBUG (2): numMsgSent 1
-0:1:11.982421885 DEBUG (2): Random value generated 21
-0:1:11.982421885 DEBUG (2): Node: 2 , Parent: 1, max: 42, depth: 2
-0:1:11.997070323 DEBUG (14): numMsgSent 1
+0:1:11.972656261 DEBUG (13): Node: 13 , Parent: 9, Sum: 40, count: 1, 3rd parameter: 1600, depth: 3
+0:1:11.997070323 DEBUG (14): numMsgSent 3
 0:1:11.997070323 DEBUG (14): Random value generated 47
-0:1:11.997070323 DEBUG (14): Node: 14 , Parent: 9, max: 47, depth: 3
-0:1:12.021484386 DEBUG (15): numMsgSent 1
+0:1:11.997070323 DEBUG (14): Node: 14 , Parent: 9, Sum: 47, count: 1, 3rd parameter: 2209, depth: 3
+0:1:12.021484386 DEBUG (15): numMsgSent 3
 0:1:12.021484386 DEBUG (15): Random value generated 18
-0:1:12.021484386 DEBUG (15): Node: 15 , Parent: 10, max: 18, depth: 3
-0:1:12.080078135 DEBUG (6): numMsgSent 1
-0:1:12.080078135 DEBUG (6): Random value generated 13
-0:1:12.080078135 DEBUG (6): Node: 6 , Parent: 1, max: 13, depth: 2
-0:1:12.128906260 DEBUG (8): numMsgSent 1
+0:1:12.021484386 DEBUG (15): Node: 15 , Parent: 10, Sum: 18, count: 1, 3rd parameter: 324, depth: 3
+0:1:12.128906260 DEBUG (8): numMsgSent 3
 0:1:12.128906260 DEBUG (8): Random value generated 41
-0:1:12.128906260 DEBUG (8): Node: 8 , Parent: 4, max: 41, depth: 2
-0:1:12.153320323 DEBUG (9): numMsgSent 1
+0:1:12.128906260 DEBUG (8): Node: 8 , Parent: 4, Sum: 41, count: 1, 3rd parameter: 1681, depth: 2
+0:1:12.153320323 DEBUG (9): numMsgSent 3
 0:1:12.153320323 DEBUG (9): Random value generated 48
-0:1:12.153320323 DEBUG (9): Node: 9 , Parent: 4, max: 48, depth: 2
-0:1:12.177734386 DEBUG (10): numMsgSent 1
+0:1:12.153320323 DEBUG (9): Node: 9 , Parent: 4, Sum: 181, count: 5, 3rd parameter: 7371, depth: 2
+0:1:12.177734386 DEBUG (10): numMsgSent 3
 0:1:12.177734386 DEBUG (10): Random value generated 5
-0:1:12.177734386 DEBUG (10): Node: 10 , Parent: 5, max: 34, depth: 2
-0:1:12.236328135 DEBUG (1): numMsgSent 1
+0:1:12.177734386 DEBUG (10): Node: 10 , Parent: 5, Sum: 146, count: 6, 3rd parameter: 4386, depth: 2
+0:1:12.236328135 DEBUG (1): numMsgSent 3
 0:1:12.236328135 DEBUG (1): Random value generated 14
-0:1:12.236328135 DEBUG (1): Node: 1 , Parent: 0, max: 42, depth: 1
-0:1:12.309570322 DEBUG (4): numMsgSent 1
+0:1:12.236328135 DEBUG (1): Node: 1 , Parent: 0, Sum: 14, count: 1, 3rd parameter: 196, depth: 1
+0:1:12.309570322 DEBUG (4): numMsgSent 3
 0:1:12.309570322 DEBUG (4): Random value generated 49
-0:1:12.309570322 DEBUG (4): Node: 4 , Parent: 0, max: 49, depth: 1
-0:1:12.333984385 DEBUG (5): numMsgSent 1
+0:1:12.309570322 DEBUG (4): Node: 4 , Parent: 0, Sum: 271, count: 7, 3rd parameter: 11453, depth: 1
+0:1:12.333984385 DEBUG (5): numMsgSent 3
 0:1:12.333984385 DEBUG (5): Random value generated 6
-0:1:12.333984385 DEBUG (5): Node: 5 , Parent: 0, max: 34, depth: 1
-0:1:12.490234385 DEBUG (0): numMsgSent 1
+0:1:12.333984385 DEBUG (5): Node: 5 , Parent: 0, Sum: 152, count: 7, 3rd parameter: 4422, depth: 1
+0:1:12.490234385 DEBUG (0): numMsgSent 3
 0:1:12.490234385 DEBUG (0): Random value generated 7
 0:1:12.490234385 DEBUG (0): 
 
 ########################Epoch 1 completed#####################
 0:1:12.490234385 DEBUG (0): #### OUTPUT: 
-0:1:12.490234385 DEBUG (0): #### [ΜΑΧ] = 49
+0:1:12.490234385 DEBUG (0): #### [VARIANCE] = 278
+0:1:12.490234385 DEBUG (0): #### [AVG] = 27
 
 
-0:2:10.322265635 DEBUG (3): numMsgSent 1
-0:2:10.322265635 DEBUG (3): Random value generated 6
-0:2:10.322265635 DEBUG (3): Node: 3 , Parent: 2, max: 6, depth: 3
-0:2:10.419921885 DEBUG (7): numMsgSent 1
+0:2:10.019531260 DEBUG (2): numMsgSent 3
+0:2:10.019531260 DEBUG (2): Random value generated 17
+0:2:10.019531260 DEBUG (2): Node: 2 , Parent: 7, Sum: 17, count: 1, 3rd parameter: 289, depth: 4
+0:2:10.043945322 DEBUG (3): numMsgSent 3
+0:2:10.043945322 DEBUG (3): Random value generated 6
+0:2:10.043945322 DEBUG (3): Node: 3 , Parent: 7, Sum: 6, count: 1, 3rd parameter: 36, depth: 4
+0:2:10.395507823 DEBUG (6): numMsgSent 3
+0:2:10.395507823 DEBUG (6): Random value generated 37
+0:2:10.395507823 DEBUG (6): Node: 6 , Parent: 9, Sum: 37, count: 1, 3rd parameter: 1369, depth: 3
+0:2:10.419921885 DEBUG (7): numMsgSent 3
 0:2:10.419921885 DEBUG (7): Random value generated 27
-0:2:10.419921885 DEBUG (7): Node: 7 , Parent: 10, max: 27, depth: 3
-0:2:10.517578136 DEBUG (11): numMsgSent 1
+0:2:10.419921885 DEBUG (7): Node: 7 , Parent: 10, Sum: 50, count: 3, 3rd parameter: 1054, depth: 3
+0:2:10.517578136 DEBUG (11): numMsgSent 3
 0:2:10.517578136 DEBUG (11): Random value generated 47
-0:2:10.517578136 DEBUG (11): Node: 11 , Parent: 10, max: 47, depth: 3
-0:2:10.541992198 DEBUG (12): numMsgSent 1
+0:2:10.517578136 DEBUG (11): Node: 11 , Parent: 10, Sum: 47, count: 1, 3rd parameter: 2209, depth: 3
+0:2:10.541992198 DEBUG (12): numMsgSent 3
 0:2:10.541992198 DEBUG (12): Random value generated 36
-0:2:10.541992198 DEBUG (12): Node: 12 , Parent: 9, max: 36, depth: 3
-0:2:10.566406261 DEBUG (13): numMsgSent 1
+0:2:10.541992198 DEBUG (12): Node: 12 , Parent: 9, Sum: 36, count: 1, 3rd parameter: 1296, depth: 3
+0:2:10.566406261 DEBUG (13): numMsgSent 3
 0:2:10.566406261 DEBUG (13): Random value generated 39
-0:2:10.566406261 DEBUG (13): Node: 13 , Parent: 9, max: 39, depth: 3
-0:2:10.576171885 DEBUG (2): numMsgSent 1
-0:2:10.576171885 DEBUG (2): Random value generated 17
-0:2:10.576171885 DEBUG (2): Node: 2 , Parent: 1, max: 17, depth: 2
-0:2:10.590820323 DEBUG (14): numMsgSent 1
+0:2:10.566406261 DEBUG (13): Node: 13 , Parent: 9, Sum: 39, count: 1, 3rd parameter: 1521, depth: 3
+0:2:10.590820323 DEBUG (14): numMsgSent 3
 0:2:10.590820323 DEBUG (14): Random value generated 28
-0:2:10.590820323 DEBUG (14): Node: 14 , Parent: 9, max: 28, depth: 3
-0:2:10.615234386 DEBUG (15): numMsgSent 1
+0:2:10.590820323 DEBUG (14): Node: 14 , Parent: 9, Sum: 28, count: 1, 3rd parameter: 784, depth: 3
+0:2:10.615234386 DEBUG (15): numMsgSent 3
 0:2:10.615234386 DEBUG (15): Random value generated 18
-0:2:10.615234386 DEBUG (15): Node: 15 , Parent: 10, max: 18, depth: 3
-0:2:10.673828135 DEBUG (6): numMsgSent 1
-0:2:10.673828135 DEBUG (6): Random value generated 37
-0:2:10.673828135 DEBUG (6): Node: 6 , Parent: 1, max: 37, depth: 2
-0:2:10.722656260 DEBUG (8): numMsgSent 1
+0:2:10.615234386 DEBUG (15): Node: 15 , Parent: 10, Sum: 18, count: 1, 3rd parameter: 324, depth: 3
+0:2:10.722656260 DEBUG (8): numMsgSent 3
 0:2:10.722656260 DEBUG (8): Random value generated 30
-0:2:10.722656260 DEBUG (8): Node: 8 , Parent: 4, max: 30, depth: 2
-0:2:10.747070323 DEBUG (9): numMsgSent 1
+0:2:10.722656260 DEBUG (8): Node: 8 , Parent: 4, Sum: 30, count: 1, 3rd parameter: 900, depth: 2
+0:2:10.747070323 DEBUG (9): numMsgSent 3
 0:2:10.747070323 DEBUG (9): Random value generated 19
-0:2:10.747070323 DEBUG (9): Node: 9 , Parent: 4, max: 39, depth: 2
-0:2:10.771484386 DEBUG (10): numMsgSent 1
+0:2:10.747070323 DEBUG (9): Node: 9 , Parent: 4, Sum: 159, count: 5, 3rd parameter: 5331, depth: 2
+0:2:10.771484386 DEBUG (10): numMsgSent 3
 0:2:10.771484386 DEBUG (10): Random value generated 8
-0:2:10.771484386 DEBUG (10): Node: 10 , Parent: 5, max: 47, depth: 2
-0:2:10.830078135 DEBUG (1): numMsgSent 1
+0:2:10.771484386 DEBUG (10): Node: 10 , Parent: 5, Sum: 123, count: 6, 3rd parameter: 3651, depth: 2
+0:2:10.830078135 DEBUG (1): numMsgSent 3
 0:2:10.830078135 DEBUG (1): Random value generated 28
-0:2:10.830078135 DEBUG (1): Node: 1 , Parent: 0, max: 37, depth: 1
-0:2:10.903320322 DEBUG (4): numMsgSent 1
+0:2:10.830078135 DEBUG (1): Node: 1 , Parent: 0, Sum: 28, count: 1, 3rd parameter: 784, depth: 1
+0:2:10.903320322 DEBUG (4): numMsgSent 3
 0:2:10.903320322 DEBUG (4): Random value generated 9
-0:2:10.903320322 DEBUG (4): Node: 4 , Parent: 0, max: 39, depth: 1
-0:2:10.927734385 DEBUG (5): numMsgSent 1
+0:2:10.903320322 DEBUG (4): Node: 4 , Parent: 0, Sum: 198, count: 7, 3rd parameter: 6312, depth: 1
+0:2:10.927734385 DEBUG (5): numMsgSent 3
 0:2:10.927734385 DEBUG (5): Random value generated 48
-0:2:10.927734385 DEBUG (5): Node: 5 , Parent: 0, max: 48, depth: 1
-0:2:11.083984385 DEBUG (0): numMsgSent 1
+0:2:10.927734385 DEBUG (5): Node: 5 , Parent: 0, Sum: 171, count: 7, 3rd parameter: 5955, depth: 1
+0:2:11.083984385 DEBUG (0): numMsgSent 3
 0:2:11.083984385 DEBUG (0): Random value generated 39
 0:2:11.083984385 DEBUG (0): 
 
 ########################Epoch 2 completed#####################
 0:2:11.083984385 DEBUG (0): #### OUTPUT: 
-0:2:11.083984385 DEBUG (0): #### [ΜΑΧ] = 48
+0:2:11.083984385 DEBUG (0): #### [VARIANCE] = 181
+0:2:11.083984385 DEBUG (0): #### [AVG] = 27
 
 
-0:3:8.916015635 DEBUG (3): numMsgSent 1
-0:3:8.916015635 DEBUG (3): Random value generated 27
-0:3:8.916015635 DEBUG (3): Node: 3 , Parent: 2, max: 27, depth: 3
-0:3:9.013671885 DEBUG (7): numMsgSent 1
+0:3:8.613281260 DEBUG (2): numMsgSent 3
+0:3:8.613281260 DEBUG (2): Random value generated 27
+0:3:8.613281260 DEBUG (2): Node: 2 , Parent: 7, Sum: 27, count: 1, 3rd parameter: 729, depth: 4
+0:3:8.637695322 DEBUG (3): numMsgSent 3
+0:3:8.637695322 DEBUG (3): Random value generated 27
+0:3:8.637695322 DEBUG (3): Node: 3 , Parent: 7, Sum: 27, count: 1, 3rd parameter: 729, depth: 4
+0:3:8.989257823 DEBUG (6): numMsgSent 3
+0:3:8.989257823 DEBUG (6): Random value generated 4
+0:3:8.989257823 DEBUG (6): Node: 6 , Parent: 9, Sum: 4, count: 1, 3rd parameter: 16, depth: 3
+0:3:9.013671885 DEBUG (7): numMsgSent 3
 0:3:9.013671885 DEBUG (7): Random value generated 18
-0:3:9.013671885 DEBUG (7): Node: 7 , Parent: 10, max: 18, depth: 3
-0:3:9.111328136 DEBUG (11): numMsgSent 1
+0:3:9.013671885 DEBUG (7): Node: 7 , Parent: 10, Sum: 72, count: 3, 3rd parameter: 1782, depth: 3
+0:3:9.111328136 DEBUG (11): numMsgSent 3
 0:3:9.111328136 DEBUG (11): Random value generated 9
-0:3:9.111328136 DEBUG (11): Node: 11 , Parent: 10, max: 9, depth: 3
-0:3:9.135742198 DEBUG (12): numMsgSent 1
+0:3:9.111328136 DEBUG (11): Node: 11 , Parent: 10, Sum: 9, count: 1, 3rd parameter: 81, depth: 3
+0:3:9.135742198 DEBUG (12): numMsgSent 3
 0:3:9.135742198 DEBUG (12): Random value generated 8
-0:3:9.135742198 DEBUG (12): Node: 12 , Parent: 9, max: 8, depth: 3
-0:3:9.160156261 DEBUG (13): numMsgSent 1
+0:3:9.135742198 DEBUG (12): Node: 12 , Parent: 9, Sum: 8, count: 1, 3rd parameter: 64, depth: 3
+0:3:9.160156261 DEBUG (13): numMsgSent 3
 0:3:9.160156261 DEBUG (13): Random value generated 22
-0:3:9.160156261 DEBUG (13): Node: 13 , Parent: 9, max: 22, depth: 3
-0:3:9.169921885 DEBUG (2): numMsgSent 1
-0:3:9.169921885 DEBUG (2): Random value generated 27
-0:3:9.169921885 DEBUG (2): Node: 2 , Parent: 1, max: 27, depth: 2
-0:3:9.184570323 DEBUG (14): numMsgSent 1
+0:3:9.160156261 DEBUG (13): Node: 13 , Parent: 9, Sum: 22, count: 1, 3rd parameter: 484, depth: 3
+0:3:9.184570323 DEBUG (14): numMsgSent 3
 0:3:9.184570323 DEBUG (14): Random value generated 36
-0:3:9.184570323 DEBUG (14): Node: 14 , Parent: 9, max: 36, depth: 3
-0:3:9.208984386 DEBUG (15): numMsgSent 1
+0:3:9.184570323 DEBUG (14): Node: 14 , Parent: 9, Sum: 36, count: 1, 3rd parameter: 1296, depth: 3
+0:3:9.208984386 DEBUG (15): numMsgSent 3
 0:3:9.208984386 DEBUG (15): Random value generated 36
-0:3:9.208984386 DEBUG (15): Node: 15 , Parent: 10, max: 36, depth: 3
-0:3:9.267578135 DEBUG (6): numMsgSent 1
-0:3:9.267578135 DEBUG (6): Random value generated 4
-0:3:9.267578135 DEBUG (6): Node: 6 , Parent: 1, max: 4, depth: 2
-0:3:9.316406260 DEBUG (8): numMsgSent 1
+0:3:9.208984386 DEBUG (15): Node: 15 , Parent: 10, Sum: 36, count: 1, 3rd parameter: 1296, depth: 3
+0:3:9.316406260 DEBUG (8): numMsgSent 3
 0:3:9.316406260 DEBUG (8): Random value generated 31
-0:3:9.316406260 DEBUG (8): Node: 8 , Parent: 4, max: 31, depth: 2
-0:3:9.340820323 DEBUG (9): numMsgSent 1
+0:3:9.316406260 DEBUG (8): Node: 8 , Parent: 4, Sum: 31, count: 1, 3rd parameter: 961, depth: 2
+0:3:9.340820323 DEBUG (9): numMsgSent 3
 0:3:9.340820323 DEBUG (9): Random value generated 31
-0:3:9.340820323 DEBUG (9): Node: 9 , Parent: 4, max: 36, depth: 2
-0:3:9.365234386 DEBUG (10): numMsgSent 1
+0:3:9.340820323 DEBUG (9): Node: 9 , Parent: 4, Sum: 101, count: 5, 3rd parameter: 2821, depth: 2
+0:3:9.365234386 DEBUG (10): numMsgSent 3
 0:3:9.365234386 DEBUG (10): Random value generated 45
-0:3:9.365234386 DEBUG (10): Node: 10 , Parent: 5, max: 45, depth: 2
-0:3:9.423828135 DEBUG (1): numMsgSent 1
+0:3:9.365234386 DEBUG (10): Node: 10 , Parent: 5, Sum: 162, count: 6, 3rd parameter: 5184, depth: 2
+0:3:9.423828135 DEBUG (1): numMsgSent 3
 0:3:9.423828135 DEBUG (1): Random value generated 13
-0:3:9.423828135 DEBUG (1): Node: 1 , Parent: 0, max: 27, depth: 1
-0:3:9.497070322 DEBUG (4): numMsgSent 1
+0:3:9.423828135 DEBUG (1): Node: 1 , Parent: 0, Sum: 13, count: 1, 3rd parameter: 169, depth: 1
+0:3:9.497070322 DEBUG (4): numMsgSent 3
 0:3:9.497070322 DEBUG (4): Random value generated 40
-0:3:9.497070322 DEBUG (4): Node: 4 , Parent: 0, max: 40, depth: 1
-0:3:9.521484385 DEBUG (5): numMsgSent 1
+0:3:9.497070322 DEBUG (4): Node: 4 , Parent: 0, Sum: 172, count: 7, 3rd parameter: 5382, depth: 1
+0:3:9.521484385 DEBUG (5): numMsgSent 3
 0:3:9.521484385 DEBUG (5): Random value generated 4
-0:3:9.521484385 DEBUG (5): Node: 5 , Parent: 0, max: 45, depth: 1
-0:3:9.677734385 DEBUG (0): numMsgSent 1
+0:3:9.521484385 DEBUG (5): Node: 5 , Parent: 0, Sum: 166, count: 7, 3rd parameter: 5200, depth: 1
+0:3:9.677734385 DEBUG (0): numMsgSent 3
 0:3:9.677734385 DEBUG (0): Random value generated 49
 0:3:9.677734385 DEBUG (0): 
 
 ########################Epoch 3 completed#####################
 0:3:9.677734385 DEBUG (0): #### OUTPUT: 
-0:3:9.677734385 DEBUG (0): #### [ΜΑΧ] = 49
+0:3:9.677734385 DEBUG (0): #### [VARIANCE] = 197
+0:3:9.677734385 DEBUG (0): #### [AVG] = 25
 
 
-0:4:7.509765635 DEBUG (3): numMsgSent 1
-0:4:7.509765635 DEBUG (3): Random value generated 7
-0:4:7.509765635 DEBUG (3): Node: 3 , Parent: 2, max: 7, depth: 3
-0:4:7.607421885 DEBUG (7): numMsgSent 1
+0:4:7.207031260 DEBUG (2): numMsgSent 3
+0:4:7.207031260 DEBUG (2): Random value generated 43
+0:4:7.207031260 DEBUG (2): Node: 2 , Parent: 7, Sum: 43, count: 1, 3rd parameter: 1849, depth: 4
+0:4:7.231445322 DEBUG (3): numMsgSent 3
+0:4:7.231445322 DEBUG (3): Random value generated 7
+0:4:7.231445322 DEBUG (3): Node: 3 , Parent: 7, Sum: 7, count: 1, 3rd parameter: 49, depth: 4
+0:4:7.583007823 DEBUG (6): numMsgSent 3
+0:4:7.583007823 DEBUG (6): Random value generated 1
+0:4:7.583007823 DEBUG (6): Node: 6 , Parent: 9, Sum: 1, count: 1, 3rd parameter: 1, depth: 3
+0:4:7.607421885 DEBUG (7): numMsgSent 3
 0:4:7.607421885 DEBUG (7): Random value generated 15
-0:4:7.607421885 DEBUG (7): Node: 7 , Parent: 10, max: 15, depth: 3
-0:4:7.705078136 DEBUG (11): numMsgSent 1
+0:4:7.607421885 DEBUG (7): Node: 7 , Parent: 10, Sum: 65, count: 3, 3rd parameter: 2123, depth: 3
+0:4:7.705078136 DEBUG (11): numMsgSent 3
 0:4:7.705078136 DEBUG (11): Random value generated 23
-0:4:7.705078136 DEBUG (11): Node: 11 , Parent: 10, max: 23, depth: 3
-0:4:7.729492198 DEBUG (12): numMsgSent 1
+0:4:7.705078136 DEBUG (11): Node: 11 , Parent: 10, Sum: 23, count: 1, 3rd parameter: 529, depth: 3
+0:4:7.729492198 DEBUG (12): numMsgSent 3
 0:4:7.729492198 DEBUG (12): Random value generated 37
-0:4:7.729492198 DEBUG (12): Node: 12 , Parent: 9, max: 37, depth: 3
-0:4:7.753906261 DEBUG (13): numMsgSent 1
+0:4:7.729492198 DEBUG (12): Node: 12 , Parent: 9, Sum: 37, count: 1, 3rd parameter: 1369, depth: 3
+0:4:7.753906261 DEBUG (13): numMsgSent 3
 0:4:7.753906261 DEBUG (13): Random value generated 2
-0:4:7.753906261 DEBUG (13): Node: 13 , Parent: 9, max: 2, depth: 3
-0:4:7.763671885 DEBUG (2): numMsgSent 1
-0:4:7.763671885 DEBUG (2): Random value generated 43
-0:4:7.763671885 DEBUG (2): Node: 2 , Parent: 1, max: 43, depth: 2
-0:4:7.778320323 DEBUG (14): numMsgSent 1
+0:4:7.753906261 DEBUG (13): Node: 13 , Parent: 9, Sum: 2, count: 1, 3rd parameter: 4, depth: 3
+0:4:7.778320323 DEBUG (14): numMsgSent 3
 0:4:7.778320323 DEBUG (14): Random value generated 16
-0:4:7.778320323 DEBUG (14): Node: 14 , Parent: 9, max: 16, depth: 3
-0:4:7.802734386 DEBUG (15): numMsgSent 1
+0:4:7.778320323 DEBUG (14): Node: 14 , Parent: 9, Sum: 16, count: 1, 3rd parameter: 256, depth: 3
+0:4:7.802734386 DEBUG (15): numMsgSent 3
 0:4:7.802734386 DEBUG (15): Random value generated 31
-0:4:7.802734386 DEBUG (15): Node: 15 , Parent: 10, max: 31, depth: 3
-0:4:7.861328135 DEBUG (6): numMsgSent 1
-0:4:7.861328135 DEBUG (6): Random value generated 1
-0:4:7.861328135 DEBUG (6): Node: 6 , Parent: 1, max: 1, depth: 2
-0:4:7.910156260 DEBUG (8): numMsgSent 1
+0:4:7.802734386 DEBUG (15): Node: 15 , Parent: 10, Sum: 31, count: 1, 3rd parameter: 961, depth: 3
+0:4:7.910156260 DEBUG (8): numMsgSent 3
 0:4:7.910156260 DEBUG (8): Random value generated 30
-0:4:7.910156260 DEBUG (8): Node: 8 , Parent: 4, max: 30, depth: 2
-0:4:7.934570323 DEBUG (9): numMsgSent 1
+0:4:7.910156260 DEBUG (8): Node: 8 , Parent: 4, Sum: 30, count: 1, 3rd parameter: 900, depth: 2
+0:4:7.934570323 DEBUG (9): numMsgSent 3
 0:4:7.934570323 DEBUG (9): Random value generated 44
-0:4:7.934570323 DEBUG (9): Node: 9 , Parent: 4, max: 44, depth: 2
-0:4:7.958984386 DEBUG (10): numMsgSent 1
+0:4:7.934570323 DEBUG (9): Node: 9 , Parent: 4, Sum: 100, count: 5, 3rd parameter: 3566, depth: 2
+0:4:7.958984386 DEBUG (10): numMsgSent 3
 0:4:7.958984386 DEBUG (10): Random value generated 9
-0:4:7.958984386 DEBUG (10): Node: 10 , Parent: 5, max: 31, depth: 2
-0:4:8.017578135 DEBUG (1): numMsgSent 1
+0:4:7.958984386 DEBUG (10): Node: 10 , Parent: 5, Sum: 128, count: 6, 3rd parameter: 3694, depth: 2
+0:4:8.017578135 DEBUG (1): numMsgSent 3
 0:4:8.017578135 DEBUG (1): Random value generated 28
-0:4:8.017578135 DEBUG (1): Node: 1 , Parent: 0, max: 43, depth: 1
-0:4:8.090820322 DEBUG (4): numMsgSent 1
+0:4:8.017578135 DEBUG (1): Node: 1 , Parent: 0, Sum: 28, count: 1, 3rd parameter: 784, depth: 1
+0:4:8.090820322 DEBUG (4): numMsgSent 3
 0:4:8.090820322 DEBUG (4): Random value generated 22
-0:4:8.090820322 DEBUG (4): Node: 4 , Parent: 0, max: 44, depth: 1
-0:4:8.115234385 DEBUG (5): numMsgSent 1
+0:4:8.090820322 DEBUG (4): Node: 4 , Parent: 0, Sum: 152, count: 7, 3rd parameter: 4950, depth: 1
+0:4:8.115234385 DEBUG (5): numMsgSent 3
 0:4:8.115234385 DEBUG (5): Random value generated 36
-0:4:8.115234385 DEBUG (5): Node: 5 , Parent: 0, max: 36, depth: 1
-0:4:8.271484385 DEBUG (0): numMsgSent 1
+0:4:8.115234385 DEBUG (5): Node: 5 , Parent: 0, Sum: 164, count: 7, 3rd parameter: 4990, depth: 1
+0:4:8.271484385 DEBUG (0): numMsgSent 3
 0:4:8.271484385 DEBUG (0): Random value generated 14
 0:4:8.271484385 DEBUG (0): 
 
 ########################Epoch 4 completed#####################
 0:4:8.271484385 DEBUG (0): #### OUTPUT: 
-0:4:8.271484385 DEBUG (0): #### [ΜΑΧ] = 44
+0:4:8.271484385 DEBUG (0): #### [VARIANCE] = 198
+0:4:8.271484385 DEBUG (0): #### [AVG] = 22
 
 
-0:5:6.103515635 DEBUG (3): numMsgSent 1
-0:5:6.103515635 DEBUG (3): Random value generated 42
-0:5:6.103515635 DEBUG (3): Node: 3 , Parent: 2, max: 42, depth: 3
-0:5:6.201171885 DEBUG (7): numMsgSent 1
+0:5:5.800781260 DEBUG (2): numMsgSent 3
+0:5:5.800781260 DEBUG (2): Random value generated 13
+0:5:5.800781260 DEBUG (2): Node: 2 , Parent: 7, Sum: 13, count: 1, 3rd parameter: 169, depth: 4
+0:5:5.825195322 DEBUG (3): numMsgSent 3
+0:5:5.825195322 DEBUG (3): Random value generated 42
+0:5:5.825195322 DEBUG (3): Node: 3 , Parent: 7, Sum: 42, count: 1, 3rd parameter: 1764, depth: 4
+0:5:6.176757823 DEBUG (6): numMsgSent 3
+0:5:6.176757823 DEBUG (6): Random value generated 19
+0:5:6.176757823 DEBUG (6): Node: 6 , Parent: 9, Sum: 19, count: 1, 3rd parameter: 361, depth: 3
+0:5:6.201171885 DEBUG (7): numMsgSent 3
 0:5:6.201171885 DEBUG (7): Random value generated 48
-0:5:6.201171885 DEBUG (7): Node: 7 , Parent: 10, max: 48, depth: 3
-0:5:6.298828136 DEBUG (11): numMsgSent 1
+0:5:6.201171885 DEBUG (7): Node: 7 , Parent: 10, Sum: 103, count: 3, 3rd parameter: 4237, depth: 3
+0:5:6.298828136 DEBUG (11): numMsgSent 3
 0:5:6.298828136 DEBUG (11): Random value generated 4
-0:5:6.298828136 DEBUG (11): Node: 11 , Parent: 10, max: 4, depth: 3
-0:5:6.323242198 DEBUG (12): numMsgSent 1
+0:5:6.298828136 DEBUG (11): Node: 11 , Parent: 10, Sum: 4, count: 1, 3rd parameter: 16, depth: 3
+0:5:6.323242198 DEBUG (12): numMsgSent 3
 0:5:6.323242198 DEBUG (12): Random value generated 46
-0:5:6.323242198 DEBUG (12): Node: 12 , Parent: 9, max: 46, depth: 3
-0:5:6.347656261 DEBUG (13): numMsgSent 1
+0:5:6.323242198 DEBUG (12): Node: 12 , Parent: 9, Sum: 46, count: 1, 3rd parameter: 2116, depth: 3
+0:5:6.347656261 DEBUG (13): numMsgSent 3
 0:5:6.347656261 DEBUG (13): Random value generated 39
-0:5:6.347656261 DEBUG (13): Node: 13 , Parent: 9, max: 39, depth: 3
-0:5:6.357421885 DEBUG (2): numMsgSent 1
-0:5:6.357421885 DEBUG (2): Random value generated 13
-0:5:6.357421885 DEBUG (2): Node: 2 , Parent: 1, max: 42, depth: 2
-0:5:6.372070323 DEBUG (14): numMsgSent 1
+0:5:6.347656261 DEBUG (13): Node: 13 , Parent: 9, Sum: 39, count: 1, 3rd parameter: 1521, depth: 3
+0:5:6.372070323 DEBUG (14): numMsgSent 3
 0:5:6.372070323 DEBUG (14): Random value generated 17
-0:5:6.372070323 DEBUG (14): Node: 14 , Parent: 9, max: 17, depth: 3
-0:5:6.396484386 DEBUG (15): numMsgSent 1
+0:5:6.372070323 DEBUG (14): Node: 14 , Parent: 9, Sum: 17, count: 1, 3rd parameter: 289, depth: 3
+0:5:6.396484386 DEBUG (15): numMsgSent 3
 0:5:6.396484386 DEBUG (15): Random value generated 10
-0:5:6.396484386 DEBUG (15): Node: 15 , Parent: 10, max: 10, depth: 3
-0:5:6.455078135 DEBUG (6): numMsgSent 1
-0:5:6.455078135 DEBUG (6): Random value generated 19
-0:5:6.455078135 DEBUG (6): Node: 6 , Parent: 1, max: 19, depth: 2
-0:5:6.503906260 DEBUG (8): numMsgSent 1
+0:5:6.396484386 DEBUG (15): Node: 15 , Parent: 10, Sum: 10, count: 1, 3rd parameter: 100, depth: 3
+0:5:6.503906260 DEBUG (8): numMsgSent 3
 0:5:6.503906260 DEBUG (8): Random value generated 40
-0:5:6.503906260 DEBUG (8): Node: 8 , Parent: 4, max: 40, depth: 2
-0:5:6.528320323 DEBUG (9): numMsgSent 1
+0:5:6.503906260 DEBUG (8): Node: 8 , Parent: 4, Sum: 40, count: 1, 3rd parameter: 1600, depth: 2
+0:5:6.528320323 DEBUG (9): numMsgSent 3
 0:5:6.528320323 DEBUG (9): Random value generated 33
-0:5:6.528320323 DEBUG (9): Node: 9 , Parent: 4, max: 46, depth: 2
-0:5:6.552734386 DEBUG (10): numMsgSent 1
+0:5:6.528320323 DEBUG (9): Node: 9 , Parent: 4, Sum: 154, count: 5, 3rd parameter: 5376, depth: 2
+0:5:6.552734386 DEBUG (10): numMsgSent 3
 0:5:6.552734386 DEBUG (10): Random value generated 11
-0:5:6.552734386 DEBUG (10): Node: 10 , Parent: 5, max: 48, depth: 2
-0:5:6.611328135 DEBUG (1): numMsgSent 1
+0:5:6.552734386 DEBUG (10): Node: 10 , Parent: 5, Sum: 128, count: 6, 3rd parameter: 4474, depth: 2
+0:5:6.611328135 DEBUG (1): numMsgSent 3
 0:5:6.611328135 DEBUG (1): Random value generated 21
-0:5:6.611328135 DEBUG (1): Node: 1 , Parent: 0, max: 42, depth: 1
-0:5:6.684570322 DEBUG (4): numMsgSent 1
+0:5:6.611328135 DEBUG (1): Node: 1 , Parent: 0, Sum: 21, count: 1, 3rd parameter: 441, depth: 1
+0:5:6.684570322 DEBUG (4): numMsgSent 3
 0:5:6.684570322 DEBUG (4): Random value generated 34
-0:5:6.684570322 DEBUG (4): Node: 4 , Parent: 0, max: 46, depth: 1
-0:5:6.708984385 DEBUG (5): numMsgSent 1
+0:5:6.684570322 DEBUG (4): Node: 4 , Parent: 0, Sum: 228, count: 7, 3rd parameter: 8132, depth: 1
+0:5:6.708984385 DEBUG (5): numMsgSent 3
 0:5:6.708984385 DEBUG (5): Random value generated 27
-0:5:6.708984385 DEBUG (5): Node: 5 , Parent: 0, max: 48, depth: 1
-0:5:6.865234385 DEBUG (0): numMsgSent 1
+0:5:6.708984385 DEBUG (5): Node: 5 , Parent: 0, Sum: 155, count: 7, 3rd parameter: 5203, depth: 1
+0:5:6.865234385 DEBUG (0): numMsgSent 3
 0:5:6.865234385 DEBUG (0): Random value generated 28
 0:5:6.865234385 DEBUG (0): 
 
 ########################Epoch 5 completed#####################
 0:5:6.865234385 DEBUG (0): #### OUTPUT: 
-0:5:6.865234385 DEBUG (0): #### [ΜΑΧ] = 48
+0:5:6.865234385 DEBUG (0): #### [VARIANCE] = 181
+0:5:6.865234385 DEBUG (0): #### [AVG] = 27
 
 
-0:6:4.697265635 DEBUG (3): numMsgSent 1
-0:6:4.697265635 DEBUG (3): Random value generated 24
-0:6:4.697265635 DEBUG (3): Node: 3 , Parent: 2, max: 24, depth: 3
-0:6:4.794921885 DEBUG (7): numMsgSent 1
+0:6:4.394531260 DEBUG (2): numMsgSent 3
+0:6:4.394531260 DEBUG (2): Random value generated 2
+0:6:4.394531260 DEBUG (2): Node: 2 , Parent: 7, Sum: 2, count: 1, 3rd parameter: 4, depth: 4
+0:6:4.418945322 DEBUG (3): numMsgSent 3
+0:6:4.418945322 DEBUG (3): Random value generated 24
+0:6:4.418945322 DEBUG (3): Node: 3 , Parent: 7, Sum: 24, count: 1, 3rd parameter: 576, depth: 4
+0:6:4.770507823 DEBUG (6): numMsgSent 3
+0:6:4.770507823 DEBUG (6): Random value generated 27
+0:6:4.770507823 DEBUG (6): Node: 6 , Parent: 9, Sum: 27, count: 1, 3rd parameter: 729, depth: 3
+0:6:4.794921885 DEBUG (7): numMsgSent 3
 0:6:4.794921885 DEBUG (7): Random value generated 49
-0:6:4.794921885 DEBUG (7): Node: 7 , Parent: 10, max: 49, depth: 3
-0:6:4.892578136 DEBUG (11): numMsgSent 1
+0:6:4.794921885 DEBUG (7): Node: 7 , Parent: 10, Sum: 75, count: 3, 3rd parameter: 2981, depth: 3
+0:6:4.892578136 DEBUG (11): numMsgSent 3
 0:6:4.892578136 DEBUG (11): Random value generated 38
-0:6:4.892578136 DEBUG (11): Node: 11 , Parent: 10, max: 38, depth: 3
-0:6:4.916992198 DEBUG (12): numMsgSent 1
+0:6:4.892578136 DEBUG (11): Node: 11 , Parent: 10, Sum: 38, count: 1, 3rd parameter: 1444, depth: 3
+0:6:4.916992198 DEBUG (12): numMsgSent 3
 0:6:4.916992198 DEBUG (12): Random value generated 10
-0:6:4.916992198 DEBUG (12): Node: 12 , Parent: 9, max: 10, depth: 3
-0:6:4.941406261 DEBUG (13): numMsgSent 1
+0:6:4.916992198 DEBUG (12): Node: 12 , Parent: 9, Sum: 10, count: 1, 3rd parameter: 100, depth: 3
+0:6:4.941406261 DEBUG (13): numMsgSent 3
 0:6:4.941406261 DEBUG (13): Random value generated 19
-0:6:4.941406261 DEBUG (13): Node: 13 , Parent: 9, max: 19, depth: 3
-0:6:4.951171885 DEBUG (2): numMsgSent 1
-0:6:4.951171885 DEBUG (2): Random value generated 2
-0:6:4.951171885 DEBUG (2): Node: 2 , Parent: 1, max: 24, depth: 2
-0:6:4.965820323 DEBUG (14): numMsgSent 1
+0:6:4.941406261 DEBUG (13): Node: 13 , Parent: 9, Sum: 19, count: 1, 3rd parameter: 361, depth: 3
+0:6:4.965820323 DEBUG (14): numMsgSent 3
 0:6:4.965820323 DEBUG (14): Random value generated 41
-0:6:4.965820323 DEBUG (14): Node: 14 , Parent: 9, max: 41, depth: 3
-0:6:4.990234386 DEBUG (15): numMsgSent 1
+0:6:4.965820323 DEBUG (14): Node: 14 , Parent: 9, Sum: 41, count: 1, 3rd parameter: 1681, depth: 3
+0:6:4.990234386 DEBUG (15): numMsgSent 3
 0:6:4.990234386 DEBUG (15): Random value generated 13
-0:6:4.990234386 DEBUG (15): Node: 15 , Parent: 10, max: 13, depth: 3
-0:6:5.048828135 DEBUG (6): numMsgSent 1
-0:6:5.048828135 DEBUG (6): Random value generated 27
-0:6:5.048828135 DEBUG (6): Node: 6 , Parent: 1, max: 27, depth: 2
-0:6:5.097656260 DEBUG (8): numMsgSent 1
+0:6:4.990234386 DEBUG (15): Node: 15 , Parent: 10, Sum: 13, count: 1, 3rd parameter: 169, depth: 3
+0:6:5.097656260 DEBUG (8): numMsgSent 3
 0:6:5.097656260 DEBUG (8): Random value generated 21
-0:6:5.097656260 DEBUG (8): Node: 8 , Parent: 4, max: 21, depth: 2
-0:6:5.122070323 DEBUG (9): numMsgSent 1
+0:6:5.097656260 DEBUG (8): Node: 8 , Parent: 4, Sum: 21, count: 1, 3rd parameter: 441, depth: 2
+0:6:5.122070323 DEBUG (9): numMsgSent 3
 0:6:5.122070323 DEBUG (9): Random value generated 44
-0:6:5.122070323 DEBUG (9): Node: 9 , Parent: 4, max: 44, depth: 2
-0:6:5.146484386 DEBUG (10): numMsgSent 1
+0:6:5.122070323 DEBUG (9): Node: 9 , Parent: 4, Sum: 141, count: 5, 3rd parameter: 4807, depth: 2
+0:6:5.146484386 DEBUG (10): numMsgSent 3
 0:6:5.146484386 DEBUG (10): Random value generated 16
-0:6:5.146484386 DEBUG (10): Node: 10 , Parent: 5, max: 49, depth: 2
-0:6:5.205078135 DEBUG (1): numMsgSent 1
+0:6:5.146484386 DEBUG (10): Node: 10 , Parent: 5, Sum: 142, count: 6, 3rd parameter: 4850, depth: 2
+0:6:5.205078135 DEBUG (1): numMsgSent 3
 0:6:5.205078135 DEBUG (1): Random value generated 30
-0:6:5.205078135 DEBUG (1): Node: 1 , Parent: 0, max: 30, depth: 1
-0:6:5.278320322 DEBUG (4): numMsgSent 1
+0:6:5.205078135 DEBUG (1): Node: 1 , Parent: 0, Sum: 30, count: 1, 3rd parameter: 900, depth: 1
+0:6:5.278320322 DEBUG (4): numMsgSent 3
 0:6:5.278320322 DEBUG (4): Random value generated 47
-0:6:5.278320322 DEBUG (4): Node: 4 , Parent: 0, max: 47, depth: 1
-0:6:5.302734385 DEBUG (5): numMsgSent 1
+0:6:5.278320322 DEBUG (4): Node: 4 , Parent: 0, Sum: 209, count: 7, 3rd parameter: 7457, depth: 1
+0:6:5.302734385 DEBUG (5): numMsgSent 3
 0:6:5.302734385 DEBUG (5): Random value generated 19
-0:6:5.302734385 DEBUG (5): Node: 5 , Parent: 0, max: 49, depth: 1
-0:6:5.458984385 DEBUG (0): numMsgSent 1
+0:6:5.302734385 DEBUG (5): Node: 5 , Parent: 0, Sum: 161, count: 7, 3rd parameter: 5211, depth: 1
+0:6:5.458984385 DEBUG (0): numMsgSent 3
 0:6:5.458984385 DEBUG (0): Random value generated 8
 0:6:5.458984385 DEBUG (0): 
 
 ########################Epoch 6 completed#####################
 0:6:5.458984385 DEBUG (0): #### OUTPUT: 
-0:6:5.458984385 DEBUG (0): #### [ΜΑΧ] = 49
+0:6:5.458984385 DEBUG (0): #### [VARIANCE] = 227
+0:6:5.458984385 DEBUG (0): #### [AVG] = 25
 
 
-0:7:3.291015635 DEBUG (3): numMsgSent 1
-0:7:3.291015635 DEBUG (3): Random value generated 0
-0:7:3.291015635 DEBUG (3): Node: 3 , Parent: 2, max: 0, depth: 3
-0:7:3.388671885 DEBUG (7): numMsgSent 1
+0:7:2.988281260 DEBUG (2): numMsgSent 3
+0:7:2.988281260 DEBUG (2): Random value generated 18
+0:7:2.988281260 DEBUG (2): Node: 2 , Parent: 7, Sum: 18, count: 1, 3rd parameter: 324, depth: 4
+0:7:3.012695322 DEBUG (3): numMsgSent 3
+0:7:3.012695322 DEBUG (3): Random value generated 0
+0:7:3.012695322 DEBUG (3): Node: 3 , Parent: 7, Sum: 0, count: 1, 3rd parameter: 0, depth: 4
+0:7:3.364257823 DEBUG (6): numMsgSent 3
+0:7:3.364257823 DEBUG (6): Random value generated 18
+0:7:3.364257823 DEBUG (6): Node: 6 , Parent: 9, Sum: 18, count: 1, 3rd parameter: 324, depth: 3
+0:7:3.388671885 DEBUG (7): numMsgSent 3
 0:7:3.388671885 DEBUG (7): Random value generated 0
-0:7:3.388671885 DEBUG (7): Node: 7 , Parent: 10, max: 0, depth: 3
-0:7:3.486328136 DEBUG (11): numMsgSent 1
+0:7:3.388671885 DEBUG (7): Node: 7 , Parent: 10, Sum: 18, count: 3, 3rd parameter: 324, depth: 3
+0:7:3.486328136 DEBUG (11): numMsgSent 3
 0:7:3.486328136 DEBUG (11): Random value generated 0
-0:7:3.486328136 DEBUG (11): Node: 11 , Parent: 10, max: 0, depth: 3
-0:7:3.510742198 DEBUG (12): numMsgSent 1
+0:7:3.486328136 DEBUG (11): Node: 11 , Parent: 10, Sum: 0, count: 1, 3rd parameter: 0, depth: 3
+0:7:3.510742198 DEBUG (12): numMsgSent 3
 0:7:3.510742198 DEBUG (12): Random value generated 32
-0:7:3.510742198 DEBUG (12): Node: 12 , Parent: 9, max: 32, depth: 3
-0:7:3.535156261 DEBUG (13): numMsgSent 1
+0:7:3.510742198 DEBUG (12): Node: 12 , Parent: 9, Sum: 32, count: 1, 3rd parameter: 1024, depth: 3
+0:7:3.535156261 DEBUG (13): numMsgSent 3
 0:7:3.535156261 DEBUG (13): Random value generated 0
-0:7:3.535156261 DEBUG (13): Node: 13 , Parent: 9, max: 0, depth: 3
-0:7:3.544921885 DEBUG (2): numMsgSent 1
-0:7:3.544921885 DEBUG (2): Random value generated 18
-0:7:3.544921885 DEBUG (2): Node: 2 , Parent: 1, max: 18, depth: 2
-0:7:3.559570323 DEBUG (14): numMsgSent 1
+0:7:3.535156261 DEBUG (13): Node: 13 , Parent: 9, Sum: 0, count: 1, 3rd parameter: 0, depth: 3
+0:7:3.559570323 DEBUG (14): numMsgSent 3
 0:7:3.559570323 DEBUG (14): Random value generated 32
-0:7:3.559570323 DEBUG (14): Node: 14 , Parent: 9, max: 32, depth: 3
-0:7:3.583984386 DEBUG (15): numMsgSent 1
+0:7:3.559570323 DEBUG (14): Node: 14 , Parent: 9, Sum: 32, count: 1, 3rd parameter: 1024, depth: 3
+0:7:3.583984386 DEBUG (15): numMsgSent 3
 0:7:3.583984386 DEBUG (15): Random value generated 0
-0:7:3.583984386 DEBUG (15): Node: 15 , Parent: 10, max: 0, depth: 3
-0:7:3.642578135 DEBUG (6): numMsgSent 1
-0:7:3.642578135 DEBUG (6): Random value generated 18
-0:7:3.642578135 DEBUG (6): Node: 6 , Parent: 1, max: 18, depth: 2
-0:7:3.691406260 DEBUG (8): numMsgSent 1
+0:7:3.583984386 DEBUG (15): Node: 15 , Parent: 10, Sum: 0, count: 1, 3rd parameter: 0, depth: 3
+0:7:3.691406260 DEBUG (8): numMsgSent 3
 0:7:3.691406260 DEBUG (8): Random value generated 32
-0:7:3.691406260 DEBUG (8): Node: 8 , Parent: 4, max: 32, depth: 2
-0:7:3.715820323 DEBUG (9): numMsgSent 1
+0:7:3.691406260 DEBUG (8): Node: 8 , Parent: 4, Sum: 32, count: 1, 3rd parameter: 1024, depth: 2
+0:7:3.715820323 DEBUG (9): numMsgSent 3
 0:7:3.715820323 DEBUG (9): Random value generated 0
-0:7:3.715820323 DEBUG (9): Node: 9 , Parent: 4, max: 32, depth: 2
-0:7:3.740234386 DEBUG (10): numMsgSent 1
+0:7:3.715820323 DEBUG (9): Node: 9 , Parent: 4, Sum: 82, count: 5, 3rd parameter: 2372, depth: 2
+0:7:3.740234386 DEBUG (10): numMsgSent 3
 0:7:3.740234386 DEBUG (10): Random value generated 32
-0:7:3.740234386 DEBUG (10): Node: 10 , Parent: 5, max: 32, depth: 2
-0:7:3.798828135 DEBUG (1): numMsgSent 1
+0:7:3.740234386 DEBUG (10): Node: 10 , Parent: 5, Sum: 50, count: 6, 3rd parameter: 1348, depth: 2
+0:7:3.798828135 DEBUG (1): numMsgSent 3
 0:7:3.798828135 DEBUG (1): Random value generated 0
-0:7:3.798828135 DEBUG (1): Node: 1 , Parent: 0, max: 18, depth: 1
-0:7:3.872070322 DEBUG (4): numMsgSent 1
+0:7:3.798828135 DEBUG (1): Node: 1 , Parent: 0, Sum: 0, count: 1, 3rd parameter: 0, depth: 1
+0:7:3.872070322 DEBUG (4): numMsgSent 3
 0:7:3.872070322 DEBUG (4): Random value generated 18
-0:7:3.872070322 DEBUG (4): Node: 4 , Parent: 0, max: 32, depth: 1
-0:7:3.896484385 DEBUG (5): numMsgSent 1
+0:7:3.872070322 DEBUG (4): Node: 4 , Parent: 0, Sum: 132, count: 7, 3rd parameter: 3720, depth: 1
+0:7:3.896484385 DEBUG (5): numMsgSent 3
 0:7:3.896484385 DEBUG (5): Random value generated 0
-0:7:3.896484385 DEBUG (5): Node: 5 , Parent: 0, max: 32, depth: 1
-0:7:4.052734385 DEBUG (0): numMsgSent 1
+0:7:3.896484385 DEBUG (5): Node: 5 , Parent: 0, Sum: 50, count: 7, 3rd parameter: 1348, depth: 1
+0:7:4.052734385 DEBUG (0): numMsgSent 3
 0:7:4.052734385 DEBUG (0): Random value generated 18
 0:7:4.052734385 DEBUG (0): 
 
 ########################Epoch 7 completed#####################
 0:7:4.052734385 DEBUG (0): #### OUTPUT: 
-0:7:4.052734385 DEBUG (0): #### [ΜΑΧ] = 32
+0:7:4.052734385 DEBUG (0): #### [VARIANCE] = 193
+0:7:4.052734385 DEBUG (0): #### [AVG] = 12
 
 
-0:8:1.884765635 DEBUG (3): numMsgSent 1
-0:8:1.884765635 DEBUG (3): Random value generated 34
-0:8:1.884765635 DEBUG (3): Node: 3 , Parent: 2, max: 34, depth: 3
-0:8:1.982421885 DEBUG (7): numMsgSent 1
+0:8:1.582031260 DEBUG (2): numMsgSent 3
+0:8:1.582031260 DEBUG (2): Random value generated 26
+0:8:1.582031260 DEBUG (2): Node: 2 , Parent: 7, Sum: 26, count: 1, 3rd parameter: 676, depth: 4
+0:8:1.606445322 DEBUG (3): numMsgSent 3
+0:8:1.606445322 DEBUG (3): Random value generated 34
+0:8:1.606445322 DEBUG (3): Node: 3 , Parent: 7, Sum: 34, count: 1, 3rd parameter: 1156, depth: 4
+0:8:1.958007823 DEBUG (6): numMsgSent 3
+0:8:1.958007823 DEBUG (6): Random value generated 10
+0:8:1.958007823 DEBUG (6): Node: 6 , Parent: 9, Sum: 10, count: 1, 3rd parameter: 100, depth: 3
+0:8:1.982421885 DEBUG (7): numMsgSent 3
 0:8:1.982421885 DEBUG (7): Random value generated 19
-0:8:1.982421885 DEBUG (7): Node: 7 , Parent: 10, max: 19, depth: 3
-0:8:2.080078136 DEBUG (11): numMsgSent 1
+0:8:1.982421885 DEBUG (7): Node: 7 , Parent: 10, Sum: 79, count: 3, 3rd parameter: 2193, depth: 3
+0:8:2.080078136 DEBUG (11): numMsgSent 3
 0:8:2.080078136 DEBUG (11): Random value generated 4
-0:8:2.080078136 DEBUG (11): Node: 11 , Parent: 10, max: 4, depth: 3
-0:8:2.104492198 DEBUG (12): numMsgSent 1
+0:8:2.080078136 DEBUG (11): Node: 11 , Parent: 10, Sum: 4, count: 1, 3rd parameter: 16, depth: 3
+0:8:2.104492198 DEBUG (12): numMsgSent 3
 0:8:2.104492198 DEBUG (12): Random value generated 12
-0:8:2.104492198 DEBUG (12): Node: 12 , Parent: 9, max: 12, depth: 3
-0:8:2.128906261 DEBUG (13): numMsgSent 1
+0:8:2.104492198 DEBUG (12): Node: 12 , Parent: 9, Sum: 12, count: 1, 3rd parameter: 144, depth: 3
+0:8:2.128906261 DEBUG (13): numMsgSent 3
 0:8:2.128906261 DEBUG (13): Random value generated 21
-0:8:2.128906261 DEBUG (13): Node: 13 , Parent: 9, max: 21, depth: 3
-0:8:2.138671885 DEBUG (2): numMsgSent 1
-0:8:2.138671885 DEBUG (2): Random value generated 26
-0:8:2.138671885 DEBUG (2): Node: 2 , Parent: 1, max: 34, depth: 2
-0:8:2.153320323 DEBUG (14): numMsgSent 1
+0:8:2.128906261 DEBUG (13): Node: 13 , Parent: 9, Sum: 21, count: 1, 3rd parameter: 441, depth: 3
+0:8:2.153320323 DEBUG (14): numMsgSent 3
 0:8:2.153320323 DEBUG (14): Random value generated 30
-0:8:2.153320323 DEBUG (14): Node: 14 , Parent: 9, max: 30, depth: 3
-0:8:2.177734386 DEBUG (15): numMsgSent 1
+0:8:2.153320323 DEBUG (14): Node: 14 , Parent: 9, Sum: 30, count: 1, 3rd parameter: 900, depth: 3
+0:8:2.177734386 DEBUG (15): numMsgSent 3
 0:8:2.177734386 DEBUG (15): Random value generated 38
-0:8:2.177734386 DEBUG (15): Node: 15 , Parent: 10, max: 38, depth: 3
-0:8:2.236328135 DEBUG (6): numMsgSent 1
-0:8:2.236328135 DEBUG (6): Random value generated 10
-0:8:2.236328135 DEBUG (6): Node: 6 , Parent: 1, max: 10, depth: 2
-0:8:2.285156260 DEBUG (8): numMsgSent 1
+0:8:2.177734386 DEBUG (15): Node: 15 , Parent: 10, Sum: 38, count: 1, 3rd parameter: 1444, depth: 3
+0:8:2.285156260 DEBUG (8): numMsgSent 3
 0:8:2.285156260 DEBUG (8): Random value generated 28
-0:8:2.285156260 DEBUG (8): Node: 8 , Parent: 4, max: 28, depth: 2
-0:8:2.309570323 DEBUG (9): numMsgSent 1
+0:8:2.285156260 DEBUG (8): Node: 8 , Parent: 4, Sum: 28, count: 1, 3rd parameter: 784, depth: 2
+0:8:2.309570323 DEBUG (9): numMsgSent 3
 0:8:2.309570323 DEBUG (9): Random value generated 36
-0:8:2.309570323 DEBUG (9): Node: 9 , Parent: 4, max: 36, depth: 2
-0:8:2.333984386 DEBUG (10): numMsgSent 1
+0:8:2.309570323 DEBUG (9): Node: 9 , Parent: 4, Sum: 109, count: 5, 3rd parameter: 2881, depth: 2
+0:8:2.333984386 DEBUG (10): numMsgSent 3
 0:8:2.333984386 DEBUG (10): Random value generated 45
-0:8:2.333984386 DEBUG (10): Node: 10 , Parent: 5, max: 45, depth: 2
-0:8:2.392578135 DEBUG (1): numMsgSent 1
+0:8:2.333984386 DEBUG (10): Node: 10 , Parent: 5, Sum: 166, count: 6, 3rd parameter: 5678, depth: 2
+0:8:2.392578135 DEBUG (1): numMsgSent 3
 0:8:2.392578135 DEBUG (1): Random value generated 17
-0:8:2.392578135 DEBUG (1): Node: 1 , Parent: 0, max: 34, depth: 1
-0:8:2.465820322 DEBUG (4): numMsgSent 1
+0:8:2.392578135 DEBUG (1): Node: 1 , Parent: 0, Sum: 17, count: 1, 3rd parameter: 289, depth: 1
+0:8:2.465820322 DEBUG (4): numMsgSent 3
 0:8:2.465820322 DEBUG (4): Random value generated 43
-0:8:2.465820322 DEBUG (4): Node: 4 , Parent: 0, max: 43, depth: 1
-0:8:2.490234385 DEBUG (5): numMsgSent 1
+0:8:2.465820322 DEBUG (4): Node: 4 , Parent: 0, Sum: 180, count: 7, 3rd parameter: 5514, depth: 1
+0:8:2.490234385 DEBUG (5): numMsgSent 3
 0:8:2.490234385 DEBUG (5): Random value generated 2
-0:8:2.490234385 DEBUG (5): Node: 5 , Parent: 0, max: 45, depth: 1
-0:8:2.646484385 DEBUG (0): numMsgSent 1
+0:8:2.490234385 DEBUG (5): Node: 5 , Parent: 0, Sum: 168, count: 7, 3rd parameter: 5682, depth: 1
+0:8:2.646484385 DEBUG (0): numMsgSent 3
 0:8:2.646484385 DEBUG (0): Random value generated 8
 0:8:2.646484385 DEBUG (0): 
 
 ########################Epoch 8 completed#####################
 0:8:2.646484385 DEBUG (0): #### OUTPUT: 
-0:8:2.646484385 DEBUG (0): #### [ΜΑΧ] = 45
+0:8:2.646484385 DEBUG (0): #### [VARIANCE] = 192
+0:8:2.646484385 DEBUG (0): #### [AVG] = 23
 
 
-0:9:0.478515635 DEBUG (3): numMsgSent 1
-0:9:0.478515635 DEBUG (3): Random value generated 48
-0:9:0.478515635 DEBUG (3): Node: 3 , Parent: 2, max: 48, depth: 3
-0:9:0.576171885 DEBUG (7): numMsgSent 1
+0:9:0.175781260 DEBUG (2): numMsgSent 3
+0:9:0.175781260 DEBUG (2): Random value generated 49
+0:9:0.175781260 DEBUG (2): Node: 2 , Parent: 7, Sum: 49, count: 1, 3rd parameter: 2401, depth: 4
+0:9:0.200195322 DEBUG (3): numMsgSent 3
+0:9:0.200195322 DEBUG (3): Random value generated 48
+0:9:0.200195322 DEBUG (3): Node: 3 , Parent: 7, Sum: 48, count: 1, 3rd parameter: 2304, depth: 4
+0:9:0.551757823 DEBUG (6): numMsgSent 3
+0:9:0.551757823 DEBUG (6): Random value generated 11
+0:9:0.551757823 DEBUG (6): Node: 6 , Parent: 9, Sum: 11, count: 1, 3rd parameter: 121, depth: 3
+0:9:0.576171885 DEBUG (7): numMsgSent 3
 0:9:0.576171885 DEBUG (7): Random value generated 11
-0:9:0.576171885 DEBUG (7): Node: 7 , Parent: 10, max: 11, depth: 3
-0:9:0.673828136 DEBUG (11): numMsgSent 1
+0:9:0.576171885 DEBUG (7): Node: 7 , Parent: 10, Sum: 108, count: 3, 3rd parameter: 4826, depth: 3
+0:9:0.673828136 DEBUG (11): numMsgSent 3
 0:9:0.673828136 DEBUG (11): Random value generated 24
-0:9:0.673828136 DEBUG (11): Node: 11 , Parent: 10, max: 24, depth: 3
-0:9:0.698242198 DEBUG (12): numMsgSent 1
+0:9:0.673828136 DEBUG (11): Node: 11 , Parent: 10, Sum: 24, count: 1, 3rd parameter: 576, depth: 3
+0:9:0.698242198 DEBUG (12): numMsgSent 3
 0:9:0.698242198 DEBUG (12): Random value generated 23
-0:9:0.698242198 DEBUG (12): Node: 12 , Parent: 9, max: 23, depth: 3
-0:9:0.722656261 DEBUG (13): numMsgSent 1
+0:9:0.698242198 DEBUG (12): Node: 12 , Parent: 9, Sum: 23, count: 1, 3rd parameter: 529, depth: 3
+0:9:0.722656261 DEBUG (13): numMsgSent 3
 0:9:0.722656261 DEBUG (13): Random value generated 23
-0:9:0.722656261 DEBUG (13): Node: 13 , Parent: 9, max: 23, depth: 3
-0:9:0.732421885 DEBUG (2): numMsgSent 1
-0:9:0.732421885 DEBUG (2): Random value generated 49
-0:9:0.732421885 DEBUG (2): Node: 2 , Parent: 1, max: 49, depth: 2
-0:9:0.747070323 DEBUG (14): numMsgSent 1
+0:9:0.722656261 DEBUG (13): Node: 13 , Parent: 9, Sum: 23, count: 1, 3rd parameter: 529, depth: 3
+0:9:0.747070323 DEBUG (14): numMsgSent 3
 0:9:0.747070323 DEBUG (14): Random value generated 23
-0:9:0.747070323 DEBUG (14): Node: 14 , Parent: 9, max: 23, depth: 3
-0:9:0.771484386 DEBUG (15): numMsgSent 1
+0:9:0.747070323 DEBUG (14): Node: 14 , Parent: 9, Sum: 23, count: 1, 3rd parameter: 529, depth: 3
+0:9:0.771484386 DEBUG (15): numMsgSent 3
 0:9:0.771484386 DEBUG (15): Random value generated 22
-0:9:0.771484386 DEBUG (15): Node: 15 , Parent: 10, max: 22, depth: 3
-0:9:0.830078135 DEBUG (6): numMsgSent 1
-0:9:0.830078135 DEBUG (6): Random value generated 11
-0:9:0.830078135 DEBUG (6): Node: 6 , Parent: 1, max: 11, depth: 2
-0:9:0.878906260 DEBUG (8): numMsgSent 1
+0:9:0.771484386 DEBUG (15): Node: 15 , Parent: 10, Sum: 22, count: 1, 3rd parameter: 484, depth: 3
+0:9:0.878906260 DEBUG (8): numMsgSent 3
 0:9:0.878906260 DEBUG (8): Random value generated 11
-0:9:0.878906260 DEBUG (8): Node: 8 , Parent: 4, max: 11, depth: 2
-0:9:0.903320323 DEBUG (9): numMsgSent 1
+0:9:0.878906260 DEBUG (8): Node: 8 , Parent: 4, Sum: 11, count: 1, 3rd parameter: 121, depth: 2
+0:9:0.903320323 DEBUG (9): numMsgSent 3
 0:9:0.903320323 DEBUG (9): Random value generated 10
-0:9:0.903320323 DEBUG (9): Node: 9 , Parent: 4, max: 23, depth: 2
-0:9:0.927734386 DEBUG (10): numMsgSent 1
+0:9:0.903320323 DEBUG (9): Node: 9 , Parent: 4, Sum: 90, count: 5, 3rd parameter: 1808, depth: 2
+0:9:0.927734386 DEBUG (10): numMsgSent 3
 0:9:0.927734386 DEBUG (10): Random value generated 24
-0:9:0.927734386 DEBUG (10): Node: 10 , Parent: 5, max: 24, depth: 2
-0:9:0.986328135 DEBUG (1): numMsgSent 1
+0:9:0.927734386 DEBUG (10): Node: 10 , Parent: 5, Sum: 178, count: 6, 3rd parameter: 6462, depth: 2
+0:9:0.986328135 DEBUG (1): numMsgSent 3
 0:9:0.986328135 DEBUG (1): Random value generated 49
-0:9:0.986328135 DEBUG (1): Node: 1 , Parent: 0, max: 49, depth: 1
-0:9:1.059570322 DEBUG (4): numMsgSent 1
+0:9:0.986328135 DEBUG (1): Node: 1 , Parent: 0, Sum: 49, count: 1, 3rd parameter: 2401, depth: 1
+0:9:1.059570322 DEBUG (4): numMsgSent 3
 0:9:1.059570322 DEBUG (4): Random value generated 48
-0:9:1.059570322 DEBUG (4): Node: 4 , Parent: 0, max: 48, depth: 1
-0:9:1.083984385 DEBUG (5): numMsgSent 1
+0:9:1.059570322 DEBUG (4): Node: 4 , Parent: 0, Sum: 149, count: 7, 3rd parameter: 4233, depth: 1
+0:9:1.083984385 DEBUG (5): numMsgSent 3
 0:9:1.083984385 DEBUG (5): Random value generated 12
-0:9:1.083984385 DEBUG (5): Node: 5 , Parent: 0, max: 24, depth: 1
-0:9:1.240234385 DEBUG (0): numMsgSent 1
+0:9:1.083984385 DEBUG (5): Node: 5 , Parent: 0, Sum: 190, count: 7, 3rd parameter: 6606, depth: 1
+0:9:1.240234385 DEBUG (0): numMsgSent 3
 0:9:1.240234385 DEBUG (0): Random value generated 49
 0:9:1.240234385 DEBUG (0): 
 
 ########################Epoch 9 completed#####################
 0:9:1.240234385 DEBUG (0): #### OUTPUT: 
-0:9:1.240234385 DEBUG (0): #### [ΜΑΧ] = 49
+0:9:1.240234385 DEBUG (0): #### [VARIANCE] = 248
+0:9:1.240234385 DEBUG (0): #### [AVG] = 27
 
 
-0:9:59.072265635 DEBUG (3): numMsgSent 1
-0:9:59.072265635 DEBUG (3): Random value generated 7
-0:9:59.072265635 DEBUG (3): Node: 3 , Parent: 2, max: 7, depth: 3
-0:9:59.169921885 DEBUG (7): numMsgSent 1
+0:9:58.769531260 DEBUG (2): numMsgSent 3
+0:9:58.769531260 DEBUG (2): Random value generated 5
+0:9:58.769531260 DEBUG (2): Node: 2 , Parent: 7, Sum: 5, count: 1, 3rd parameter: 25, depth: 4
+0:9:58.793945322 DEBUG (3): numMsgSent 3
+0:9:58.793945322 DEBUG (3): Random value generated 7
+0:9:58.793945322 DEBUG (3): Node: 3 , Parent: 7, Sum: 7, count: 1, 3rd parameter: 49, depth: 4
+0:9:59.145507823 DEBUG (6): numMsgSent 3
+0:9:59.145507823 DEBUG (6): Random value generated 13
+0:9:59.145507823 DEBUG (6): Node: 6 , Parent: 9, Sum: 13, count: 1, 3rd parameter: 169, depth: 3
+0:9:59.169921885 DEBUG (7): numMsgSent 3
 0:9:59.169921885 DEBUG (7): Random value generated 15
-0:9:59.169921885 DEBUG (7): Node: 7 , Parent: 10, max: 15, depth: 3
-0:9:59.267578136 DEBUG (11): numMsgSent 1
+0:9:59.169921885 DEBUG (7): Node: 7 , Parent: 10, Sum: 27, count: 3, 3rd parameter: 299, depth: 3
+0:9:59.267578136 DEBUG (11): numMsgSent 3
 0:9:59.267578136 DEBUG (11): Random value generated 23
-0:9:59.267578136 DEBUG (11): Node: 11 , Parent: 10, max: 23, depth: 3
-0:9:59.291992198 DEBUG (12): numMsgSent 1
+0:9:59.267578136 DEBUG (11): Node: 11 , Parent: 10, Sum: 23, count: 1, 3rd parameter: 529, depth: 3
+0:9:59.291992198 DEBUG (12): numMsgSent 3
 0:9:59.291992198 DEBUG (12): Random value generated 25
-0:9:59.291992198 DEBUG (12): Node: 12 , Parent: 9, max: 25, depth: 3
-0:9:59.316406261 DEBUG (13): numMsgSent 1
+0:9:59.291992198 DEBUG (12): Node: 12 , Parent: 9, Sum: 25, count: 1, 3rd parameter: 625, depth: 3
+0:9:59.316406261 DEBUG (13): numMsgSent 3
 0:9:59.316406261 DEBUG (13): Random value generated 27
-0:9:59.316406261 DEBUG (13): Node: 13 , Parent: 9, max: 27, depth: 3
-0:9:59.326171885 DEBUG (2): numMsgSent 1
-0:9:59.326171885 DEBUG (2): Random value generated 5
-0:9:59.326171885 DEBUG (2): Node: 2 , Parent: 1, max: 7, depth: 2
-0:9:59.340820323 DEBUG (14): numMsgSent 1
+0:9:59.316406261 DEBUG (13): Node: 13 , Parent: 9, Sum: 27, count: 1, 3rd parameter: 729, depth: 3
+0:9:59.340820323 DEBUG (14): numMsgSent 3
 0:9:59.340820323 DEBUG (14): Random value generated 29
-0:9:59.340820323 DEBUG (14): Node: 14 , Parent: 9, max: 29, depth: 3
-0:9:59.365234386 DEBUG (15): numMsgSent 1
+0:9:59.340820323 DEBUG (14): Node: 14 , Parent: 9, Sum: 29, count: 1, 3rd parameter: 841, depth: 3
+0:9:59.365234386 DEBUG (15): numMsgSent 3
 0:9:59.365234386 DEBUG (15): Random value generated 30
-0:9:59.365234386 DEBUG (15): Node: 15 , Parent: 10, max: 30, depth: 3
-0:9:59.423828135 DEBUG (6): numMsgSent 1
-0:9:59.423828135 DEBUG (6): Random value generated 13
-0:9:59.423828135 DEBUG (6): Node: 6 , Parent: 1, max: 13, depth: 2
-0:9:59.472656260 DEBUG (8): numMsgSent 1
+0:9:59.365234386 DEBUG (15): Node: 15 , Parent: 10, Sum: 30, count: 1, 3rd parameter: 900, depth: 3
+0:9:59.472656260 DEBUG (8): numMsgSent 3
 0:9:59.472656260 DEBUG (8): Random value generated 17
-0:9:59.472656260 DEBUG (8): Node: 8 , Parent: 4, max: 17, depth: 2
-0:9:59.497070323 DEBUG (9): numMsgSent 1
+0:9:59.472656260 DEBUG (8): Node: 8 , Parent: 4, Sum: 17, count: 1, 3rd parameter: 289, depth: 2
+0:9:59.497070323 DEBUG (9): numMsgSent 3
 0:9:59.497070323 DEBUG (9): Random value generated 19
-0:9:59.497070323 DEBUG (9): Node: 9 , Parent: 4, max: 29, depth: 2
-0:9:59.521484386 DEBUG (10): numMsgSent 1
+0:9:59.497070323 DEBUG (9): Node: 9 , Parent: 4, Sum: 113, count: 5, 3rd parameter: 2725, depth: 2
+0:9:59.521484386 DEBUG (10): numMsgSent 3
 0:9:59.521484386 DEBUG (10): Random value generated 21
-0:9:59.521484386 DEBUG (10): Node: 10 , Parent: 5, max: 30, depth: 2
-0:9:59.580078135 DEBUG (1): numMsgSent 1
+0:9:59.521484386 DEBUG (10): Node: 10 , Parent: 5, Sum: 101, count: 6, 3rd parameter: 2169, depth: 2
+0:9:59.580078135 DEBUG (1): numMsgSent 3
 0:9:59.580078135 DEBUG (1): Random value generated 3
-0:9:59.580078135 DEBUG (1): Node: 1 , Parent: 0, max: 13, depth: 1
-0:9:59.653320322 DEBUG (4): numMsgSent 1
+0:9:59.580078135 DEBUG (1): Node: 1 , Parent: 0, Sum: 3, count: 1, 3rd parameter: 9, depth: 1
+0:9:59.653320322 DEBUG (4): numMsgSent 3
 0:9:59.653320322 DEBUG (4): Random value generated 9
-0:9:59.653320322 DEBUG (4): Node: 4 , Parent: 0, max: 29, depth: 1
-0:9:59.677734385 DEBUG (5): numMsgSent 1
+0:9:59.653320322 DEBUG (4): Node: 4 , Parent: 0, Sum: 139, count: 7, 3rd parameter: 3095, depth: 1
+0:9:59.677734385 DEBUG (5): numMsgSent 3
 0:9:59.677734385 DEBUG (5): Random value generated 11
-0:9:59.677734385 DEBUG (5): Node: 5 , Parent: 0, max: 30, depth: 1
-0:9:59.833984385 DEBUG (0): numMsgSent 1
+0:9:59.677734385 DEBUG (5): Node: 5 , Parent: 0, Sum: 112, count: 7, 3rd parameter: 2290, depth: 1
+0:9:59.833984385 DEBUG (0): numMsgSent 3
 0:9:59.833984385 DEBUG (0): Random value generated 1
 0:9:59.833984385 DEBUG (0): 
 
 ########################Epoch 10 completed#####################
 0:9:59.833984385 DEBUG (0): #### OUTPUT: 
-0:9:59.833984385 DEBUG (0): #### [ΜΑΧ] = 30
+0:9:59.833984385 DEBUG (0): #### [VARIANCE] = 112
+0:9:59.833984385 DEBUG (0): #### [AVG] = 15
 
 

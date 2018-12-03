@@ -106,14 +106,85 @@ implementation
 		
 	}
 
-	/**Used to print all needed messages when we reach root*/
-	void rootMsgPrint(DistrMsg* mrpkt){
+
+	/**Used to print all needed messages in the case where we send 4 messages*/
+	void rootMsgPrint4(DistrMsg4* mrpkt){
 		dbg("SRTreeC", "#### OUTPUT: \n");
-		dbg("SRTreeC", "#### [COUNT] = %d\n", mrpkt->count);
-		dbg("SRTreeC", "#### [SUM] = %d\n", mrpkt->sum);
-		dbg("SRTreeC", "#### [MAX] = %d\n", mrpkt->max);
-		dbg("SRTreeC", "#### [AVG] = %f\n\n\n", (double)mrpkt->sum / mrpkt->count);
+		//dbg("SRTreeC", "#### [COUNT] = %d\n", mrpkt->field4b);
+		//dbg("SRTreeC", "#### [SUM] = %d\n", mrpkt->field4a);
+		if(chooseFun1 == 1 || chooseFun2 ==1){	//min case
+			dbg("SRTreeC", "#### [MIN] = %d\n", mrpkt->field4d);
+		}else{	//max case
+			dbg("SRTreeC", "#### [MAX] = %d\n", mrpkt->field4d);
+		}
+		//dbg("SRTreeC", "#### [SUM OF SQUARES] = %d\n\n\n", mrpkt->field4c);
+		dbg("SRTreeC", "#### [VARIANCE] = %d\n\n\n", (mrpkt->field4c/mrpkt->field4b-(mrpkt->field4a/mrpkt->field4b)*(mrpkt->field4a/mrpkt->field4b)));
+		
 	}
+
+	void rootMsgPrint3(DistrMsg3* mrpkt){
+		dbg("SRTreeC", "#### OUTPUT: \n");
+		if(chooseFun==6){
+			dbg("SRTreeC", "#### [VARIANCE] = %d\n\n\n", mrpkt->field3c/mrpkt->field3b-(mrpkt->field3a/mrpkt->field3b)*(mrpkt->field3a/mrpkt->field3b));
+		}
+		else if(chooseFun1==6 || chooseFun2==6){ //Two functions. One of them is VARIANCE
+           dbg("SRTreeC", "#### [VARIANCE] = %d\n", mrpkt->field3c/mrpkt->field3b-(mrpkt->field3a/mrpkt->field3b)*(mrpkt->field3a/mrpkt->field3b));
+		   if(chooseFun1==5 || chooseFun2==5){ // case SUM
+              dbg("SRTreeC", "#### [SUM] = %d\n\n\n", mrpkt->field3a);
+		   }
+		   else if(chooseFun1==3 || chooseFun2==3){ //case COUNT
+              dbg("SRTreeC", "#### [COUNT] = %d\n\n\n", mrpkt->field3b);
+		   }
+		   else{ // case AVG
+		   	  dbg("SRTreeC", "#### [AVG] = %d\n\n\n", mrpkt->field3a/mrpkt->field3b);
+		   }
+		}
+		else if(chooseFun1==1 || chooseFun2==1 || chooseFun1==2 || chooseFun2==2){ // case AVG + (MAX or MIN)
+           dbg("SRTreeC", "#### [AVG] = %d\n", mrpkt->field3a/mrpkt->field3b);
+           if(chooseFun1 == 1 || chooseFun2 ==1){	//min case
+			dbg("SRTreeC", "#### [MIN] = %d\n\n\n", mrpkt->field3c);
+		   }else{	//max case
+			dbg("SRTreeC", "#### [MAX] = %d\n\n\n", mrpkt->field3c);
+		   } 
+		}
+	}
+
+	void rootMsgPrint2(DistrMsg2* mrpkt){
+		dbg("SRTreeC", "#### OUTPUT: \n");
+		if (numFun==1 && chooseFun==4){
+			dbg("SRTreeC", "#### [AVG] = %d\n\n\n", mrpkt->field2a/mrpkt->field2b);
+		}
+		else if(chooseFun1==1 || chooseFun2==1 || chooseFun1==2 || chooseFun2==2){ //At least one (min/max) function
+            if((chooseFun1==1 || chooseFun2==1) && (chooseFun1==2 || chooseFun2==2)){ // min AND max
+            	dbg("SRTreeC", "#### [MIN] = %d\n", mrpkt->field2a);
+            	dbg("SRTreeC", "#### [MAX] = %d\n\n\n", mrpkt->field2b);
+            }
+            else {
+                if(chooseFun1==5 || chooseFun2==5) // SUM + (MIN or MAX)
+                    dbg("SRTreeC", "#### [SUM] = %d\n", mrpkt->field2a);
+                else    // COUNT + (MIN or MAX)
+                    dbg("SRTreeC", "#### [COUNT] = %d\n", mrpkt->field2a); 
+                if(chooseFun1 == 1 || chooseFun2 == 1){	//case min
+					dbg("SRTreeC", "#### [MIN] = %d\n\n\n", mrpkt->field2b);
+				}else if(chooseFun1 == 2 || chooseFun2 == 2){ //case max
+					dbg("SRTreeC", "#### [MAX] = %d\n\n\n", mrpkt->field2b);
+				}
+            }
+		}
+		else if(numFun==2 && (chooseFun1==4 || chooseFun2==4)){ // One function is AVG
+                dbg("SRTreeC", "#### [AVG] = %d\n", mrpkt->field2a/mrpkt->field2b);
+                if(chooseFun1==3 || chooseFun2==3)
+                   dbg("SRTreeC", "#### [COUNT] = %d\n\n\n", mrpkt->field2b);
+                else
+                   dbg("SRTreeC", "#### [SUM] = %d\n\n\n", mrpkt->field2a);      
+		}
+		else if((chooseFun1==3 || chooseFun2==3) && (chooseFun1==5 || chooseFun2==5)){ //case SUM + COUNT
+				  dbg("SRTreeC", "#### [COUNT] = %d\n", mrpkt->field2b);
+				  dbg("SRTreeC", "#### [SUM] = %d\n\n\n", mrpkt->field2a);	
+		}
+	}
+
+
 
 	/**Used to print all needed messages in the case where we send 1 message*/
 	void rootMsgPrint1(DistrMsg1* mrpkt){
@@ -128,23 +199,6 @@ implementation
 		}else{	//sum case
 			dbg("SRTreeC", "#### [SUM] = %d\n\n\n", mrpkt->field1a);
 		}
-		
-	}
-
-
-
-	/**Used to print all needed messages in the case where we send 4 messages*/
-	void rootMsgPrint4(DistrMsg4* mrpkt){
-		dbg("SRTreeC", "#### OUTPUT: \n");
-		dbg("SRTreeC", "#### [COUNT] = %d\n", mrpkt->field4b);
-		dbg("SRTreeC", "#### [SUM] = %d\n", mrpkt->field4a);
-		if(chooseFun1 == 1 || chooseFun2 ==1){	//min case
-			dbg("SRTreeC", "#### [MIN] = %d\n", mrpkt->field4d);
-		}else{	//max case
-			dbg("SRTreeC", "#### [MAX] = %d\n", mrpkt->field4d);
-		}
-		dbg("SRTreeC", "#### [SUM OF SQUARES] = %d\n\n\n", mrpkt->field4c);
-		//TODO ADD VARIANCE
 		
 	}
 
@@ -292,12 +346,12 @@ implementation
 			chooseProg= 1;
 
 			if(chooseProg == 1){	//case 2.1 question is chosen
-				numFun = 1;
+				numFun = 2;
 
 				if(numFun == 2){
 
 					chooseFun1 = 6;
-					chooseFun2 = 1;
+					chooseFun2 = 4;
 	
 					//TODO must check that random numbers always differ
 					if((chooseFun1 == 1 || chooseFun2 == 1) || (chooseFun1 == 2 || chooseFun2 == 2)){	/** Case that one of the given choices is MIN or MAX*/
@@ -330,7 +384,7 @@ implementation
 					}
 
 				}else{
-					chooseFun =2; //chooseFun is when one aggregation is chosen
+					chooseFun =4; //chooseFun is when one aggregation is chosen
 					if(chooseFun == 6){	//case that the choice is VARIANCE
 						//case 3
 						numMsgSent = 3;
@@ -357,7 +411,7 @@ implementation
 					the previous order of the function. We choose a random value from 1 to 4.
 					If 4 is chosen we assign it value 5.
 				*/
-				chooseFun= 3;
+				chooseFun= 4;
 
 				if(chooseFun == 4){
 					chooseFun = 5;
@@ -482,9 +536,118 @@ implementation
 
 
 		}else if(numMsgSent == 2){
+
+			/** 
+            Check all possible combinations where we need two attributes 
+            */
 			mrpkt2 = (DistrMsg2*) (call DistrPacket.getPayload(&tmp, sizeof(DistrMsg2)));
+	
+            
+            if(chooseFun==4 || (chooseFun1!=1 && chooseFun2!=1 && chooseFun1!=2 && chooseFun2!=2)){ // cases where only COUNT,SUM are needed
+                atomic{
+					mrpkt2->field2a = randVal;	/*used as sum*/
+					mrpkt2->field2b = 1;	/*used as count*/
+				}
+
+				/*Aggregation of values*/
+			    for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
+					mrpkt2->field2a += childrenArray[i].sum;
+					mrpkt2->field2b += childrenArray[i].count;  
+			    }
+			}
+			else if(chooseFun1==1 || chooseFun2==1 || chooseFun1==2 || chooseFun2==2){ // cases with at least one (min/max) function
+               if((chooseFun1==1 || chooseFun2==1) && (chooseFun1==2 || chooseFun2==2)){ //min AND max case
+                   atomic{
+					mrpkt2->field2a = randVal;	/*used as min*/
+					mrpkt2->field2b = randVal;	/*used as max*/
+			       }
+
+			        /*Aggregation of values*/
+				    for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
+						mrpkt2->field2a = minFinder(childrenArray[i].min, mrpkt2->field2a);
+						mrpkt2->field2b = maxFinder(childrenArray[i].max, mrpkt2->field2b);   
+				    }
+                }
+                else if(chooseFun1==5 || chooseFun2==5){  // AVG + (MIN or MAX)
+                    atomic{
+						mrpkt2->field2a = randVal;	/*used as sum*/
+						mrpkt2->field2b = randVal;	/*used as min or max*/
+				    }
+                    
+                    /*Aggregation of values*/
+                    for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
+						mrpkt2->field2a += childrenArray[i].sum;
+						if(chooseFun1==1 || chooseFun2==1) // case min
+						   mrpkt2->field2b = minFinder(childrenArray[i].min, mrpkt2->field2b);
+						else // case max
+						   mrpkt2->field2b = maxFinder(childrenArray[i].max, mrpkt2->field2b);   
+			        }
+                }
+                else{ // case COUNT + (MAX or MIN)
+                	atomic{
+						mrpkt2->field2a = 1;	/*used as count*/
+						mrpkt2->field2b = randVal;	/*used as min or max*/
+				    }
+
+				    /*Aggregation of values*/
+				    for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
+						mrpkt2->field2a += childrenArray[i].count;
+						if(chooseFun1==1 || chooseFun2==1) // case min
+						   mrpkt2->field2b = minFinder(childrenArray[i].min, mrpkt2->field2b);
+						else // case max
+						   mrpkt2->field2b = maxFinder(childrenArray[i].max, mrpkt2->field2b);   
+				    }
+                }
+			}
+			 
+
+			if(mrpkt2==NULL)
+			{
+		 		dbg("SRTreeC","DistrMsgTimer.fired(): No valid payload... \n");
+		 		return;
+		 	}
 		}else if(numMsgSent == 3){
+			/** 
+            Check all possible combinations where we need three attributes 
+            */    
 			mrpkt3 = (DistrMsg3*) (call DistrPacket.getPayload(&tmp, sizeof(DistrMsg3)));
+
+            if(numFun==2 && (chooseFun1==1 || chooseFun2==1 || chooseFun1==2 || chooseFun2==2)){  //Definitely case AVG + (MIN or MAX)
+				atomic{
+				mrpkt3->field3a = randVal;	/*used as sum*/
+				mrpkt3->field3b = 1;	/*used as count*/
+				mrpkt3->field3c = randVal; /*used as min or max */
+			    }
+
+                /*Aggregation of values*/
+			    for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
+					mrpkt3->field3a += childrenArray[i].sum;
+					mrpkt3->field3b += childrenArray[i].count;
+					if(chooseFun1==1 || chooseFun2==1) // case min
+					   mrpkt3->field3c = minFinder(childrenArray[i].min, mrpkt3->field3c);
+					else // case max
+					   mrpkt3->field3c = maxFinder(childrenArray[i].max, mrpkt3->field3c);   
+			    } 
+			}else{   // cases VARIANCE, VARIANCE + SUM, VARIANCE + COUNT, VARIANCE + AVG all need the same attributes
+                atomic{
+				mrpkt3->field3a = randVal;	/*used as sum*/
+				mrpkt3->field3b = 1;	/*used as count*/
+				mrpkt3->field3c = randVal * randVal; /*used as sumofSquares*/
+			    }
+
+                /*Aggregation of values*/
+			    for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
+				mrpkt3->field3a += childrenArray[i].sum;
+				mrpkt3->field3b += childrenArray[i].count;
+				mrpkt3->field3c += childrenArray[i].sumofSquares;
+			    }
+			}
+
+			if(mrpkt3==NULL)
+			{
+		 		dbg("SRTreeC","DistrMsgTimer.fired(): No valid payload... \n");
+		 		return;
+		 	}
 		}else{
 			/**
 				All combination of the aggregation functions in this case 
@@ -533,9 +696,9 @@ implementation
 			if(numMsgSent == 1){
 				rootMsgPrint1(mrpkt1);
 			}else if(numMsgSent == 2){
-				//rootMsgPrint2(mrpkt2);
+				rootMsgPrint2(mrpkt2);
 			}else if(numMsgSent == 3){
-				//rootMsgPrint3(mrpkt3);
+				rootMsgPrint3(mrpkt3);
 			}else{
 				rootMsgPrint4(mrpkt4);
 			}
@@ -572,25 +735,29 @@ implementation
 				if(oldFlag == 0){
 					
 				
-				call DistrPacket.setPayloadLength(&tmp, sizeof(DistrMsg1));
+					call DistrPacket.setPayloadLength(&tmp, sizeof(DistrMsg1));
 
-				if(chooseFun == 1){	//min case
-					dbg("SRTreeC", "Node: %d , Parent: %d, min: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt1->field1a,curdepth);
-				}else if( chooseFun == 2){	//max case
-					dbg("SRTreeC", "Node: %d , Parent: %d, max: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt1->field1a,curdepth);
-				}else if(chooseFun == 3){	//count case
-					dbg("SRTreeC", "Node: %d , Parent: %d, count: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt1->field1a,curdepth);
-				}else{	// sum count
-					dbg("SRTreeC", "Node: %d , Parent: %d, sum: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt1->field1a,curdepth);
-				}
+					if(chooseFun == 1){	//min case
+						dbg("SRTreeC", "Node: %d , Parent: %d, min: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt1->field1a,curdepth);
+					}else if( chooseFun == 2){	//max case
+						dbg("SRTreeC", "Node: %d , Parent: %d, max: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt1->field1a,curdepth);
+					}else if(chooseFun == 3){	//count case
+						dbg("SRTreeC", "Node: %d , Parent: %d, count: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt1->field1a,curdepth);
+					}else{	// sum count
+						dbg("SRTreeC", "Node: %d , Parent: %d, sum: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt1->field1a,curdepth);
+					}
 
 				}
 				// 	dbg("SRTreeC","Don't send message with new value %d and old value %d\n", mrpkt1->field1a, Vold);
 				// }
 			}else if(numMsgSent == 2){
 				call DistrPacket.setPayloadLength(&tmp, sizeof(DistrMsg2));
+				dbg("SRTreeC", "Node: %d , Parent: %d, Par_1: %d, Par_2: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt2->field2a, mrpkt2->field2b,curdepth);
+
 			}else if(numMsgSent == 3){
 				call DistrPacket.setPayloadLength(&tmp, sizeof(DistrMsg3));
+				dbg("SRTreeC", "Node: %d , Parent: %d, Sum: %d, count: %d, 3rd parameter: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt3->field3a, mrpkt3->field3b, mrpkt3->field3c,curdepth);
+
 			}else{
 				call DistrPacket.setPayloadLength(&tmp, sizeof(DistrMsg4));
 
@@ -941,10 +1108,91 @@ implementation
 			}
 
 		}else if(numMsgSent == 2){
+			/**Check if received a message*/
+			if(len == sizeof(DistrMsg2))
+			{
 			
+				DistrMsg2* mr = (DistrMsg2*) (call DistrPacket.getPayload(&radioDistrRecPkt,len));
+
+				/** Add new child to cache*/
+				for(i=0; i< MAX_CHILDREN ; i++){
+					if(source == childrenArray[i].senderID || childrenArray[i].senderID == 0){
+						childrenArray[i].senderID = source;
+						if(chooseFun==4 || (chooseFun1!=1 && chooseFun2!=1 && chooseFun1!=2 && chooseFun2!=2)){
+							childrenArray[i].sum = mr->field2a;
+							childrenArray[i].count = mr->field2b;
+						}
+						else if(chooseFun1==1 || chooseFun2==1 || chooseFun1==2 || chooseFun2==2){ //At least one (min/max) function
+                           if((chooseFun1==1 || chooseFun2==1) && (chooseFun1==2 || chooseFun2==2)){ // min AND max
+                               childrenArray[i].min = mr->field2a;
+                               childrenArray[i].max = mr->field2b;
+                           }
+                           else {
+                           	   if(chooseFun1==5 || chooseFun2==5) // SUM + (MIN or MAX)
+                                  childrenArray[i].sum = mr->field2a;
+                               else    // COUNT + (MIN or MAX)
+                                  childrenArray[i].count = mr->field2a; 
+                                if(chooseFun1 == 1 || chooseFun2 == 1){	//case min
+								childrenArray[i].min = mr->field2b;
+							   }else if(chooseFun1 == 2 || chooseFun2 == 2){ //case max
+								childrenArray[i].max = mr->field2b;
+							   }
+                           }
+						}
+						
+						break;
+
+					}
+					/**
+						Still haven't found from the children array the right
+						destination
+					*/
+				
+				}
+			
+			}
+			else
+			{
+				dbg("SRTreeC","receiveDistrTask():Empty message!!! \n");
+				return;
+			}
 
 		}else if(numMsgSent == 3){
+			/**Check if received a message*/
+			if(len == sizeof(DistrMsg3))
+			{
 			
+				DistrMsg3* mr = (DistrMsg3*) (call DistrPacket.getPayload(&radioDistrRecPkt,len));
+
+				/** Add new child to cache*/
+				for(i=0; i< MAX_CHILDREN ; i++){
+					if(source == childrenArray[i].senderID || childrenArray[i].senderID == 0){
+						childrenArray[i].senderID = source;
+						childrenArray[i].sum = mr->field3a;
+						childrenArray[i].count = mr->field3b;
+						childrenArray[i].sumofSquares = mr->field3c;						
+						if(chooseFun1 == 1 || chooseFun2 == 1){	//case min (+ avg)
+							childrenArray[i].min = mr->field3c;
+						}else if(chooseFun1 == 2 || chooseFun2 == 2){ //case max (+ avg)
+							childrenArray[i].max = mr->field3c;
+						}
+						
+						break;
+
+					}
+					/**
+						Still haven't found from the children array the right
+						destination
+					*/
+				
+				}
+			
+			}
+			else
+			{
+				dbg("SRTreeC","receiveDistrTask():Empty message!!! \n");
+				return;
+			}
 
 		}else{
 			/**Check if received a message*/
