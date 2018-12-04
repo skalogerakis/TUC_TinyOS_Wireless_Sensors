@@ -16,6 +16,8 @@ enum{
 	TIMER_PERIOD_MILLI=150000,
 	TIMER_FAST_PERIOD=200,
 	TIMER_LEDS_MILLI=1000,
+	TCT = 80,
+	PERCENTAGE = 100,
 
 	EPOCH = 60000,
 	MAX_CHILDREN = 20,
@@ -24,6 +26,7 @@ enum{
 
 typedef nx_struct RoutingMsg
 {
+	nx_uint16_t ques;
 	nx_uint16_t senderID;
 	nx_uint8_t depth;
 } RoutingMsg;
@@ -84,7 +87,7 @@ typedef nx_struct ChildDistrMsg{
 	nx_uint16_t sumofSquares;
 } ChildDistrMsg;
 
-double TCT = 0.8;
+//double TCT = 0.8;
 
 uint8_t numMsgSent;
 

@@ -55,6 +55,7 @@ implementation
 	//KP EDIT
 	/**Variables used*/
 	uint8_t curdepth;
+	uint16_t chooseQues;
 	uint16_t parentID;
 	uint8_t i;
 	uint16_t startPer;
@@ -66,6 +67,8 @@ implementation
 	uint16_t subSlotChoose;
 	uint16_t timerCounter;
 	uint16_t Vold;
+
+	//double tct = (double)TCT/(double)PERCENTAGE;
 
 
 	//KP Edit
@@ -213,7 +216,7 @@ implementation
 		return (a < b) ? a : b;
 	}
 	
-
+	uint8_t nDigits;
 	/**This is where everything starts*/
 	event void Boot.booted()
 	{
@@ -237,7 +240,9 @@ implementation
 			parentID=-1;
 			Vold = 0;
 		}
-
+		i = 100;
+		nDigits = floor(log10(abs(100)))+1;
+		dbg("SRTreeC", "CHECK %d\n", nDigits);
 		/**
 			It is advised to pass as init parameter the different TOS_NODE_ID
 			to generate different numbers at every node, as rand is pseudo random
@@ -359,44 +364,54 @@ implementation
 						if(chooseFun1 == 6 || chooseFun2 == 6){	//case that one of the choices is VARIANCE
 							//case 4
 							numMsgSent = 4;
+							chooseQues = chooseFun1 * 1000 + chooseFun2;
 						}
 						else if(chooseFun1 == 4 || chooseFun2 == 4){	//case that one of the choises is AVG
 							//case 3
 							numMsgSent = 3;
+							chooseQues = chooseFun1 * 100 + chooseFun2;
 						}
 						else if((chooseFun1 == 3 || chooseFun2 == 3) || (chooseFun1 == 5 || chooseFun2 == 5)){	//case that one of the choises is COUNT, SUM
 							//case 2
 							numMsgSent = 2;
+							chooseQues = chooseFun1 * 10 + chooseFun2;
 						}
 
 						if((chooseFun1 == 1 && chooseFun2 == 2) || (chooseFun1 == 2 && chooseFun2 == 1)){
 							//case 1
 							numMsgSent = 2;
+							chooseQues = chooseFun1 * 10 + chooseFun2;
 						}
 					}else if(chooseFun1 == 6 || chooseFun2 == 6){ /**case one of the choises is VARIANCE*/
 						//case 3 for all cases
 						numMsgSent = 3;
+						chooseQues = chooseFun1 * 100 + chooseFun2;
 
 					}else{	/**Case that the choices are SUM, COUNT or AVG */
 						//case 2 for all cases
 						numMsgSent = 2;
+						chooseQues = chooseFun1 * 10 + chooseFun2;
+
 
 					}
 
 				}else{
-					chooseFun =4; //chooseFun is when one aggregation is chosen
+					chooseFun =6; //chooseFun is when one aggregation is chosen
 					if(chooseFun == 6){	//case that the choice is VARIANCE
 						//case 3
 						numMsgSent = 3;
+						chooseQues = chooseFun * 100;
 					
 					}
 					else if(chooseFun == 4){	//case that the choice is AVG
 					//case 2
 						numMsgSent = 2;
+						chooseQues = chooseFun * 10;
 					}
 					else{	//case that the choice is MIN, MAX, COUNT, SUM
 					//case 1
 						numMsgSent = 1;
+						chooseQues = chooseFun;
 					}
 				}
 			}else{
@@ -411,19 +426,27 @@ implementation
 					the previous order of the function. We choose a random value from 1 to 4.
 					If 4 is chosen we assign it value 5.
 				*/
-				chooseFun= 4;
+				chooseFun= 2;
 
 				if(chooseFun == 4){
 					chooseFun = 5;
 				}
 
-				numMsgSent = 1;	
+				numMsgSent = 1;
+				//TODO CHECK IF
+				chooseQues = chooseFun+5;	
 			}
 
 			
 
 		}
 		
+		dbg("SRTreeC", "GENIUS BITCHESSSSS %d\n", chooseQues);
+		dbg("SRTreeC", "GENIUS BITCHESSSSS LAST %d\n", chooseQues % 10);
+		while(chooseQues >= 10){
+			chooseQues/=10;
+		}
+		dbg("SRTreeC", "GENIUS BITCHESSSSS FIRST %d\n", chooseQues);
 
 		if(call RoutingSendQueue.full())
 		{
@@ -438,6 +461,7 @@ implementation
 			dbg("SRTreeC","RoutingMsgTimer.fired(): No valid payload... \n");
 			return;
 		}
+		//todo must add another variable
 		atomic{
 		mrpkt->senderID=TOS_NODE_ID;
 		mrpkt->depth = curdepth;
@@ -724,7 +748,7 @@ implementation
 					leaves but in the whole tree. So if the statement below is true, just keep
 					the old values to minimize messages sent. TCT is defined in SimpleRoutingTree.h
 				*/
-				if(chooseProg == 2 && !(abs(mrpkt1->field1a - Vold) > abs(Vold) * TCT)){	//don't change value
+				if(chooseProg == 2 && !(abs(mrpkt1->field1a - Vold) > abs(Vold) * ((double)TCT/(double)PERCENTAGE))){	//don't change value
 					oldFlag = 1;
 					dbg("SRTreeC","Don't send message with new value %d and old value %d\n", mrpkt1->field1a, Vold);
 				}else if( chooseProg == 2){	//change value and update old
