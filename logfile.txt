@@ -1,193 +1,161 @@
 TicksPerSecond :  10000000000 
 
-0:0:10.000000000 DEBUG (0): CHECK 3
-0:0:10.000000000 DEBUG (1): CHECK 3
-0:0:10.000000000 DEBUG (2): CHECK 3
-0:0:10.000000000 DEBUG (3): CHECK 3
-0:0:10.000000000 DEBUG (4): CHECK 3
-0:0:10.000000000 DEBUG (5): CHECK 3
-0:0:10.000000000 DEBUG (6): CHECK 3
-0:0:10.000000000 DEBUG (7): CHECK 3
-0:0:10.000000000 DEBUG (8): CHECK 3
-0:0:10.000000000 DEBUG (9): CHECK 3
-0:0:10.000000001 DEBUG (10): CHECK 3
-0:0:10.000000001 DEBUG (11): CHECK 3
-0:0:10.000000001 DEBUG (12): CHECK 3
-0:0:10.000000001 DEBUG (13): CHECK 3
-0:0:10.000000001 DEBUG (14): CHECK 3
-0:0:10.000000001 DEBUG (15): CHECK 3
 0:0:10.000000010 DEBUG (0): ###########START ROUTING###############
 
-0:0:10.195312510 DEBUG (0): GENIUS BITCHESSSSS 604
-0:0:10.195312510 DEBUG (0): GENIUS BITCHESSSSS LAST 4
-0:0:10.195312510 DEBUG (0): GENIUS BITCHESSSSS FIRST 6
-0:0:10.197387713 DEBUG (5): NodeID= 5 : curdepth= 1 , parentID= 0 
-0:0:10.197387713 DEBUG (4): NodeID= 4 : curdepth= 1 , parentID= 0 
-0:0:10.197387713 DEBUG (1): NodeID= 1 : curdepth= 1 , parentID= 0 
-0:0:10.392578135 DEBUG (1): GENIUS BITCHESSSSS 0
-0:0:10.392578135 DEBUG (1): GENIUS BITCHESSSSS LAST 0
-0:0:10.392578135 DEBUG (1): GENIUS BITCHESSSSS FIRST 0
-0:0:10.392578135 DEBUG (4): GENIUS BITCHESSSSS 0
-0:0:10.392578135 DEBUG (4): GENIUS BITCHESSSSS LAST 0
-0:0:10.392578135 DEBUG (4): GENIUS BITCHESSSSS FIRST 0
-0:0:10.392578135 DEBUG (5): GENIUS BITCHESSSSS 0
-0:0:10.392578135 DEBUG (5): GENIUS BITCHESSSSS LAST 0
-0:0:10.392578135 DEBUG (5): GENIUS BITCHESSSSS FIRST 0
-0:0:10.395233169 DEBUG (9): NodeID= 9 : curdepth= 2 , parentID= 4 
-0:0:10.395233169 DEBUG (8): NodeID= 8 : curdepth= 2 , parentID= 4 
-0:0:10.396759039 DEBUG (6): NodeID= 6 : curdepth= 2 , parentID= 5 
-0:0:10.396759039 DEBUG (10): NodeID= 10 : curdepth= 2 , parentID= 5 
-0:0:10.396759039 DEBUG (2): NodeID= 2 : curdepth= 2 , parentID= 5 
-0:0:10.589843760 DEBUG (8): GENIUS BITCHESSSSS 0
-0:0:10.589843760 DEBUG (8): GENIUS BITCHESSSSS LAST 0
-0:0:10.589843760 DEBUG (8): GENIUS BITCHESSSSS FIRST 0
-0:0:10.589843760 DEBUG (9): GENIUS BITCHESSSSS 0
-0:0:10.589843760 DEBUG (9): GENIUS BITCHESSSSS LAST 0
-0:0:10.589843760 DEBUG (9): GENIUS BITCHESSSSS FIRST 0
-0:0:10.591796885 DEBUG (2): GENIUS BITCHESSSSS 0
-0:0:10.591796885 DEBUG (2): GENIUS BITCHESSSSS LAST 0
-0:0:10.591796885 DEBUG (2): GENIUS BITCHESSSSS FIRST 0
-0:0:10.591796885 DEBUG (6): GENIUS BITCHESSSSS 0
-0:0:10.591796885 DEBUG (6): GENIUS BITCHESSSSS LAST 0
-0:0:10.591796885 DEBUG (6): GENIUS BITCHESSSSS FIRST 0
-0:0:10.591796886 DEBUG (10): GENIUS BITCHESSSSS 0
-0:0:10.591796886 DEBUG (10): GENIUS BITCHESSSSS LAST 0
-0:0:10.591796886 DEBUG (10): GENIUS BITCHESSSSS FIRST 0
-0:0:10.594818128 DEBUG (13): NodeID= 13 : curdepth= 3 , parentID= 10 
-0:0:10.594818128 DEBUG (11): NodeID= 11 : curdepth= 3 , parentID= 10 
-0:0:10.594818128 DEBUG (15): NodeID= 15 : curdepth= 3 , parentID= 10 
-0:0:10.594818128 DEBUG (14): NodeID= 14 : curdepth= 3 , parentID= 10 
-0:0:10.594818128 DEBUG (7): NodeID= 7 : curdepth= 3 , parentID= 10 
-0:0:10.596405033 DEBUG (3): NodeID= 3 : curdepth= 3 , parentID= 6 
-0:0:10.596527091 DEBUG (12): NodeID= 12 : curdepth= 3 , parentID= 8 
-0:0:10.790039073 DEBUG (7): GENIUS BITCHESSSSS 0
-0:0:10.790039073 DEBUG (7): GENIUS BITCHESSSSS LAST 0
-0:0:10.790039073 DEBUG (7): GENIUS BITCHESSSSS FIRST 0
-0:0:10.790039073 DEBUG (11): GENIUS BITCHESSSSS 0
-0:0:10.790039073 DEBUG (11): GENIUS BITCHESSSSS LAST 0
-0:0:10.790039073 DEBUG (11): GENIUS BITCHESSSSS FIRST 0
-0:0:10.790039073 DEBUG (13): GENIUS BITCHESSSSS 0
-0:0:10.790039073 DEBUG (13): GENIUS BITCHESSSSS LAST 0
-0:0:10.790039073 DEBUG (13): GENIUS BITCHESSSSS FIRST 0
-0:0:10.790039073 DEBUG (14): GENIUS BITCHESSSSS 0
-0:0:10.790039073 DEBUG (14): GENIUS BITCHESSSSS LAST 0
-0:0:10.790039073 DEBUG (14): GENIUS BITCHESSSSS FIRST 0
-0:0:10.790039074 DEBUG (15): GENIUS BITCHESSSSS 0
-0:0:10.790039074 DEBUG (15): GENIUS BITCHESSSSS LAST 0
-0:0:10.790039074 DEBUG (15): GENIUS BITCHESSSSS FIRST 0
-0:0:10.791015635 DEBUG (3): GENIUS BITCHESSSSS 0
-0:0:10.791015635 DEBUG (3): GENIUS BITCHESSSSS LAST 0
-0:0:10.791015635 DEBUG (3): GENIUS BITCHESSSSS FIRST 0
-0:0:10.791015636 DEBUG (12): GENIUS BITCHESSSSS 0
-0:0:10.791015636 DEBUG (12): GENIUS BITCHESSSSS LAST 0
-0:0:10.791015636 DEBUG (12): GENIUS BITCHESSSSS FIRST 0
-0:1:11.728515635 DEBUG (3): numMsgSent 3
+0:0:10.197662369 DEBUG (5): NodeID= 5 : curdepth= 1 , parentID= 0 
+0:0:10.197662369 DEBUG (4): NodeID= 4 : curdepth= 1 , parentID= 0 
+0:0:10.197662369 DEBUG (1): NodeID= 1 : curdepth= 1 , parentID= 0 
+0:0:10.395111099 DEBUG (9): NodeID= 9 : curdepth= 2 , parentID= 4 
+0:0:10.395111099 DEBUG (8): NodeID= 8 : curdepth= 2 , parentID= 4 
+0:0:10.397460939 DEBUG (6): NodeID= 6 : curdepth= 2 , parentID= 5 
+0:0:10.397460939 DEBUG (10): NodeID= 10 : curdepth= 2 , parentID= 5 
+0:0:10.397460939 DEBUG (2): NodeID= 2 : curdepth= 2 , parentID= 5 
+0:0:10.593460092 DEBUG (14): NodeID= 14 : curdepth= 3 , parentID= 9 
+0:0:10.593460092 DEBUG (12): NodeID= 12 : curdepth= 3 , parentID= 9 
+0:0:10.593460092 DEBUG (13): NodeID= 13 : curdepth= 3 , parentID= 9 
+0:0:10.595382705 DEBUG (7): NodeID= 7 : curdepth= 3 , parentID= 6 
+0:0:10.595382705 DEBUG (11): NodeID= 11 : curdepth= 3 , parentID= 6 
+0:0:10.595382705 DEBUG (3): NodeID= 3 : curdepth= 3 , parentID= 6 
+0:0:10.602889986 DEBUG (15): NodeID= 15 : curdepth= 3 , parentID= 10 
+0:0:14.882812510 DEBUG (0): CHECK 3, chooseQues 104
+0:0:14.882812510 DEBUG (0): First 10
+0:0:14.882812510 DEBUG (0): First 1
+0:0:14.882812510 DEBUG (0): GENIUS BITCHESSSSS numFun 2,chooseProg 1 , chooseFun 0 , chooseFun1 1, chooseFun2 4
+0:0:14.882812510 DEBUG (1): CHECK 3, chooseQues 104
+0:0:14.882812510 DEBUG (1): First 10
+0:0:14.882812510 DEBUG (1): First 1
+0:0:14.882812510 DEBUG (1): GENIUS BITCHESSSSS numFun 2,chooseProg 1 , chooseFun 0 , chooseFun1 1, chooseFun2 4
+0:0:14.882812510 DEBUG (2): CHECK 3, chooseQues 104
+0:0:14.882812510 DEBUG (2): First 10
+0:0:14.882812510 DEBUG (2): First 1
+0:0:14.882812510 DEBUG (2): GENIUS BITCHESSSSS numFun 2,chooseProg 1 , chooseFun 0 , chooseFun1 1, chooseFun2 4
+0:0:14.882812510 DEBUG (3): CHECK 3, chooseQues 104
+0:0:14.882812510 DEBUG (3): First 10
+0:0:14.882812510 DEBUG (3): First 1
+0:0:14.882812510 DEBUG (3): GENIUS BITCHESSSSS numFun 2,chooseProg 1 , chooseFun 0 , chooseFun1 1, chooseFun2 4
+0:0:14.882812510 DEBUG (4): CHECK 3, chooseQues 104
+0:0:14.882812510 DEBUG (4): First 10
+0:0:14.882812510 DEBUG (4): First 1
+0:0:14.882812510 DEBUG (4): GENIUS BITCHESSSSS numFun 2,chooseProg 1 , chooseFun 0 , chooseFun1 1, chooseFun2 4
+0:0:14.882812510 DEBUG (5): CHECK 3, chooseQues 104
+0:0:14.882812510 DEBUG (5): First 10
+0:0:14.882812510 DEBUG (5): First 1
+0:0:14.882812510 DEBUG (5): GENIUS BITCHESSSSS numFun 2,chooseProg 1 , chooseFun 0 , chooseFun1 1, chooseFun2 4
+0:0:14.882812510 DEBUG (6): CHECK 3, chooseQues 104
+0:0:14.882812510 DEBUG (6): First 10
+0:0:14.882812510 DEBUG (6): First 1
+0:0:14.882812510 DEBUG (6): GENIUS BITCHESSSSS numFun 2,chooseProg 1 , chooseFun 0 , chooseFun1 1, chooseFun2 4
+0:0:14.882812510 DEBUG (7): CHECK 3, chooseQues 104
+0:0:14.882812510 DEBUG (7): First 10
+0:0:14.882812510 DEBUG (7): First 1
+0:0:14.882812510 DEBUG (7): GENIUS BITCHESSSSS numFun 2,chooseProg 1 , chooseFun 0 , chooseFun1 1, chooseFun2 4
+0:0:14.882812510 DEBUG (8): CHECK 3, chooseQues 104
+0:0:14.882812510 DEBUG (8): First 10
+0:0:14.882812510 DEBUG (8): First 1
+0:0:14.882812510 DEBUG (8): GENIUS BITCHESSSSS numFun 2,chooseProg 1 , chooseFun 0 , chooseFun1 1, chooseFun2 4
+0:0:14.882812510 DEBUG (9): CHECK 3, chooseQues 104
+0:0:14.882812510 DEBUG (9): First 10
+0:0:14.882812510 DEBUG (9): First 1
+0:0:14.882812510 DEBUG (9): GENIUS BITCHESSSSS numFun 2,chooseProg 1 , chooseFun 0 , chooseFun1 1, chooseFun2 4
+0:0:14.882812511 DEBUG (10): CHECK 3, chooseQues 104
+0:0:14.882812511 DEBUG (10): First 10
+0:0:14.882812511 DEBUG (10): First 1
+0:0:14.882812511 DEBUG (10): GENIUS BITCHESSSSS numFun 2,chooseProg 1 , chooseFun 0 , chooseFun1 1, chooseFun2 4
+0:0:14.882812511 DEBUG (11): CHECK 3, chooseQues 104
+0:0:14.882812511 DEBUG (11): First 10
+0:0:14.882812511 DEBUG (11): First 1
+0:0:14.882812511 DEBUG (11): GENIUS BITCHESSSSS numFun 2,chooseProg 1 , chooseFun 0 , chooseFun1 1, chooseFun2 4
+0:0:14.882812511 DEBUG (12): CHECK 3, chooseQues 104
+0:0:14.882812511 DEBUG (12): First 10
+0:0:14.882812511 DEBUG (12): First 1
+0:0:14.882812511 DEBUG (12): GENIUS BITCHESSSSS numFun 2,chooseProg 1 , chooseFun 0 , chooseFun1 1, chooseFun2 4
+0:0:14.882812511 DEBUG (13): CHECK 3, chooseQues 104
+0:0:14.882812511 DEBUG (13): First 10
+0:0:14.882812511 DEBUG (13): First 1
+0:0:14.882812511 DEBUG (13): GENIUS BITCHESSSSS numFun 2,chooseProg 1 , chooseFun 0 , chooseFun1 1, chooseFun2 4
+0:0:14.882812511 DEBUG (14): CHECK 3, chooseQues 104
+0:0:14.882812511 DEBUG (14): First 10
+0:0:14.882812511 DEBUG (14): First 1
+0:0:14.882812511 DEBUG (14): GENIUS BITCHESSSSS numFun 2,chooseProg 1 , chooseFun 0 , chooseFun1 1, chooseFun2 4
+0:0:14.882812511 DEBUG (15): CHECK 3, chooseQues 104
+0:0:14.882812511 DEBUG (15): First 10
+0:0:14.882812511 DEBUG (15): First 1
+0:0:14.882812511 DEBUG (15): GENIUS BITCHESSSSS numFun 2,chooseProg 1 , chooseFun 0 , chooseFun1 1, chooseFun2 4
 0:1:11.728515635 DEBUG (3): Random value generated 42
-0:1:11.728515635 DEBUG (3): Node: 3 , Parent: 6, Sum: 42, count: 1, 3rd parameter: 1764, depth: 3
-0:1:11.826171885 DEBUG (7): numMsgSent 3
+0:1:11.728515635 DEBUG (3): Node: 3 , Parent: 6, Sum: 42, count: 1, 3rd parameter: 42, depth: 3
 0:1:11.826171885 DEBUG (7): Random value generated 34
-0:1:11.826171885 DEBUG (7): Node: 7 , Parent: 10, Sum: 34, count: 1, 3rd parameter: 1156, depth: 3
-0:1:11.923828136 DEBUG (11): numMsgSent 3
+0:1:11.826171885 DEBUG (7): Node: 7 , Parent: 6, Sum: 34, count: 1, 3rd parameter: 34, depth: 3
 0:1:11.923828136 DEBUG (11): Random value generated 26
-0:1:11.923828136 DEBUG (11): Node: 11 , Parent: 10, Sum: 26, count: 1, 3rd parameter: 676, depth: 3
-0:1:11.948242198 DEBUG (12): numMsgSent 3
+0:1:11.923828136 DEBUG (11): Node: 11 , Parent: 6, Sum: 26, count: 1, 3rd parameter: 26, depth: 3
 0:1:11.948242198 DEBUG (12): Random value generated 33
-0:1:11.948242198 DEBUG (12): Node: 12 , Parent: 8, Sum: 33, count: 1, 3rd parameter: 1089, depth: 3
-0:1:11.972656261 DEBUG (13): numMsgSent 3
+0:1:11.948242198 DEBUG (12): Node: 12 , Parent: 9, Sum: 33, count: 1, 3rd parameter: 33, depth: 3
 0:1:11.972656261 DEBUG (13): Random value generated 40
-0:1:11.972656261 DEBUG (13): Node: 13 , Parent: 10, Sum: 40, count: 1, 3rd parameter: 1600, depth: 3
-0:1:11.982421885 DEBUG (2): numMsgSent 3
+0:1:11.972656261 DEBUG (13): Node: 13 , Parent: 9, Sum: 40, count: 1, 3rd parameter: 40, depth: 3
 0:1:11.982421885 DEBUG (2): Random value generated 21
-0:1:11.982421885 DEBUG (2): Node: 2 , Parent: 5, Sum: 21, count: 1, 3rd parameter: 441, depth: 2
-0:1:11.997070323 DEBUG (14): numMsgSent 3
+0:1:11.982421885 DEBUG (2): Node: 2 , Parent: 5, Sum: 21, count: 1, 3rd parameter: 21, depth: 2
 0:1:11.997070323 DEBUG (14): Random value generated 47
-0:1:11.997070323 DEBUG (14): Node: 14 , Parent: 10, Sum: 47, count: 1, 3rd parameter: 2209, depth: 3
-0:1:12.021484386 DEBUG (15): numMsgSent 3
+0:1:11.997070323 DEBUG (14): Node: 14 , Parent: 9, Sum: 47, count: 1, 3rd parameter: 47, depth: 3
 0:1:12.021484386 DEBUG (15): Random value generated 18
-0:1:12.021484386 DEBUG (15): Node: 15 , Parent: 10, Sum: 18, count: 1, 3rd parameter: 324, depth: 3
-0:1:12.080078135 DEBUG (6): numMsgSent 3
+0:1:12.021484386 DEBUG (15): Node: 15 , Parent: 10, Sum: 18, count: 1, 3rd parameter: 18, depth: 3
 0:1:12.080078135 DEBUG (6): Random value generated 13
-0:1:12.080078135 DEBUG (6): Node: 6 , Parent: 5, Sum: 55, count: 2, 3rd parameter: 1933, depth: 2
-0:1:12.128906260 DEBUG (8): numMsgSent 3
+0:1:12.080078135 DEBUG (6): Node: 6 , Parent: 5, Sum: 115, count: 4, 3rd parameter: 13, depth: 2
 0:1:12.128906260 DEBUG (8): Random value generated 41
-0:1:12.128906260 DEBUG (8): Node: 8 , Parent: 4, Sum: 74, count: 2, 3rd parameter: 2770, depth: 2
-0:1:12.153320323 DEBUG (9): numMsgSent 3
+0:1:12.128906260 DEBUG (8): Node: 8 , Parent: 4, Sum: 41, count: 1, 3rd parameter: 41, depth: 2
 0:1:12.153320323 DEBUG (9): Random value generated 48
-0:1:12.153320323 DEBUG (9): Node: 9 , Parent: 4, Sum: 48, count: 1, 3rd parameter: 2304, depth: 2
-0:1:12.177734386 DEBUG (10): numMsgSent 3
+0:1:12.153320323 DEBUG (9): Node: 9 , Parent: 4, Sum: 168, count: 4, 3rd parameter: 33, depth: 2
 0:1:12.177734386 DEBUG (10): Random value generated 5
-0:1:12.177734386 DEBUG (10): Node: 10 , Parent: 5, Sum: 170, count: 6, 3rd parameter: 5990, depth: 2
-0:1:12.236328135 DEBUG (1): numMsgSent 3
+0:1:12.177734386 DEBUG (10): Node: 10 , Parent: 5, Sum: 23, count: 2, 3rd parameter: 5, depth: 2
 0:1:12.236328135 DEBUG (1): Random value generated 14
-0:1:12.236328135 DEBUG (1): Node: 1 , Parent: 0, Sum: 14, count: 1, 3rd parameter: 196, depth: 1
-0:1:12.309570322 DEBUG (4): numMsgSent 3
+0:1:12.236328135 DEBUG (1): Node: 1 , Parent: 0, Sum: 14, count: 1, 3rd parameter: 14, depth: 1
 0:1:12.309570322 DEBUG (4): Random value generated 49
-0:1:12.309570322 DEBUG (4): Node: 4 , Parent: 0, Sum: 171, count: 4, 3rd parameter: 7475, depth: 1
-0:1:12.333984385 DEBUG (5): numMsgSent 3
+0:1:12.309570322 DEBUG (4): Node: 4 , Parent: 0, Sum: 258, count: 6, 3rd parameter: 33, depth: 1
 0:1:12.333984385 DEBUG (5): Random value generated 6
-0:1:12.333984385 DEBUG (5): Node: 5 , Parent: 0, Sum: 252, count: 10, 3rd parameter: 8400, depth: 1
-0:1:12.490234385 DEBUG (0): numMsgSent 3
+0:1:12.333984385 DEBUG (5): Node: 5 , Parent: 0, Sum: 165, count: 8, 3rd parameter: 5, depth: 1
 0:1:12.490234385 DEBUG (0): Random value generated 7
 0:1:12.490234385 DEBUG (0): 
 
 ########################Epoch 1 completed#####################
 0:1:12.490234385 DEBUG (0): #### OUTPUT: 
-0:1:12.490234385 DEBUG (0): #### [VARIANCE] = 278
 0:1:12.490234385 DEBUG (0): #### [AVG] = 27
+0:1:12.490234385 DEBUG (0): #### [MIN] = 5
 
 
-0:2:10.322265635 DEBUG (3): numMsgSent 3
 0:2:10.322265635 DEBUG (3): Random value generated 6
-0:2:10.322265635 DEBUG (3): Node: 3 , Parent: 6, Sum: 6, count: 1, 3rd parameter: 36, depth: 3
-0:2:10.419921885 DEBUG (7): numMsgSent 3
+0:2:10.322265635 DEBUG (3): Node: 3 , Parent: 6, Sum: 6, count: 1, 3rd parameter: 6, depth: 3
 0:2:10.419921885 DEBUG (7): Random value generated 27
-0:2:10.419921885 DEBUG (7): Node: 7 , Parent: 10, Sum: 27, count: 1, 3rd parameter: 729, depth: 3
-0:2:10.517578136 DEBUG (11): numMsgSent 3
+0:2:10.419921885 DEBUG (7): Node: 7 , Parent: 6, Sum: 27, count: 1, 3rd parameter: 27, depth: 3
 0:2:10.517578136 DEBUG (11): Random value generated 47
-0:2:10.517578136 DEBUG (11): Node: 11 , Parent: 10, Sum: 47, count: 1, 3rd parameter: 2209, depth: 3
-0:2:10.541992198 DEBUG (12): numMsgSent 3
+0:2:10.517578136 DEBUG (11): Node: 11 , Parent: 6, Sum: 47, count: 1, 3rd parameter: 47, depth: 3
 0:2:10.541992198 DEBUG (12): Random value generated 36
-0:2:10.541992198 DEBUG (12): Node: 12 , Parent: 8, Sum: 36, count: 1, 3rd parameter: 1296, depth: 3
-0:2:10.566406261 DEBUG (13): numMsgSent 3
+0:2:10.541992198 DEBUG (12): Node: 12 , Parent: 9, Sum: 36, count: 1, 3rd parameter: 36, depth: 3
 0:2:10.566406261 DEBUG (13): Random value generated 39
-0:2:10.566406261 DEBUG (13): Node: 13 , Parent: 10, Sum: 39, count: 1, 3rd parameter: 1521, depth: 3
-0:2:10.576171885 DEBUG (2): numMsgSent 3
+0:2:10.566406261 DEBUG (13): Node: 13 , Parent: 9, Sum: 39, count: 1, 3rd parameter: 39, depth: 3
 0:2:10.576171885 DEBUG (2): Random value generated 17
-0:2:10.576171885 DEBUG (2): Node: 2 , Parent: 5, Sum: 17, count: 1, 3rd parameter: 289, depth: 2
-0:2:10.590820323 DEBUG (14): numMsgSent 3
+0:2:10.576171885 DEBUG (2): Node: 2 , Parent: 5, Sum: 17, count: 1, 3rd parameter: 17, depth: 2
 0:2:10.590820323 DEBUG (14): Random value generated 28
-0:2:10.590820323 DEBUG (14): Node: 14 , Parent: 10, Sum: 28, count: 1, 3rd parameter: 784, depth: 3
-0:2:10.615234386 DEBUG (15): numMsgSent 3
+0:2:10.590820323 DEBUG (14): Node: 14 , Parent: 9, Sum: 28, count: 1, 3rd parameter: 28, depth: 3
 0:2:10.615234386 DEBUG (15): Random value generated 18
-0:2:10.615234386 DEBUG (15): Node: 15 , Parent: 10, Sum: 18, count: 1, 3rd parameter: 324, depth: 3
-0:2:10.673828135 DEBUG (6): numMsgSent 3
+0:2:10.615234386 DEBUG (15): Node: 15 , Parent: 10, Sum: 18, count: 1, 3rd parameter: 18, depth: 3
 0:2:10.673828135 DEBUG (6): Random value generated 37
-0:2:10.673828135 DEBUG (6): Node: 6 , Parent: 5, Sum: 43, count: 2, 3rd parameter: 1405, depth: 2
-0:2:10.722656260 DEBUG (8): numMsgSent 3
+0:2:10.673828135 DEBUG (6): Node: 6 , Parent: 5, Sum: 117, count: 4, 3rd parameter: 6, depth: 2
 0:2:10.722656260 DEBUG (8): Random value generated 30
-0:2:10.722656260 DEBUG (8): Node: 8 , Parent: 4, Sum: 66, count: 2, 3rd parameter: 2196, depth: 2
-0:2:10.747070323 DEBUG (9): numMsgSent 3
+0:2:10.722656260 DEBUG (8): Node: 8 , Parent: 4, Sum: 30, count: 1, 3rd parameter: 30, depth: 2
 0:2:10.747070323 DEBUG (9): Random value generated 19
-0:2:10.747070323 DEBUG (9): Node: 9 , Parent: 4, Sum: 19, count: 1, 3rd parameter: 361, depth: 2
-0:2:10.771484386 DEBUG (10): numMsgSent 3
+0:2:10.747070323 DEBUG (9): Node: 9 , Parent: 4, Sum: 122, count: 4, 3rd parameter: 19, depth: 2
 0:2:10.771484386 DEBUG (10): Random value generated 8
-0:2:10.771484386 DEBUG (10): Node: 10 , Parent: 5, Sum: 167, count: 6, 3rd parameter: 5631, depth: 2
-0:2:10.830078135 DEBUG (1): numMsgSent 3
+0:2:10.771484386 DEBUG (10): Node: 10 , Parent: 5, Sum: 26, count: 2, 3rd parameter: 8, depth: 2
 0:2:10.830078135 DEBUG (1): Random value generated 28
-0:2:10.830078135 DEBUG (1): Node: 1 , Parent: 0, Sum: 28, count: 1, 3rd parameter: 784, depth: 1
-0:2:10.903320322 DEBUG (4): numMsgSent 3
+0:2:10.830078135 DEBUG (1): Node: 1 , Parent: 0, Sum: 28, count: 1, 3rd parameter: 28, depth: 1
 0:2:10.903320322 DEBUG (4): Random value generated 9
-0:2:10.903320322 DEBUG (4): Node: 4 , Parent: 0, Sum: 94, count: 4, 3rd parameter: 2638, depth: 1
-0:2:10.927734385 DEBUG (5): numMsgSent 3
+0:2:10.903320322 DEBUG (4): Node: 4 , Parent: 0, Sum: 161, count: 6, 3rd parameter: 9, depth: 1
 0:2:10.927734385 DEBUG (5): Random value generated 48
-0:2:10.927734385 DEBUG (5): Node: 5 , Parent: 0, Sum: 275, count: 10, 3rd parameter: 9629, depth: 1
-0:2:11.083984385 DEBUG (0): numMsgSent 3
+0:2:10.927734385 DEBUG (5): Node: 5 , Parent: 0, Sum: 208, count: 8, 3rd parameter: 6, depth: 1
 0:2:11.083984385 DEBUG (0): Random value generated 39
 0:2:11.083984385 DEBUG (0): 
 
 ########################Epoch 2 completed#####################
 0:2:11.083984385 DEBUG (0): #### OUTPUT: 
-0:2:11.083984385 DEBUG (0): #### [VARIANCE] = 181
 0:2:11.083984385 DEBUG (0): #### [AVG] = 27
+0:2:11.083984385 DEBUG (0): #### [MIN] = 6
 
 

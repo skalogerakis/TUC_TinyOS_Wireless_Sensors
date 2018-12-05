@@ -71,6 +71,17 @@ implementation
 	//double tct = (double)TCT/(double)PERCENTAGE;
 
 
+	uint8_t numMsgSent;
+
+
+	uint8_t numFun;
+	uint8_t chooseFun1;
+	uint8_t chooseFun2;
+	uint8_t chooseFun;
+	uint8_t chooseProg=1;	//default program choose. Only when 2.2 change
+	uint8_t oldFlag = 0;
+
+
 	//KP Edit
 	/** Create Array of type ChildDristrMsg*/
 	ChildDistrMsg childrenArray[MAX_CHILDREN];
@@ -111,7 +122,8 @@ implementation
 
 
 	/**Used to print all needed messages in the case where we send 4 messages*/
-	void rootMsgPrint4(DistrMsg4* mrpkt){
+	void rootMsgPrint4(DistrMsg4* mrpkt)
+	{
 		dbg("SRTreeC", "#### OUTPUT: \n");
 		//dbg("SRTreeC", "#### [COUNT] = %d\n", mrpkt->field4b);
 		//dbg("SRTreeC", "#### [SUM] = %d\n", mrpkt->field4a);
@@ -125,7 +137,8 @@ implementation
 		
 	}
 
-	void rootMsgPrint3(DistrMsg3* mrpkt){
+	void rootMsgPrint3(DistrMsg3* mrpkt)
+	{
 		dbg("SRTreeC", "#### OUTPUT: \n");
 		if(chooseFun==6){
 			dbg("SRTreeC", "#### [VARIANCE] = %d\n\n\n", mrpkt->field3c/mrpkt->field3b-(mrpkt->field3a/mrpkt->field3b)*(mrpkt->field3a/mrpkt->field3b));
@@ -152,7 +165,8 @@ implementation
 		}
 	}
 
-	void rootMsgPrint2(DistrMsg2* mrpkt){
+	void rootMsgPrint2(DistrMsg2* mrpkt)
+	{
 		dbg("SRTreeC", "#### OUTPUT: \n");
 		if (numFun==1 && chooseFun==4){
 			dbg("SRTreeC", "#### [AVG] = %d\n\n\n", mrpkt->field2a/mrpkt->field2b);
@@ -190,7 +204,8 @@ implementation
 
 
 	/**Used to print all needed messages in the case where we send 1 message*/
-	void rootMsgPrint1(DistrMsg1* mrpkt){
+	void rootMsgPrint1(DistrMsg1* mrpkt)
+	{
 		dbg("SRTreeC", "#### OUTPUT: \n");
 
 		if(chooseFun == 1){	//min case
@@ -240,9 +255,7 @@ implementation
 			parentID=-1;
 			Vold = 0;
 		}
-		i = 100;
-		nDigits = floor(log10(abs(100)))+1;
-		dbg("SRTreeC", "CHECK %d\n", nDigits);
+		
 		/**
 			It is advised to pass as init parameter the different TOS_NODE_ID
 			to generate different numbers at every node, as rand is pseudo random
@@ -289,12 +302,89 @@ implementation
 		are over and all nodes are ready to start aggregation from one level to another
 	*/
 	event void RoutingComplTimer.fired(){
-
+		uint16_t fDigit;
+		uint8_t lDigit;
 		
+
+		//dbg("SRTreeC", "FIRST %d\n", fDigit);
 		slotTime = EPOCH/(MAX_DEPTH+1);
 		subSlotSplit = (MAX_DEPTH);
 
 		subSlotChoose = (MAX_DEPTH - curdepth);
+
+
+
+		/**Find aggregation functions used.Since the functions don't change during
+		runtime and need to be calculated just once. Here is the place where will be
+		the fewest calculations possible*/
+
+		
+
+		nDigits = floor(log10(abs(chooseQues)))+1;	/*Use some maths to calculate number length*/
+		dbg("SRTreeC", "CHECK %d, chooseQues %d\n", nDigits, chooseQues);
+
+		switch(nDigits){
+			case 1:
+				//dbg("SRTreeC", "One digit");
+				numMsgSent = 1;
+				if(chooseQues < 5){
+					//case 2.1 with one aggregation
+					chooseProg = 1;
+					chooseFun = chooseQues;
+				}else{
+					//case 2.2
+					chooseProg = 2;
+					chooseFun = chooseQues - 5;
+					if(chooseFun == 4){
+						chooseFun = 5;
+					}
+				}
+				numFun = 1;
+				
+				break;
+			case 2:
+				//dbg("SRTreeC", "Two digits");
+				numMsgSent = 2;
+				chooseProg = 1;
+				break;
+			case 3:
+				//dbg("SRTreeC", "Three digits");
+				numMsgSent = 3;
+				chooseProg = 1;
+				break;
+			default :	
+				//case 4
+				//dbg("SRTreeC", "Four digits");
+				numMsgSent = 4;
+				chooseProg = 1;
+				break;
+		}
+
+		if(nDigits!= 1){
+			fDigit = chooseQues;
+			lDigit = chooseQues % 10;	/*Calculate last digit of number*/
+			
+			//dbg("SRTreeC", "First %d\n", fDigit);
+			atomic{	/*Calculate first digit of number*/
+				while(fDigit >= 10){
+				fDigit/=10;
+				}
+			}
+			
+
+			//dbg("SRTreeC", "First %d, last %d\n", fDigit, lDigit);
+
+			if(lDigit != 0){
+				numFun = 2;
+				chooseFun1 = fDigit;
+				chooseFun2 = lDigit;
+			}else{
+				numFun = 1;
+				chooseFun = fDigit;
+			}
+		}
+		
+		dbg("SRTreeC", "GENIUS BITCHESSSSS numFun %d,chooseProg %d , chooseFun %d , chooseFun1 %d, chooseFun2 %d\n", numFun,chooseProg, chooseFun, chooseFun1, chooseFun2);
 
 
 		/** 
@@ -347,6 +437,20 @@ implementation
 					5. SUM
 					6. VARIANCE
 				*/
+
+		/*		The technique we used to send the least amount of messages is based on encoding/decoding.
+				To be more specific, we send in Routing an extra message ques which includes
+				info about all the aggregations used in all possible ways. First, we check
+				the number of messages that the random combination of aggreagations will sent(choose suitable struct
+				afterwards). This will be our final's integer size. Then, we assign the numbers of the aggregates used
+				(from the number map above) one as a first digit of a number and one as last digit. If last digit is 0
+				then we have only 1 aggregate. In case, we have 1 message sent(struct DistrMsg1) the numbers from
+				1 to 4 are used in 2.1 program whereas from 6 to 9 are referring to program 2.2
+
+				Ex. sent = 6001, number of messages 4(struct DistrMsg4) as sent.length = 4, and aggregation functions
+				6(Variance) and 1(Min) will be used.
+
+		*/
 				//TODO RAND
 			chooseProg= 1;
 
@@ -355,7 +459,7 @@ implementation
 
 				if(numFun == 2){
 
-					chooseFun1 = 6;
+					chooseFun1 = 1;
 					chooseFun2 = 4;
 	
 					//TODO must check that random numbers always differ
@@ -426,11 +530,11 @@ implementation
 					the previous order of the function. We choose a random value from 1 to 4.
 					If 4 is chosen we assign it value 5.
 				*/
-				chooseFun= 2;
+				chooseFun= 4;
 
-				if(chooseFun == 4){
-					chooseFun = 5;
-				}
+				// if(chooseFun == 4){
+				// 	chooseFun = 5;
+				// }
 
 				numMsgSent = 1;
 				//TODO CHECK IF
@@ -441,13 +545,7 @@ implementation
 
 		}
 		
-		dbg("SRTreeC", "GENIUS BITCHESSSSS %d\n", chooseQues);
-		dbg("SRTreeC", "GENIUS BITCHESSSSS LAST %d\n", chooseQues % 10);
-		while(chooseQues >= 10){
-			chooseQues/=10;
-		}
-		dbg("SRTreeC", "GENIUS BITCHESSSSS FIRST %d\n", chooseQues);
-
+		
 		if(call RoutingSendQueue.full())
 		{
 			dbg("SRTreeC", "RoutingSendQueue is FULL!!! \n");
@@ -463,8 +561,9 @@ implementation
 		}
 		//todo must add another variable
 		atomic{
-		mrpkt->senderID=TOS_NODE_ID;
-		mrpkt->depth = curdepth;
+			mrpkt->ques = chooseQues;
+			mrpkt->senderID=TOS_NODE_ID;
+			mrpkt->depth = curdepth;
 		}
 
 		
@@ -497,7 +596,6 @@ implementation
 		
 	}
 
-	//NEEDS WORK
 	//based on RoutingMsgTimer
 	event void DistrMsgTimer.fired()
 	{
@@ -514,7 +612,7 @@ implementation
 		DistrMsg3* mrpkt3;
 		DistrMsg4* mrpkt4;
 
-		dbg("SRTreeC", "numMsgSent %d\n" ,numMsgSent);
+		
 
 		/**The simulation never reaches the statements below but will not be deleted
 		for plentitude*/
@@ -1053,7 +1151,7 @@ implementation
 
 				parentID= call RoutingAMPacket.source(&radioRoutingRecPkt);
 				curdepth= mpkt->depth + 1;
-		
+				chooseQues = mpkt->ques;
 				if (TOS_NODE_ID!=0)
 				{
 					dbg("SRTreeC" ,"NodeID= %d : curdepth= %d , parentID= %d \n", TOS_NODE_ID ,curdepth , parentID);
@@ -1255,11 +1353,12 @@ implementation
 				return;
 			}
 		}
-
-		
-		
 	}
-	 
+
+
+	/****************************ENCODING/DECODING TASKS**************************/
+
+
 	
 }
 
