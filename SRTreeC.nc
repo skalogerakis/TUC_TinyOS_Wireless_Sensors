@@ -68,11 +68,9 @@ implementation
 	uint16_t timerCounter;
 	uint16_t Vold;
 
-	//double tct = (double)TCT/(double)PERCENTAGE;
-
 
 	uint8_t numMsgSent;
-
+	uint8_t nDigits;
 
 	uint8_t numFun;
 	uint8_t chooseFun1;
@@ -90,6 +88,12 @@ implementation
 	task void receiveRoutingTask();
 	task void sendDistrTask();
 	task void receiveDistrTask();
+
+	task void encodingData();
+	task void decodingData();
+	task void calcData();
+
+	task void RoutingCon();
 	
 	void setRoutingSendBusy(bool state)
 	{
@@ -119,7 +123,6 @@ implementation
 		}
 		
 	}
-
 
 	/**Used to print all needed messages in the case where we send 4 messages*/
 	void rootMsgPrint4(DistrMsg4* mrpkt)
@@ -201,8 +204,6 @@ implementation
 		}
 	}
 
-
-
 	/**Used to print all needed messages in the case where we send 1 message*/
 	void rootMsgPrint1(DistrMsg1* mrpkt)
 	{
@@ -220,6 +221,23 @@ implementation
 		
 	}
 
+	void Printer(int nMsg, void* this){
+		roundCounter+=1;
+
+			dbg("SRTreeC", "\n\n########################Epoch %d completed#####################\n", roundCounter);
+
+			if(nMsg == 1){
+				rootMsgPrint1(this);
+			}else if(nMsg == 2){
+				rootMsgPrint2(this);
+			}else if(nMsg == 3){
+				rootMsgPrint3(this);
+			}else{
+				rootMsgPrint4(this);
+			}
+	}
+
+
 
 	/**This function returns max*/
 	uint8_t maxFinder(uint16_t a, uint16_t b){
@@ -231,7 +249,7 @@ implementation
 		return (a < b) ? a : b;
 	}
 	
-	uint8_t nDigits;
+	
 	/**This is where everything starts*/
 	event void Boot.booted()
 	{
@@ -301,91 +319,20 @@ implementation
 		When this event is fired, it means that 5 sec available for routing
 		are over and all nodes are ready to start aggregation from one level to another
 	*/
-	event void RoutingComplTimer.fired(){
-		uint16_t fDigit;
-		uint8_t lDigit;
-		
 
-		//dbg("SRTreeC", "FIRST %d\n", fDigit);
+	//FIXED
+	event void RoutingComplTimer.fired(){
+		
 		slotTime = EPOCH/(MAX_DEPTH+1);
 		subSlotSplit = (MAX_DEPTH);
 
 		subSlotChoose = (MAX_DEPTH - curdepth);
 
-
-
 		/**Find aggregation functions used.Since the functions don't change during
 		runtime and need to be calculated just once. Here is the place where will be
 		the fewest calculations possible*/
 
-		
-
-		nDigits = floor(log10(abs(chooseQues)))+1;	/*Use some maths to calculate number length*/
-		dbg("SRTreeC", "CHECK %d, chooseQues %d\n", nDigits, chooseQues);
-
-		switch(nDigits){
-			case 1:
-				//dbg("SRTreeC", "One digit");
-				numMsgSent = 1;
-				if(chooseQues < 5){
-					//case 2.1 with one aggregation
-					chooseProg = 1;
-					chooseFun = chooseQues;
-				}else{
-					//case 2.2
-					chooseProg = 2;
-					chooseFun = chooseQues - 5;
-					if(chooseFun == 4){
-						chooseFun = 5;
-					}
-				}
-				numFun = 1;
-				
-				break;
-			case 2:
-				//dbg("SRTreeC", "Two digits");
-				numMsgSent = 2;
-				chooseProg = 1;
-				break;
-			case 3:
-				//dbg("SRTreeC", "Three digits");
-				numMsgSent = 3;
-				chooseProg = 1;
-				break;
-			default :	
-				//case 4
-				//dbg("SRTreeC", "Four digits");
-				numMsgSent = 4;
-				chooseProg = 1;
-				break;
-		}
-
-		if(nDigits!= 1){
-			fDigit = chooseQues;
-			lDigit = chooseQues % 10;	/*Calculate last digit of number*/
-			
-			//dbg("SRTreeC", "First %d\n", fDigit);
-			atomic{	/*Calculate first digit of number*/
-				while(fDigit >= 10){
-				fDigit/=10;
-				}
-			}
-			
-
-			//dbg("SRTreeC", "First %d, last %d\n", fDigit, lDigit);
-
-			if(lDigit != 0){
-				numFun = 2;
-				chooseFun1 = fDigit;
-				chooseFun2 = lDigit;
-			}else{
-				numFun = 1;
-				chooseFun = fDigit;
-			}
-		}
-		
-		dbg("SRTreeC", "GENIUS BITCHESSSSS numFun %d,chooseProg %d , chooseFun %d , chooseFun1 %d, chooseFun2 %d\n", numFun,chooseProg, chooseFun, chooseFun1, chooseFun2);
-
+		post decodingData();
 
 		/** 
 			Synchronize timers. Divide first the epoch in 
@@ -415,176 +362,25 @@ implementation
 		startPer =  (slotTime / subSlotSplit * subSlotChoose) + TOS_NODE_ID * 25;
 
 
-		//dbg("SRTreeC", "START %d\n", startPer);
-
 		call DistrMsgTimer.startPeriodicAt(startPer, EPOCH);
 	}
 
-	//ALMOST DONE PHASE 2
+	/**Implement everything on tasks and not on event*/
 	event void RoutingMsgTimer.fired()
 	{
-		message_t tmp;
-		error_t enqueueDone;
 		
-		RoutingMsg* mrpkt;
 
 		if(TOS_NODE_ID == 0){
-				/**
-					1. MIN
-					2. MAX
-					3. COUNT
-					4. AVG
-					5. SUM
-					6. VARIANCE
-				*/
-
-		/*		The technique we used to send the least amount of messages is based on encoding/decoding.
-				To be more specific, we send in Routing an extra message ques which includes
-				info about all the aggregations used in all possible ways. First, we check
-				the number of messages that the random combination of aggreagations will sent(choose suitable struct
-				afterwards). This will be our final's integer size. Then, we assign the numbers of the aggregates used
-				(from the number map above) one as a first digit of a number and one as last digit. If last digit is 0
-				then we have only 1 aggregate. In case, we have 1 message sent(struct DistrMsg1) the numbers from
-				1 to 4 are used in 2.1 program whereas from 6 to 9 are referring to program 2.2
-
-				Ex. sent = 6001, number of messages 4(struct DistrMsg4) as sent.length = 4, and aggregation functions
-				6(Variance) and 1(Min) will be used.
-
-		*/
-				//TODO RAND
-			chooseProg= 1;
-
-			if(chooseProg == 1){	//case 2.1 question is chosen
-				numFun = 2;
-
-				if(numFun == 2){
-
-					chooseFun1 = 1;
-					chooseFun2 = 4;
-	
-					//TODO must check that random numbers always differ
-					if((chooseFun1 == 1 || chooseFun2 == 1) || (chooseFun1 == 2 || chooseFun2 == 2)){	/** Case that one of the given choices is MIN or MAX*/
-		
-						if(chooseFun1 == 6 || chooseFun2 == 6){	//case that one of the choices is VARIANCE
-							//case 4
-							numMsgSent = 4;
-							chooseQues = chooseFun1 * 1000 + chooseFun2;
-						}
-						else if(chooseFun1 == 4 || chooseFun2 == 4){	//case that one of the choises is AVG
-							//case 3
-							numMsgSent = 3;
-							chooseQues = chooseFun1 * 100 + chooseFun2;
-						}
-						else if((chooseFun1 == 3 || chooseFun2 == 3) || (chooseFun1 == 5 || chooseFun2 == 5)){	//case that one of the choises is COUNT, SUM
-							//case 2
-							numMsgSent = 2;
-							chooseQues = chooseFun1 * 10 + chooseFun2;
-						}
-
-						if((chooseFun1 == 1 && chooseFun2 == 2) || (chooseFun1 == 2 && chooseFun2 == 1)){
-							//case 1
-							numMsgSent = 2;
-							chooseQues = chooseFun1 * 10 + chooseFun2;
-						}
-					}else if(chooseFun1 == 6 || chooseFun2 == 6){ /**case one of the choises is VARIANCE*/
-						//case 3 for all cases
-						numMsgSent = 3;
-						chooseQues = chooseFun1 * 100 + chooseFun2;
-
-					}else{	/**Case that the choices are SUM, COUNT or AVG */
-						//case 2 for all cases
-						numMsgSent = 2;
-						chooseQues = chooseFun1 * 10 + chooseFun2;
-
-
-					}
-
-				}else{
-					chooseFun =6; //chooseFun is when one aggregation is chosen
-					if(chooseFun == 6){	//case that the choice is VARIANCE
-						//case 3
-						numMsgSent = 3;
-						chooseQues = chooseFun * 100;
-					
-					}
-					else if(chooseFun == 4){	//case that the choice is AVG
-					//case 2
-						numMsgSent = 2;
-						chooseQues = chooseFun * 10;
-					}
-					else{	//case that the choice is MIN, MAX, COUNT, SUM
-					//case 1
-						numMsgSent = 1;
-						chooseQues = chooseFun;
-					}
-				}
-			}else{
-
-				/**
-					1. MIN
-					2. MAX
-					3. COUNT
-					5. SUM
-
-					In order to be consistent about our statements, we don't mess with
-					the previous order of the function. We choose a random value from 1 to 4.
-					If 4 is chosen we assign it value 5.
-				*/
-				chooseFun= 4;
-
-				// if(chooseFun == 4){
-				// 	chooseFun = 5;
-				// }
-
-				numMsgSent = 1;
-				//TODO CHECK IF
-				chooseQues = chooseFun+5;	
-			}
-
-			
+			/** Task to encode aggregate functions used*/
+		 	post encodingData();
 
 		}
 		
-		
-		if(call RoutingSendQueue.full())
-		{
-			dbg("SRTreeC", "RoutingSendQueue is FULL!!! \n");
-			return;
-		}
-		
-		
-		mrpkt = (RoutingMsg*) (call RoutingPacket.getPayload(&tmp, sizeof(RoutingMsg)));
-		if(mrpkt==NULL)
-		{
-			dbg("SRTreeC","RoutingMsgTimer.fired(): No valid payload... \n");
-			return;
-		}
-		//todo must add another variable
-		atomic{
-			mrpkt->ques = chooseQues;
-			mrpkt->senderID=TOS_NODE_ID;
-			mrpkt->depth = curdepth;
-		}
-
-		
-		call RoutingAMPacket.setDestination(&tmp, AM_BROADCAST_ADDR);
-		call RoutingPacket.setPayloadLength(&tmp, sizeof(RoutingMsg));
-		
-		enqueueDone=call RoutingSendQueue.enqueue(tmp);
-		
-		if( enqueueDone==SUCCESS)
-		{
-			if (call RoutingSendQueue.size()==1)
-			{
-				post sendRoutingTask();
-			}
-			
-		}
-		else
-		{
-			dbg("SRTreeC","RoutingMsg failed to be enqueued in SendingQueue!!!");
-		}		
+		/** Another task to continue Routing. Must use task to update all nodes as tasks implement afterwards*/
+		post RoutingCon();
+				
 	}
+
 
 	event void RoutingAMSend.sendDone(message_t * msg , error_t err)
 	{
@@ -593,332 +389,17 @@ implementation
 		*/
 		setRoutingSendBusy(FALSE);
 		
-		
 	}
 
-	//based on RoutingMsgTimer
+	/**Implement everything on tasks and not on event*/
 	event void DistrMsgTimer.fired()
 	{
-		
+		/**To many calculations to be performed in an event so use a task*/
+		post calcData();
 
-		message_t tmp;
-		error_t enqueueDone;
-		uint16_t randVal;
-
-		DistrMsg* mrpkt;
-
-		DistrMsg1* mrpkt1;
-		DistrMsg2* mrpkt2;
-		DistrMsg3* mrpkt3;
-		DistrMsg4* mrpkt4;
-
-		
-
-		/**The simulation never reaches the statements below but will not be deleted
-		for plentitude*/
-		if(call DistrSendQueue.full())
-		{
-			dbg("SRTreeC", "DistrSendQueue is FULL!!! \n");
-			return;
-		}
-		
-		randVal = call RandomGen.rand16() % 50;
-
-		dbg("SRTreeC", "Random value generated %d\n", randVal);
-		// mrpkt = (DistrMsg*) (call DistrPacket.getPayload(&tmp, sizeof(DistrMsg)));
-
-		if(numMsgSent == 1){
-			mrpkt1 = (DistrMsg1*) (call DistrPacket.getPayload(&tmp, sizeof(DistrMsg1)));
-
-			if(chooseFun == 3){		/*case COUNT is choosen*/
-				mrpkt1->field1a = 1;
-			}else{	/*In every other case*/
-				mrpkt1->field1a = randVal;
-			}
-
-			//Aggregation every time for all chilren. If a value is lost we always have child value
-			for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
-				if(chooseFun == 1){	//min case
-					mrpkt1->field1a = minFinder(childrenArray[i].min, mrpkt1->field1a);
-				}else if( chooseFun == 2){	//max case
-					mrpkt1->field1a = maxFinder(childrenArray[i].max, mrpkt1->field1a);
-				}else if( chooseFun == 3){	//count case
-					mrpkt1->field1a += childrenArray[i].count; 
-				}else if( chooseFun == 5){	//sum case
-					mrpkt1->field1a += childrenArray[i].sum; 
-				}
-
-			}
-
-			if(mrpkt1==NULL)
-			{
-		 		dbg("SRTreeC","DistrMsgTimer.fired(): No valid payload... \n");
-		 		return;
-		 	}
-
-
-		}else if(numMsgSent == 2){
-
-			/** 
-            Check all possible combinations where we need two attributes 
-            */
-			mrpkt2 = (DistrMsg2*) (call DistrPacket.getPayload(&tmp, sizeof(DistrMsg2)));
-	
-            
-            if(chooseFun==4 || (chooseFun1!=1 && chooseFun2!=1 && chooseFun1!=2 && chooseFun2!=2)){ // cases where only COUNT,SUM are needed
-                atomic{
-					mrpkt2->field2a = randVal;	/*used as sum*/
-					mrpkt2->field2b = 1;	/*used as count*/
-				}
-
-				/*Aggregation of values*/
-			    for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
-					mrpkt2->field2a += childrenArray[i].sum;
-					mrpkt2->field2b += childrenArray[i].count;  
-			    }
-			}
-			else if(chooseFun1==1 || chooseFun2==1 || chooseFun1==2 || chooseFun2==2){ // cases with at least one (min/max) function
-               if((chooseFun1==1 || chooseFun2==1) && (chooseFun1==2 || chooseFun2==2)){ //min AND max case
-                   atomic{
-					mrpkt2->field2a = randVal;	/*used as min*/
-					mrpkt2->field2b = randVal;	/*used as max*/
-			       }
-
-			        /*Aggregation of values*/
-				    for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
-						mrpkt2->field2a = minFinder(childrenArray[i].min, mrpkt2->field2a);
-						mrpkt2->field2b = maxFinder(childrenArray[i].max, mrpkt2->field2b);   
-				    }
-                }
-                else if(chooseFun1==5 || chooseFun2==5){  // AVG + (MIN or MAX)
-                    atomic{
-						mrpkt2->field2a = randVal;	/*used as sum*/
-						mrpkt2->field2b = randVal;	/*used as min or max*/
-				    }
-                    
-                    /*Aggregation of values*/
-                    for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
-						mrpkt2->field2a += childrenArray[i].sum;
-						if(chooseFun1==1 || chooseFun2==1) // case min
-						   mrpkt2->field2b = minFinder(childrenArray[i].min, mrpkt2->field2b);
-						else // case max
-						   mrpkt2->field2b = maxFinder(childrenArray[i].max, mrpkt2->field2b);   
-			        }
-                }
-                else{ // case COUNT + (MAX or MIN)
-                	atomic{
-						mrpkt2->field2a = 1;	/*used as count*/
-						mrpkt2->field2b = randVal;	/*used as min or max*/
-				    }
-
-				    /*Aggregation of values*/
-				    for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
-						mrpkt2->field2a += childrenArray[i].count;
-						if(chooseFun1==1 || chooseFun2==1) // case min
-						   mrpkt2->field2b = minFinder(childrenArray[i].min, mrpkt2->field2b);
-						else // case max
-						   mrpkt2->field2b = maxFinder(childrenArray[i].max, mrpkt2->field2b);   
-				    }
-                }
-			}
-			 
-
-			if(mrpkt2==NULL)
-			{
-		 		dbg("SRTreeC","DistrMsgTimer.fired(): No valid payload... \n");
-		 		return;
-		 	}
-		}else if(numMsgSent == 3){
-			/** 
-            Check all possible combinations where we need three attributes 
-            */    
-			mrpkt3 = (DistrMsg3*) (call DistrPacket.getPayload(&tmp, sizeof(DistrMsg3)));
-
-            if(numFun==2 && (chooseFun1==1 || chooseFun2==1 || chooseFun1==2 || chooseFun2==2)){  //Definitely case AVG + (MIN or MAX)
-				atomic{
-				mrpkt3->field3a = randVal;	/*used as sum*/
-				mrpkt3->field3b = 1;	/*used as count*/
-				mrpkt3->field3c = randVal; /*used as min or max */
-			    }
-
-                /*Aggregation of values*/
-			    for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
-					mrpkt3->field3a += childrenArray[i].sum;
-					mrpkt3->field3b += childrenArray[i].count;
-					if(chooseFun1==1 || chooseFun2==1) // case min
-					   mrpkt3->field3c = minFinder(childrenArray[i].min, mrpkt3->field3c);
-					else // case max
-					   mrpkt3->field3c = maxFinder(childrenArray[i].max, mrpkt3->field3c);   
-			    } 
-			}else{   // cases VARIANCE, VARIANCE + SUM, VARIANCE + COUNT, VARIANCE + AVG all need the same attributes
-                atomic{
-				mrpkt3->field3a = randVal;	/*used as sum*/
-				mrpkt3->field3b = 1;	/*used as count*/
-				mrpkt3->field3c = randVal * randVal; /*used as sumofSquares*/
-			    }
-
-                /*Aggregation of values*/
-			    for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
-				mrpkt3->field3a += childrenArray[i].sum;
-				mrpkt3->field3b += childrenArray[i].count;
-				mrpkt3->field3c += childrenArray[i].sumofSquares;
-			    }
-			}
-
-			if(mrpkt3==NULL)
-			{
-		 		dbg("SRTreeC","DistrMsgTimer.fired(): No valid payload... \n");
-		 		return;
-		 	}
-		}else{
-			/**
-				All combination of the aggregation functions in this case 
-				produces every time sum, sumofSquares and count. Only the fourth
-				parameter changes
-			*/
-			mrpkt4 = (DistrMsg4*) (call DistrPacket.getPayload(&tmp, sizeof(DistrMsg4)));
-
-			
-			atomic{
-				mrpkt4->field4a = randVal;	/*used as sum*/
-				mrpkt4->field4b = 1;	/*used as count*/
-				mrpkt4->field4c = randVal * randVal; /*used as sumofSquares*/
-				mrpkt4->field4d = randVal;/*used as min or max*/
-			}	
-
-
-			//Aggregation every time for all chilren. If a value is lost we always have child value
-			for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
-				mrpkt4->field4b += childrenArray[i].count;
-				mrpkt4->field4a += childrenArray[i].sum;
-				mrpkt4->field4c += childrenArray[i].sumofSquares;
-				if(chooseFun1 == 1 || chooseFun2 == 1){	//case MIN
-					mrpkt4->field4d = minFinder(childrenArray[i].min, mrpkt4->field4d);
-				}else{	//case MAX
-					mrpkt4->field4d = maxFinder(childrenArray[i].max, mrpkt4->field4d);
-				}
-
-			}
-
-			if(mrpkt4==NULL)
-			{
-		 		dbg("SRTreeC","DistrMsgTimer.fired(): No valid payload... \n");
-		 		return;
-		 	}
-
-		}
-
-	
-		/** root case print everything*/
-		if(TOS_NODE_ID == 0){
-			roundCounter+=1;
-
-			dbg("SRTreeC", "\n\n########################Epoch %d completed#####################\n", roundCounter);
-
-			if(numMsgSent == 1){
-				rootMsgPrint1(mrpkt1);
-			}else if(numMsgSent == 2){
-				rootMsgPrint2(mrpkt2);
-			}else if(numMsgSent == 3){
-				rootMsgPrint3(mrpkt3);
-			}else{
-				rootMsgPrint4(mrpkt4);
-			}
-
-		}
-		else /** case we don't have root node then sent everything to the parent*/
-		{
-
-			//dbg("SRTreeC", "Node: %d , Parent: %d, Sum: %d, count: %d, max: %d , depth: %d\n",TOS_NODE_ID,parentID, mrpkt->sum, mrpkt->count, mrpkt->max, curdepth);
-			call DistrAMPacket.setDestination(&tmp, parentID);
-			// call DistrPacket.setPayloadLength(&tmp, sizeof(DistrMsg));
-
-			// if(chooseProg != 2 && ){
-
-			
-
-			if(numMsgSent == 1){	
-
-				//dbg("SRTreeC","Old value %d\n", Vold);
-				/**
-					In that section, we implement TINA. We know as a fact that both numbers
-					are positive,so we can compare their aggregate values not only in the 
-					leaves but in the whole tree. So if the statement below is true, just keep
-					the old values to minimize messages sent. TCT is defined in SimpleRoutingTree.h
-				*/
-				if(chooseProg == 2 && !(abs(mrpkt1->field1a - Vold) > abs(Vold) * ((double)TCT/(double)PERCENTAGE))){	//don't change value
-					oldFlag = 1;
-					dbg("SRTreeC","Don't send message with new value %d and old value %d\n", mrpkt1->field1a, Vold);
-				}else if( chooseProg == 2){	//change value and update old
-					oldFlag = 0;
-					Vold = mrpkt1->field1a;
-				}
-
-				if(oldFlag == 0){
-					
-				
-					call DistrPacket.setPayloadLength(&tmp, sizeof(DistrMsg1));
-
-					if(chooseFun == 1){	//min case
-						dbg("SRTreeC", "Node: %d , Parent: %d, min: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt1->field1a,curdepth);
-					}else if( chooseFun == 2){	//max case
-						dbg("SRTreeC", "Node: %d , Parent: %d, max: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt1->field1a,curdepth);
-					}else if(chooseFun == 3){	//count case
-						dbg("SRTreeC", "Node: %d , Parent: %d, count: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt1->field1a,curdepth);
-					}else{	// sum count
-						dbg("SRTreeC", "Node: %d , Parent: %d, sum: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt1->field1a,curdepth);
-					}
-
-				}
-				// 	dbg("SRTreeC","Don't send message with new value %d and old value %d\n", mrpkt1->field1a, Vold);
-				// }
-			}else if(numMsgSent == 2){
-				call DistrPacket.setPayloadLength(&tmp, sizeof(DistrMsg2));
-				dbg("SRTreeC", "Node: %d , Parent: %d, Par_1: %d, Par_2: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt2->field2a, mrpkt2->field2b,curdepth);
-
-			}else if(numMsgSent == 3){
-				call DistrPacket.setPayloadLength(&tmp, sizeof(DistrMsg3));
-				dbg("SRTreeC", "Node: %d , Parent: %d, Sum: %d, count: %d, 3rd parameter: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt3->field3a, mrpkt3->field3b, mrpkt3->field3c,curdepth);
-
-			}else{
-				call DistrPacket.setPayloadLength(&tmp, sizeof(DistrMsg4));
-
-				if(chooseFun1 == 1 || chooseFun2 == 1){	//min case
-					dbg("SRTreeC", "Node: %d , Parent: %d, Sum: %d, count: %d, min: %d ,sum of squares %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt4->field4a, mrpkt4->field4b, mrpkt4->field4d,mrpkt4->field4c ,curdepth);
-
-				}else{	//max case
-					dbg("SRTreeC", "Node: %d , Parent: %d, Sum: %d, count: %d, max: %d ,sum of squares %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt4->field4a, mrpkt4->field4b, mrpkt4->field4d,mrpkt4->field4c ,curdepth);
-
-				}
-
-			}
-			
-			if(oldFlag == 0){
-				enqueueDone=call DistrSendQueue.enqueue(tmp);
-
-				if( enqueueDone==SUCCESS)
-				{
-					if (call DistrSendQueue.size()==1)
-					{
-						post sendDistrTask();
-					}
-			
-				}
-				else
-				{
-				dbg("SRTreeC","DistrMsg failed to be enqueued in SendingQueue!!!");
-				}
-			}
-			
-
-			// }else{
-			// 	dbg("SRTreeC","Don't send message with new value %d and old value %d\n", mrpkt1->field1a, Vold)
-			// }
-
-		}		
 	}
 
-	//DONE FOR PHASE 2
+	
 	event void DistrAMSend.sendDone(message_t * msg , error_t err)
 	{
 
@@ -926,7 +407,7 @@ implementation
 		
 	}
 
-	//DONE FOR PHASE 2
+	//FIXED
 	event message_t* DistrReceive.receive( message_t* msg , void* payload , uint8_t len)
 	{
 		error_t enqueueDone;
@@ -954,7 +435,7 @@ implementation
 		return msg;
 	}
 	
-	
+	//FIXED
 	event message_t* RoutingReceive.receive( message_t * msg , void * payload, uint8_t len)
 	{
 		error_t enqueueDone;
@@ -979,6 +460,7 @@ implementation
 		return msg;
 	}
 	
+	/*********************************************************TASKS***********************************************/
 	
 	/***************************SEND TASKS****************************/
 	
@@ -1032,13 +514,13 @@ implementation
 		}
 	}
 	
-	//DONE FOR PHASE 2
+	
 	task void sendDistrTask()
 	{
 		uint8_t mlen;
 		error_t sendDone;
 		uint16_t mdest;
-		DistrMsg* mpayload;
+		
 
 		DistrMsg1* mpayload1;
 		DistrMsg2* mpayload2;
@@ -1062,7 +544,6 @@ implementation
 		
 		radioDistrSendPkt = call DistrSendQueue.dequeue();
 		mlen=call DistrPacket.payloadLength(&radioDistrSendPkt);
-		mpayload= call DistrPacket.getPayload(&radioDistrSendPkt,mlen);
 
 		//PHASE 2
 		if(numMsgSent == 1){
@@ -1102,13 +583,6 @@ implementation
 			}
 		}
 
-		
-		// if(mlen!= sizeof(DistrMsg))
-		// {
-		// 	dbg("SRTreeC", "\t\t sendDistrTask(): Unknown message!!\n");
-		// 	return;
-		// }
-		
 
 		mdest= call DistrAMPacket.destination(&radioDistrSendPkt);
 		
@@ -1173,7 +647,6 @@ implementation
 	}
 
 
-	//NEEDS WORK
 	/** Based on receiveNotifyTask()*/
 	task void receiveDistrTask()
 	{
@@ -1358,7 +831,552 @@ implementation
 
 	/****************************ENCODING/DECODING TASKS**************************/
 
+	task void encodingData(){
+		/**
+			AGGREGATION MAP
+			1. MIN
+			2. MAX
+			3. COUNT
+			4. AVG
+			5. SUM
+			6. VARIANCE
+		*/
+
+		/*		The technique we used to send the least amount of messages is based on encoding/decoding.
+				To be more specific, we send in Routing an extra message ques which includes
+				info about all the aggregations used in all possible ways. First, we check
+				the number of messages that the random combination of aggreagations will sent(choose suitable struct
+				afterwards). This will be our final's integer size. Then, we assign the numbers of the aggregates used
+				(from the number map above) one as a first digit of a number and one as last digit. If last digit is 0
+				then we have only 1 aggregate. In case, we have 1 message sent(struct DistrMsg1) the numbers from
+				1 to 4 are used in 2.1 program whereas from 6 to 9 are referring to program 2.2
+
+				Ex. sent = 6001, number of messages 4(struct DistrMsg4) as sent.length = 4, and aggregation functions
+				6(Variance) and 1(Min) will be used.
+
+		*/
+			
+			chooseProg = call RandomGen.rand16() % 2 + 1;
+
+			dbg("SRTreeC","Program chose to execute 2.%d\n",chooseProg);
+
+			if(chooseProg == 1){	//case 2.1 question is chosen
+				
+				numFun = call RandomGen.rand16() % 2 + 1;
+				dbg("SRTreeC","\n\nFunction num: %d\n\n\n",chooseProg);
+				if(numFun == 2){
+					chooseFun1 = call RandomGen.rand16() % 6 + 1;
+					chooseFun2 = call RandomGen.rand16() % 6 + 1;
+	
+					//TODO must check that random numbers always differ
+					if((chooseFun1 == 1 || chooseFun2 == 1) || (chooseFun1 == 2 || chooseFun2 == 2)){	/** Case that one of the given choices is MIN or MAX*/
+		
+						if(chooseFun1 == 6 || chooseFun2 == 6){	//case that one of the choices is VARIANCE
+							//case 4
+							//numMsgSent = 4;
+							chooseQues = chooseFun1 * 1000 + chooseFun2;
+						}
+						else if(chooseFun1 == 4 || chooseFun2 == 4){	//case that one of the choises is AVG
+							//case 3
+							//numMsgSent = 3;
+							chooseQues = chooseFun1 * 100 + chooseFun2;
+						}
+						else if((chooseFun1 == 3 || chooseFun2 == 3) || (chooseFun1 == 5 || chooseFun2 == 5)){	//case that one of the choises is COUNT, SUM
+							//case 2
+							//numMsgSent = 2;
+							chooseQues = chooseFun1 * 10 + chooseFun2;
+						}
+
+						if((chooseFun1 == 1 && chooseFun2 == 2) || (chooseFun1 == 2 && chooseFun2 == 1)){
+							//case 1
+							//numMsgSent = 2;
+							chooseQues = chooseFun1 * 10 + chooseFun2;
+						}
+					}else if(chooseFun1 == 6 || chooseFun2 == 6){ /**case one of the choises is VARIANCE*/
+						//case 3 for all cases
+						//numMsgSent = 3;
+						chooseQues = chooseFun1 * 100 + chooseFun2;
+
+					}else{	/**Case that the choices are SUM, COUNT or AVG */
+						//case 2 for all cases
+						//numMsgSent = 2;
+						chooseQues = chooseFun1 * 10 + chooseFun2;
+
+
+					}
+
+				}else{
+					chooseFun =6; //chooseFun is when one aggregation is chosen
+					chooseFun = call RandomGen.rand16() % 6 + 1;
+					if(chooseFun == 6){	//case that the choice is VARIANCE
+						//case 3
+						numMsgSent = 3;
+						chooseQues = chooseFun * 100;
+					
+					}
+					else if(chooseFun == 4){	//case that the choice is AVG
+					//case 2
+						numMsgSent = 2;
+						chooseQues = chooseFun * 10;
+					}
+					else{	//case that the choice is MIN, MAX, COUNT, SUM
+					//case 1
+						numMsgSent = 1;
+						chooseQues = chooseFun;
+					}
+				}
+			}else{
+				chooseFun1 = call RandomGen.rand16() % 4 + 1;
+				chooseFun= 4;
+
+				numMsgSent = 1;
+				chooseQues = chooseFun+5;	
+			}
+	}
+
+	task void decodingData(){
+
+		/**
+			AGGREGATION MAP
+			1. MIN
+			2. MAX
+			3. COUNT
+			4. AVG
+			5. SUM
+			6. VARIANCE
+		*/
+
+		uint16_t fDigit;
+		uint8_t lDigit;
+
+		/**Maybe could be implemented easier but it would totally 
+		change our starting code*/
+
+		nDigits = floor(log10(abs(chooseQues)))+1;	/*Use some maths to calculate number length*/
+		dbg("SRTreeC", "CHECK %d, chooseQues %d\n", nDigits, chooseQues);
+
+		switch(nDigits){
+			case 1:
+				numMsgSent = 1;
+				if(chooseQues < 5){
+					//case 2.1 with one aggregation
+					chooseProg = 1;
+					chooseFun = chooseQues;
+				}else{
+					//case 2.2
+					chooseProg = 2;
+					chooseFun = chooseQues - 5;
+
+					/**
+					1. MIN
+					2. MAX
+					3. COUNT
+					5. SUM
+
+					In order to be consistent about our statements, we don't mess with
+					the previous order of the function. We choose a random value from 1 to 4.
+					If 4 is chosen we assign it value 5.
+					*/
+
+					if(chooseFun == 4){
+						chooseFun = 5;
+					}
+				}
+				numFun = 1;
+				break;
+			case 2:
+				numMsgSent = 2;
+				chooseProg = 1;
+				break;
+			case 3:
+				numMsgSent = 3;
+				chooseProg = 1;
+				break;
+			default :	
+				//case 4
+				numMsgSent = 4;
+				chooseProg = 1;
+				break;
+		}
+
+		if(nDigits!= 1){
+			fDigit = chooseQues;
+			lDigit = chooseQues % 10;	/*Calculate last digit of number*/
+			
+			atomic{	/*Calculate first digit of number*/
+				while(fDigit >= 10){
+				fDigit/=10;
+				}
+			}
+			
+			if(lDigit != 0){
+				numFun = 2;
+				chooseFun1 = fDigit;
+				chooseFun2 = lDigit;
+			}else{
+				numFun = 1;
+				chooseFun = fDigit;
+			}
+		}
+		
+	}
+	
+
+	/****************************CALCULATION TASKS**********************************/
+	task void calcData(){
+		
+		message_t tmp;
+		error_t enqueueDone;
+		uint16_t randVal;
+
+		DistrMsg1* mrpkt1;
+		DistrMsg2* mrpkt2;
+		DistrMsg3* mrpkt3;
+		DistrMsg4* mrpkt4;
+
+		void* distrSent;
+
+		
+
+		/**The simulation never reaches the statements below but will not be deleted
+		for plentitude*/
+		if(call DistrSendQueue.full())
+		{
+			dbg("SRTreeC", "DistrSendQueue is FULL!!! \n");
+			return;
+		}
+		
+		randVal = call RandomGen.rand16() % 50;
+
+		dbg("SRTreeC", "Random value generated %d\n", randVal);
+
+		if(numMsgSent == 1){
+			mrpkt1 = (DistrMsg1*) (call DistrPacket.getPayload(&tmp, sizeof(DistrMsg1)));
+
+			if(chooseFun == 3){		/*case COUNT is choosen*/
+				mrpkt1->field1a = 1;
+			}else{	/*In every other case*/
+				mrpkt1->field1a = randVal;
+			}
+
+			//Aggregation every time for all chilren. If a value is lost we always have child value
+			for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
+				if(chooseFun == 1){	//min case
+					mrpkt1->field1a = minFinder(childrenArray[i].min, mrpkt1->field1a);
+				}else if( chooseFun == 2){	//max case
+					mrpkt1->field1a = maxFinder(childrenArray[i].max, mrpkt1->field1a);
+				}else if( chooseFun == 3){	//count case
+					mrpkt1->field1a += childrenArray[i].count; 
+				}else if( chooseFun == 5){	//sum case
+					mrpkt1->field1a += childrenArray[i].sum; 
+				}
+
+			}
+
+			if(mrpkt1==NULL)
+			{
+		 		dbg("SRTreeC","DistrMsgTimer.fired(): No valid payload... \n");
+		 		return;
+		 	}
+
+		 	distrSent = mrpkt1;
+		}else if(numMsgSent == 2){
+
+			/** 
+            Check all possible combinations where we need two attributes 
+            */
+			mrpkt2 = (DistrMsg2*) (call DistrPacket.getPayload(&tmp, sizeof(DistrMsg2)));
+	
+            
+            if(chooseFun==4 || (chooseFun1!=1 && chooseFun2!=1 && chooseFun1!=2 && chooseFun2!=2)){ // cases where only COUNT,SUM are needed
+                atomic{
+					mrpkt2->field2a = randVal;	/*used as sum*/
+					mrpkt2->field2b = 1;	/*used as count*/
+				}
+
+				/*Aggregation of values*/
+			    for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
+					mrpkt2->field2a += childrenArray[i].sum;
+					mrpkt2->field2b += childrenArray[i].count;  
+			    }
+			}
+			else if(chooseFun1==1 || chooseFun2==1 || chooseFun1==2 || chooseFun2==2){ // cases with at least one (min/max) function
+               if((chooseFun1==1 || chooseFun2==1) && (chooseFun1==2 || chooseFun2==2)){ //min AND max case
+                   atomic{
+					mrpkt2->field2a = randVal;	/*used as min*/
+					mrpkt2->field2b = randVal;	/*used as max*/
+			       }
+
+			        /*Aggregation of values*/
+				    for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
+						mrpkt2->field2a = minFinder(childrenArray[i].min, mrpkt2->field2a);
+						mrpkt2->field2b = maxFinder(childrenArray[i].max, mrpkt2->field2b);   
+				    }
+                }
+                else if(chooseFun1==5 || chooseFun2==5){  // AVG + (MIN or MAX)
+                    atomic{
+						mrpkt2->field2a = randVal;	/*used as sum*/
+						mrpkt2->field2b = randVal;	/*used as min or max*/
+				    }
+                    
+                    /*Aggregation of values*/
+                    for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
+						mrpkt2->field2a += childrenArray[i].sum;
+						if(chooseFun1==1 || chooseFun2==1) // case min
+						   mrpkt2->field2b = minFinder(childrenArray[i].min, mrpkt2->field2b);
+						else // case max
+						   mrpkt2->field2b = maxFinder(childrenArray[i].max, mrpkt2->field2b);   
+			        }
+                }
+                else{ // case COUNT + (MAX or MIN)
+                	atomic{
+						mrpkt2->field2a = 1;	/*used as count*/
+						mrpkt2->field2b = randVal;	/*used as min or max*/
+				    }
+
+				    /*Aggregation of values*/
+				    for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
+						mrpkt2->field2a += childrenArray[i].count;
+						if(chooseFun1==1 || chooseFun2==1) // case min
+						   mrpkt2->field2b = minFinder(childrenArray[i].min, mrpkt2->field2b);
+						else // case max
+						   mrpkt2->field2b = maxFinder(childrenArray[i].max, mrpkt2->field2b);   
+				    }
+                }
+			}
+			 
+
+			if(mrpkt2==NULL)
+			{
+		 		dbg("SRTreeC","DistrMsgTimer.fired(): No valid payload... \n");
+		 		return;
+		 	}
+
+		 	distrSent = mrpkt2;
+		}else if(numMsgSent == 3){
+			/** 
+            Check all possible combinations where we need three attributes 
+            */    
+			mrpkt3 = (DistrMsg3*) (call DistrPacket.getPayload(&tmp, sizeof(DistrMsg3)));
+
+            if(numFun==2 && (chooseFun1==1 || chooseFun2==1 || chooseFun1==2 || chooseFun2==2)){  //Definitely case AVG + (MIN or MAX)
+				atomic{
+				mrpkt3->field3a = randVal;	/*used as sum*/
+				mrpkt3->field3b = 1;	/*used as count*/
+				mrpkt3->field3c = randVal; /*used as min or max */
+			    }
+
+                /*Aggregation of values*/
+			    for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
+					mrpkt3->field3a += childrenArray[i].sum;
+					mrpkt3->field3b += childrenArray[i].count;
+					if(chooseFun1==1 || chooseFun2==1) // case min
+					   mrpkt3->field3c = minFinder(childrenArray[i].min, mrpkt3->field3c);
+					else // case max
+					   mrpkt3->field3c = maxFinder(childrenArray[i].max, mrpkt3->field3c);   
+			    } 
+			}else{   // cases VARIANCE, VARIANCE + SUM, VARIANCE + COUNT, VARIANCE + AVG all need the same attributes
+                atomic{
+				mrpkt3->field3a = randVal;	/*used as sum*/
+				mrpkt3->field3b = 1;	/*used as count*/
+				mrpkt3->field3c = randVal * randVal; /*used as sumofSquares*/
+			    }
+
+                /*Aggregation of values*/
+			    for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
+				mrpkt3->field3a += childrenArray[i].sum;
+				mrpkt3->field3b += childrenArray[i].count;
+				mrpkt3->field3c += childrenArray[i].sumofSquares;
+			    }
+			}
+
+			if(mrpkt3==NULL)
+			{
+		 		dbg("SRTreeC","DistrMsgTimer.fired(): No valid payload... \n");
+		 		return;
+		 	}
+
+		 	distrSent = mrpkt3;
+		}else{
+			/**
+				All combination of the aggregation functions in this case 
+				produces every time sum, sumofSquares and count. Only the fourth
+				parameter changes
+			*/
+			mrpkt4 = (DistrMsg4*) (call DistrPacket.getPayload(&tmp, sizeof(DistrMsg4)));
+
+			
+			atomic{
+				mrpkt4->field4a = randVal;	/*used as sum*/
+				mrpkt4->field4b = 1;	/*used as count*/
+				mrpkt4->field4c = randVal * randVal; /*used as sumofSquares*/
+				mrpkt4->field4d = randVal;/*used as min or max*/
+			}	
+
+
+			//Aggregation every time for all chilren. If a value is lost we always have child value
+			for(i = 0 ;i < MAX_CHILDREN && childrenArray[i].senderID!=0 ; i++){
+				mrpkt4->field4b += childrenArray[i].count;
+				mrpkt4->field4a += childrenArray[i].sum;
+				mrpkt4->field4c += childrenArray[i].sumofSquares;
+				if(chooseFun1 == 1 || chooseFun2 == 1){	//case MIN
+					mrpkt4->field4d = minFinder(childrenArray[i].min, mrpkt4->field4d);
+				}else{	//case MAX
+					mrpkt4->field4d = maxFinder(childrenArray[i].max, mrpkt4->field4d);
+				}
+
+			}
+
+			if(mrpkt4==NULL)
+			{
+		 		dbg("SRTreeC","DistrMsgTimer.fired(): No valid payload... \n");
+		 		return;
+		 	}
+
+		 	distrSent = mrpkt4;
+
+		}
+
+		//call DistrPacket.enqueue(tmp);
 
 	
+		/** root case print everything*/
+		if(TOS_NODE_ID == 0){
+			Printer(numMsgSent, distrSent);
+
+		}
+		else /** case we don't have root node then sent everything to the parent*/
+		{
+
+			//dbg("SRTreeC", "Node: %d , Parent: %d, Sum: %d, count: %d, max: %d , depth: %d\n",TOS_NODE_ID,parentID, mrpkt->sum, mrpkt->count, mrpkt->max, curdepth);
+			call DistrAMPacket.setDestination(&tmp, parentID);
+			// call DistrPacket.setPayloadLength(&tmp, sizeof(DistrMsg));
+
+			// if(chooseProg != 2 && ){
+
+			
+
+			if(numMsgSent == 1){	
+
+				//dbg("SRTreeC","Old value %d\n", Vold);
+				/**
+					In that section, we implement TINA. We know as a fact that both numbers
+					are positive,so we can compare their aggregate values not only in the 
+					leaves but in the whole tree. So if the statement below is true, just keep
+					the old values to minimize messages sent. TCT is defined in SimpleRoutingTree.h
+				*/
+				if(chooseProg == 2 && !(abs(mrpkt1->field1a - Vold) > abs(Vold) * ((double)TCT/(double)PERCENTAGE))){	//don't change value
+					oldFlag = 1;
+					dbg("SRTreeC","Don't send message with new value %d and old value %d\n", mrpkt1->field1a, Vold);
+				}else if( chooseProg == 2){	//change value and update old
+					oldFlag = 0;
+					Vold = mrpkt1->field1a;
+				}
+
+				//Check that the value can be updated (2.2)
+				if(oldFlag == 0){
+					
+				
+					call DistrPacket.setPayloadLength(&tmp, sizeof(DistrMsg1));
+
+					if(chooseFun == 1){	//min case
+						dbg("SRTreeC", "Node: %d , Parent: %d, min: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt1->field1a,curdepth);
+					}else if( chooseFun == 2){	//max case
+						dbg("SRTreeC", "Node: %d , Parent: %d, max: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt1->field1a,curdepth);
+					}else if(chooseFun == 3){	//count case
+						dbg("SRTreeC", "Node: %d , Parent: %d, count: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt1->field1a,curdepth);
+					}else{	// sum count
+						dbg("SRTreeC", "Node: %d , Parent: %d, sum: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt1->field1a,curdepth);
+					}
+
+				}
+
+			}else if(numMsgSent == 2){
+				call DistrPacket.setPayloadLength(&tmp, sizeof(DistrMsg2));
+				dbg("SRTreeC", "Node: %d , Parent: %d, Par_1: %d, Par_2: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt2->field2a, mrpkt2->field2b,curdepth);
+
+			}else if(numMsgSent == 3){
+				call DistrPacket.setPayloadLength(&tmp, sizeof(DistrMsg3));
+				dbg("SRTreeC", "Node: %d , Parent: %d, Sum: %d, count: %d, 3rd parameter: %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt3->field3a, mrpkt3->field3b, mrpkt3->field3c,curdepth);
+
+			}else{
+				call DistrPacket.setPayloadLength(&tmp, sizeof(DistrMsg4));
+
+				if(chooseFun1 == 1 || chooseFun2 == 1){	//min case
+					dbg("SRTreeC", "Node: %d , Parent: %d, Sum: %d, count: %d, min: %d ,sum of squares %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt4->field4a, mrpkt4->field4b, mrpkt4->field4d,mrpkt4->field4c ,curdepth);
+
+				}else{	//max case
+					dbg("SRTreeC", "Node: %d , Parent: %d, Sum: %d, count: %d, max: %d ,sum of squares %d, depth: %d\n",TOS_NODE_ID,parentID, mrpkt4->field4a, mrpkt4->field4b, mrpkt4->field4d,mrpkt4->field4c ,curdepth);
+
+				}
+
+			}
+			
+			if(oldFlag == 0){
+				enqueueDone=call DistrSendQueue.enqueue(tmp);
+
+				if( enqueueDone==SUCCESS)
+				{
+					if (call DistrSendQueue.size()==1)
+					{
+						post sendDistrTask();
+					}
+			
+				}
+				else
+				{
+				dbg("SRTreeC","DistrMsg failed to be enqueued in SendingQueue!!!");
+				}
+			}
+		}
+
+	}
+
+	task void RoutingCon(){
+
+		message_t tmp;
+		error_t enqueueDone;
+		
+		RoutingMsg* mrpkt;
+
+		if(call RoutingSendQueue.full())
+		{
+			dbg("SRTreeC", "RoutingSendQueue is FULL!!! \n");
+			return;
+		}
+		
+		
+		mrpkt = (RoutingMsg*) (call RoutingPacket.getPayload(&tmp, sizeof(RoutingMsg)));
+		if(mrpkt==NULL)
+		{
+			dbg("SRTreeC","RoutingMsgTimer.fired(): No valid payload... \n");
+			return;
+		}
+		//todo must add another variable
+		atomic{
+			mrpkt->ques = chooseQues;
+			mrpkt->senderID=TOS_NODE_ID;
+			mrpkt->depth = curdepth;
+		}
+
+		
+		call RoutingAMPacket.setDestination(&tmp, AM_BROADCAST_ADDR);
+		call RoutingPacket.setPayloadLength(&tmp, sizeof(RoutingMsg));
+		
+		enqueueDone=call RoutingSendQueue.enqueue(tmp);
+		
+		if( enqueueDone==SUCCESS)
+		{
+			if (call RoutingSendQueue.size()==1)
+			{
+				post sendRoutingTask();
+			}
+			
+		}
+		else
+		{
+			dbg("SRTreeC","RoutingMsg failed to be enqueued in SendingQueue!!!");
+		}	
+	}
 }
 
