@@ -136,7 +136,7 @@ implementation
 			dbg("SRTreeC", "#### [MAX] = %d\n", mrpkt->field4d);
 		}
 		//dbg("SRTreeC", "#### [SUM OF SQUARES] = %d\n\n\n", mrpkt->field4c);
-		dbg("SRTreeC", "#### [VARIANCE] = %d\n\n\n", (mrpkt->field4c/mrpkt->field4b-(mrpkt->field4a/mrpkt->field4b)*(mrpkt->field4a/mrpkt->field4b)));
+		dbg("SRTreeC", "#### [VARIANCE] = %.2f\n\n\n", (double)(mrpkt->field4c/(double)mrpkt->field4b-(mrpkt->field4a/(double)mrpkt->field4b)*(mrpkt->field4a/(double)mrpkt->field4b)));
 		
 	}
 
@@ -144,10 +144,10 @@ implementation
 	{
 		dbg("SRTreeC", "#### OUTPUT: \n");
 		if(chooseFun==6){
-			dbg("SRTreeC", "#### [VARIANCE] = %d\n\n\n", mrpkt->field3c/mrpkt->field3b-(mrpkt->field3a/mrpkt->field3b)*(mrpkt->field3a/mrpkt->field3b));
+			dbg("SRTreeC", "#### [VARIANCE] = %.2f\n\n\n", (double)(mrpkt->field3c/(double)mrpkt->field3b-(mrpkt->field3a/(double)mrpkt->field3b)*(mrpkt->field3a/(double)mrpkt->field3b)));
 		}
 		else if(chooseFun1==6 || chooseFun2==6){ //Two functions. One of them is VARIANCE
-           dbg("SRTreeC", "#### [VARIANCE] = %d\n", mrpkt->field3c/mrpkt->field3b-(mrpkt->field3a/mrpkt->field3b)*(mrpkt->field3a/mrpkt->field3b));
+           dbg("SRTreeC", "#### [VARIANCE] = %.2f\n", (mrpkt->field3c/(double)mrpkt->field3b-(mrpkt->field3a/(double)mrpkt->field3b)*(mrpkt->field3a/(double)mrpkt->field3b)));
 		   if(chooseFun1==5 || chooseFun2==5){ // case SUM
               dbg("SRTreeC", "#### [SUM] = %d\n\n\n", mrpkt->field3a);
 		   }
@@ -859,6 +859,7 @@ implementation
 			chooseProg = call RandomGen.rand16() % 2 + 1;
 
 			dbg("SRTreeC","Program chose to execute 2.%d\n",chooseProg);
+			
 
 			if(chooseProg == 1){	//case 2.1 question is chosen
 				
@@ -867,6 +868,7 @@ implementation
 				if(numFun == 2){
 					chooseFun1 = call RandomGen.rand16() % 6 + 1;
 					chooseFun2 = call RandomGen.rand16() % 6 + 1;
+					
 	
 					//TODO must check that random numbers always differ
 					if((chooseFun1 == 1 || chooseFun2 == 1) || (chooseFun1 == 2 || chooseFun2 == 2)){	/** Case that one of the given choices is MIN or MAX*/

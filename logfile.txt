@@ -3,21 +3,21 @@ TicksPerSecond :  10000000000
 0:0:10.000000010 DEBUG (0): ###########START ROUTING###############
 
 0:0:10.195312520 DEBUG (0): Program chose to execute 2.2
-0:0:10.198165936 DEBUG (5): NodeID= 5 : curdepth= 1 , parentID= 0 
-0:0:10.198165936 DEBUG (4): NodeID= 4 : curdepth= 1 , parentID= 0 
-0:0:10.198165936 DEBUG (1): NodeID= 1 : curdepth= 1 , parentID= 0 
-0:0:10.396148710 DEBUG (6): NodeID= 6 : curdepth= 2 , parentID= 1 
-0:0:10.396148710 DEBUG (2): NodeID= 2 : curdepth= 2 , parentID= 1 
-0:0:10.397872944 DEBUG (10): NodeID= 10 : curdepth= 2 , parentID= 5 
-0:0:10.397872944 DEBUG (8): NodeID= 8 : curdepth= 2 , parentID= 5 
-0:0:10.397872944 DEBUG (9): NodeID= 9 : curdepth= 2 , parentID= 5 
-0:0:10.596420305 DEBUG (7): NodeID= 7 : curdepth= 3 , parentID= 2 
-0:0:10.596420305 DEBUG (3): NodeID= 3 : curdepth= 3 , parentID= 2 
-0:0:10.597793600 DEBUG (12): NodeID= 12 : curdepth= 3 , parentID= 9 
-0:0:10.597793600 DEBUG (13): NodeID= 13 : curdepth= 3 , parentID= 9 
-0:0:10.597793600 DEBUG (14): NodeID= 14 : curdepth= 3 , parentID= 9 
-0:0:10.599807749 DEBUG (11): NodeID= 11 : curdepth= 3 , parentID= 10 
-0:0:10.599807749 DEBUG (15): NodeID= 15 : curdepth= 3 , parentID= 10 
+0:0:10.197311449 DEBUG (5): NodeID= 5 : curdepth= 1 , parentID= 0 
+0:0:10.197311449 DEBUG (4): NodeID= 4 : curdepth= 1 , parentID= 0 
+0:0:10.197311449 DEBUG (1): NodeID= 1 : curdepth= 1 , parentID= 0 
+0:0:10.397445700 DEBUG (6): NodeID= 6 : curdepth= 2 , parentID= 1 
+0:0:10.397445700 DEBUG (2): NodeID= 2 : curdepth= 2 , parentID= 1 
+0:0:10.399154675 DEBUG (10): NodeID= 10 : curdepth= 2 , parentID= 5 
+0:0:10.399154675 DEBUG (8): NodeID= 8 : curdepth= 2 , parentID= 5 
+0:0:10.399154675 DEBUG (9): NodeID= 9 : curdepth= 2 , parentID= 5 
+0:0:10.597106952 DEBUG (7): NodeID= 7 : curdepth= 3 , parentID= 2 
+0:0:10.597106952 DEBUG (3): NodeID= 3 : curdepth= 3 , parentID= 2 
+0:0:10.598144556 DEBUG (13): NodeID= 13 : curdepth= 3 , parentID= 9 
+0:0:10.598144556 DEBUG (12): NodeID= 12 : curdepth= 3 , parentID= 9 
+0:0:10.598144556 DEBUG (14): NodeID= 14 : curdepth= 3 , parentID= 9 
+0:0:10.600143434 DEBUG (11): NodeID= 11 : curdepth= 3 , parentID= 6 
+0:0:10.604705797 DEBUG (15): NodeID= 15 : curdepth= 3 , parentID= 10 
 0:0:14.882812520 DEBUG (0): CHECK 1, chooseQues 9
 0:0:14.882812520 DEBUG (1): CHECK 1, chooseQues 9
 0:0:14.882812520 DEBUG (2): CHECK 1, chooseQues 9
@@ -39,7 +39,7 @@ TicksPerSecond :  10000000000
 0:1:11.826171895 DEBUG (7): Random value generated 34
 0:1:11.826171895 DEBUG (7): Node: 7 , Parent: 2, sum: 34, depth: 3
 0:1:11.923828146 DEBUG (11): Random value generated 26
-0:1:11.923828146 DEBUG (11): Node: 11 , Parent: 10, sum: 26, depth: 3
+0:1:11.923828146 DEBUG (11): Node: 11 , Parent: 6, sum: 26, depth: 3
 0:1:11.948242208 DEBUG (12): Random value generated 33
 0:1:11.948242208 DEBUG (12): Node: 12 , Parent: 9, sum: 33, depth: 3
 0:1:11.972656271 DEBUG (13): Random value generated 40
@@ -51,19 +51,19 @@ TicksPerSecond :  10000000000
 0:1:12.021484396 DEBUG (15): Random value generated 18
 0:1:12.021484396 DEBUG (15): Node: 15 , Parent: 10, sum: 18, depth: 3
 0:1:12.080078145 DEBUG (6): Random value generated 13
-0:1:12.080078145 DEBUG (6): Node: 6 , Parent: 1, sum: 13, depth: 2
+0:1:12.080078145 DEBUG (6): Node: 6 , Parent: 1, sum: 39, depth: 2
 0:1:12.128906270 DEBUG (8): Random value generated 41
 0:1:12.128906270 DEBUG (8): Node: 8 , Parent: 5, sum: 41, depth: 2
 0:1:12.153320333 DEBUG (9): Random value generated 48
 0:1:12.153320333 DEBUG (9): Node: 9 , Parent: 5, sum: 168, depth: 2
 0:1:12.177734396 DEBUG (10): Random value generated 5
-0:1:12.177734396 DEBUG (10): Node: 10 , Parent: 5, sum: 49, depth: 2
+0:1:12.177734396 DEBUG (10): Node: 10 , Parent: 5, sum: 23, depth: 2
 0:1:12.236328145 DEBUG (1): Random value generated 14
-0:1:12.236328145 DEBUG (1): Node: 1 , Parent: 0, sum: 124, depth: 1
+0:1:12.236328145 DEBUG (1): Node: 1 , Parent: 0, sum: 150, depth: 1
 0:1:12.309570332 DEBUG (4): Random value generated 49
 0:1:12.309570332 DEBUG (4): Node: 4 , Parent: 0, sum: 49, depth: 1
 0:1:12.333984395 DEBUG (5): Random value generated 6
-0:1:12.333984395 DEBUG (5): Node: 5 , Parent: 0, sum: 264, depth: 1
+0:1:12.333984395 DEBUG (5): Node: 5 , Parent: 0, sum: 238, depth: 1
 0:1:12.490234395 DEBUG (0): Random value generated 49
 0:1:12.490234395 DEBUG (0): 
 
@@ -77,7 +77,7 @@ TicksPerSecond :  10000000000
 0:2:10.419921895 DEBUG (7): Random value generated 27
 0:2:10.419921895 DEBUG (7): Don't send message with new value 27 and old value 34
 0:2:10.517578146 DEBUG (11): Random value generated 47
-0:2:10.517578146 DEBUG (11): Node: 11 , Parent: 10, sum: 47, depth: 3
+0:2:10.517578146 DEBUG (11): Node: 11 , Parent: 6, sum: 47, depth: 3
 0:2:10.541992208 DEBUG (12): Random value generated 36
 0:2:10.541992208 DEBUG (12): Don't send message with new value 36 and old value 33
 0:2:10.566406271 DEBUG (13): Random value generated 39
@@ -89,518 +89,24 @@ TicksPerSecond :  10000000000
 0:2:10.615234396 DEBUG (15): Random value generated 18
 0:2:10.615234396 DEBUG (15): Don't send message with new value 18 and old value 18
 0:2:10.673828145 DEBUG (6): Random value generated 37
-0:2:10.673828145 DEBUG (6): Node: 6 , Parent: 1, sum: 37, depth: 2
+0:2:10.673828145 DEBUG (6): Node: 6 , Parent: 1, sum: 84, depth: 2
 0:2:10.722656270 DEBUG (8): Random value generated 30
 0:2:10.722656270 DEBUG (8): Don't send message with new value 30 and old value 41
 0:2:10.747070333 DEBUG (9): Random value generated 19
 0:2:10.747070333 DEBUG (9): Don't send message with new value 139 and old value 168
 0:2:10.771484396 DEBUG (10): Random value generated 8
-0:2:10.771484396 DEBUG (10): Don't send message with new value 73 and old value 49
+0:2:10.771484396 DEBUG (10): Don't send message with new value 26 and old value 23
 0:2:10.830078145 DEBUG (1): Random value generated 28
-0:2:10.830078145 DEBUG (1): Don't send message with new value 162 and old value 124
+0:2:10.830078145 DEBUG (1): Don't send message with new value 209 and old value 150
 0:2:10.903320332 DEBUG (4): Random value generated 9
 0:2:10.903320332 DEBUG (4): Node: 4 , Parent: 0, sum: 9, depth: 1
 0:2:10.927734395 DEBUG (5): Random value generated 48
-0:2:10.927734395 DEBUG (5): Don't send message with new value 306 and old value 264
+0:2:10.927734395 DEBUG (5): Don't send message with new value 280 and old value 238
 0:2:11.083984395 DEBUG (0): Random value generated 14
 0:2:11.083984395 DEBUG (0): 
 
 ########################Epoch 2 completed#####################
 0:2:11.083984395 DEBUG (0): #### OUTPUT: 
 0:2:11.083984395 DEBUG (0): #### [SUM] = 411
-
-
-0:3:8.916015645 DEBUG (3): Random value generated 27
-0:3:8.916015645 DEBUG (3): Node: 3 , Parent: 2, sum: 27, depth: 3
-0:3:9.013671895 DEBUG (7): Random value generated 18
-0:3:9.013671895 DEBUG (7): Don't send message with new value 18 and old value 34
-0:3:9.111328146 DEBUG (11): Random value generated 9
-0:3:9.111328146 DEBUG (11): Node: 11 , Parent: 10, sum: 9, depth: 3
-0:3:9.135742208 DEBUG (12): Random value generated 8
-0:3:9.135742208 DEBUG (12): Don't send message with new value 8 and old value 33
-0:3:9.160156271 DEBUG (13): Random value generated 22
-0:3:9.160156271 DEBUG (13): Don't send message with new value 22 and old value 40
-0:3:9.169921895 DEBUG (2): Random value generated 27
-0:3:9.169921895 DEBUG (2): Don't send message with new value 88 and old value 97
-0:3:9.184570333 DEBUG (14): Random value generated 36
-0:3:9.184570333 DEBUG (14): Don't send message with new value 36 and old value 47
-0:3:9.208984396 DEBUG (15): Random value generated 36
-0:3:9.208984396 DEBUG (15): Node: 15 , Parent: 10, sum: 36, depth: 3
-0:3:9.267578145 DEBUG (6): Random value generated 4
-0:3:9.267578145 DEBUG (6): Node: 6 , Parent: 1, sum: 4, depth: 2
-0:3:9.316406270 DEBUG (8): Random value generated 31
-0:3:9.316406270 DEBUG (8): Don't send message with new value 31 and old value 41
-0:3:9.340820333 DEBUG (9): Random value generated 31
-0:3:9.340820333 DEBUG (9): Don't send message with new value 151 and old value 168
-0:3:9.365234396 DEBUG (10): Random value generated 45
-0:3:9.365234396 DEBUG (10): Node: 10 , Parent: 5, sum: 90, depth: 2
-0:3:9.423828145 DEBUG (1): Random value generated 13
-0:3:9.423828145 DEBUG (1): Don't send message with new value 114 and old value 124
-0:3:9.497070332 DEBUG (4): Random value generated 40
-0:3:9.497070332 DEBUG (4): Node: 4 , Parent: 0, sum: 40, depth: 1
-0:3:9.521484395 DEBUG (5): Random value generated 4
-0:3:9.521484395 DEBUG (5): Don't send message with new value 303 and old value 264
-0:3:9.677734395 DEBUG (0): Random value generated 28
-0:3:9.677734395 DEBUG (0): 
-
-########################Epoch 3 completed#####################
-0:3:9.677734395 DEBUG (0): #### OUTPUT: 
-0:3:9.677734395 DEBUG (0): #### [SUM] = 456
-
-
-0:4:7.509765645 DEBUG (3): Random value generated 7
-0:4:7.509765645 DEBUG (3): Don't send message with new value 7 and old value 27
-0:4:7.607421895 DEBUG (7): Random value generated 15
-0:4:7.607421895 DEBUG (7): Don't send message with new value 15 and old value 34
-0:4:7.705078146 DEBUG (11): Random value generated 23
-0:4:7.705078146 DEBUG (11): Node: 11 , Parent: 10, sum: 23, depth: 3
-0:4:7.729492208 DEBUG (12): Random value generated 37
-0:4:7.729492208 DEBUG (12): Don't send message with new value 37 and old value 33
-0:4:7.753906271 DEBUG (13): Random value generated 2
-0:4:7.753906271 DEBUG (13): Node: 13 , Parent: 9, sum: 2, depth: 3
-0:4:7.763671895 DEBUG (2): Random value generated 43
-0:4:7.763671895 DEBUG (2): Don't send message with new value 104 and old value 97
-0:4:7.778320333 DEBUG (14): Random value generated 16
-0:4:7.778320333 DEBUG (14): Don't send message with new value 16 and old value 47
-0:4:7.802734396 DEBUG (15): Random value generated 31
-0:4:7.802734396 DEBUG (15): Don't send message with new value 31 and old value 36
-0:4:7.861328145 DEBUG (6): Random value generated 1
-0:4:7.861328145 DEBUG (6): Don't send message with new value 1 and old value 4
-0:4:7.910156270 DEBUG (8): Random value generated 30
-0:4:7.910156270 DEBUG (8): Don't send message with new value 30 and old value 41
-0:4:7.934570333 DEBUG (9): Random value generated 44
-0:4:7.934570333 DEBUG (9): Don't send message with new value 126 and old value 168
-0:4:7.958984396 DEBUG (10): Random value generated 9
-0:4:7.958984396 DEBUG (10): Don't send message with new value 68 and old value 90
-0:4:8.017578145 DEBUG (1): Random value generated 28
-0:4:8.017578145 DEBUG (1): Don't send message with new value 129 and old value 124
-0:4:8.090820332 DEBUG (4): Random value generated 22
-0:4:8.090820332 DEBUG (4): Don't send message with new value 22 and old value 40
-0:4:8.115234395 DEBUG (5): Random value generated 36
-0:4:8.115234395 DEBUG (5): Don't send message with new value 335 and old value 264
-0:4:8.271484395 DEBUG (0): Random value generated 8
-0:4:8.271484395 DEBUG (0): 
-
-########################Epoch 4 completed#####################
-0:4:8.271484395 DEBUG (0): #### OUTPUT: 
-0:4:8.271484395 DEBUG (0): #### [SUM] = 436
-
-
-0:5:6.103515645 DEBUG (3): Random value generated 42
-0:5:6.103515645 DEBUG (3): Don't send message with new value 42 and old value 27
-0:5:6.201171895 DEBUG (7): Random value generated 48
-0:5:6.201171895 DEBUG (7): Don't send message with new value 48 and old value 34
-0:5:6.298828146 DEBUG (11): Random value generated 4
-0:5:6.298828146 DEBUG (11): Node: 11 , Parent: 10, sum: 4, depth: 3
-0:5:6.323242208 DEBUG (12): Random value generated 46
-0:5:6.323242208 DEBUG (12): Don't send message with new value 46 and old value 33
-0:5:6.347656271 DEBUG (13): Random value generated 39
-0:5:6.347656271 DEBUG (13): Node: 13 , Parent: 9, sum: 39, depth: 3
-0:5:6.357421895 DEBUG (2): Random value generated 13
-0:5:6.357421895 DEBUG (2): Don't send message with new value 74 and old value 97
-0:5:6.372070333 DEBUG (14): Random value generated 17
-0:5:6.372070333 DEBUG (14): Don't send message with new value 17 and old value 47
-0:5:6.396484396 DEBUG (15): Random value generated 10
-0:5:6.396484396 DEBUG (15): Don't send message with new value 10 and old value 36
-0:5:6.455078145 DEBUG (6): Random value generated 19
-0:5:6.455078145 DEBUG (6): Node: 6 , Parent: 1, sum: 19, depth: 2
-0:5:6.503906270 DEBUG (8): Random value generated 40
-0:5:6.503906270 DEBUG (8): Don't send message with new value 40 and old value 41
-0:5:6.528320333 DEBUG (9): Random value generated 33
-0:5:6.528320333 DEBUG (9): Don't send message with new value 152 and old value 168
-0:5:6.552734396 DEBUG (10): Random value generated 11
-0:5:6.552734396 DEBUG (10): Don't send message with new value 51 and old value 90
-0:5:6.611328145 DEBUG (1): Random value generated 21
-0:5:6.611328145 DEBUG (1): Don't send message with new value 137 and old value 124
-0:5:6.684570332 DEBUG (4): Random value generated 34
-0:5:6.684570332 DEBUG (4): Don't send message with new value 34 and old value 40
-0:5:6.708984395 DEBUG (5): Random value generated 27
-0:5:6.708984395 DEBUG (5): Don't send message with new value 326 and old value 264
-0:5:6.865234395 DEBUG (0): Random value generated 18
-0:5:6.865234395 DEBUG (0): 
-
-########################Epoch 5 completed#####################
-0:5:6.865234395 DEBUG (0): #### OUTPUT: 
-0:5:6.865234395 DEBUG (0): #### [SUM] = 446
-
-
-0:6:4.697265645 DEBUG (3): Random value generated 24
-0:6:4.697265645 DEBUG (3): Don't send message with new value 24 and old value 27
-0:6:4.794921895 DEBUG (7): Random value generated 49
-0:6:4.794921895 DEBUG (7): Don't send message with new value 49 and old value 34
-0:6:4.892578146 DEBUG (11): Random value generated 38
-0:6:4.892578146 DEBUG (11): Node: 11 , Parent: 10, sum: 38, depth: 3
-0:6:4.916992208 DEBUG (12): Random value generated 10
-0:6:4.916992208 DEBUG (12): Don't send message with new value 10 and old value 33
-0:6:4.941406271 DEBUG (13): Random value generated 19
-0:6:4.941406271 DEBUG (13): Don't send message with new value 19 and old value 39
-0:6:4.951171895 DEBUG (2): Random value generated 2
-0:6:4.951171895 DEBUG (2): Don't send message with new value 63 and old value 97
-0:6:4.965820333 DEBUG (14): Random value generated 41
-0:6:4.965820333 DEBUG (14): Don't send message with new value 41 and old value 47
-0:6:4.990234396 DEBUG (15): Random value generated 13
-0:6:4.990234396 DEBUG (15): Don't send message with new value 13 and old value 36
-0:6:5.048828145 DEBUG (6): Random value generated 27
-0:6:5.048828145 DEBUG (6): Don't send message with new value 27 and old value 19
-0:6:5.097656270 DEBUG (8): Random value generated 21
-0:6:5.097656270 DEBUG (8): Don't send message with new value 21 and old value 41
-0:6:5.122070333 DEBUG (9): Random value generated 44
-0:6:5.122070333 DEBUG (9): Don't send message with new value 163 and old value 168
-0:6:5.146484396 DEBUG (10): Random value generated 16
-0:6:5.146484396 DEBUG (10): Don't send message with new value 90 and old value 90
-0:6:5.205078145 DEBUG (1): Random value generated 30
-0:6:5.205078145 DEBUG (1): Don't send message with new value 146 and old value 124
-0:6:5.278320332 DEBUG (4): Random value generated 47
-0:6:5.278320332 DEBUG (4): Don't send message with new value 47 and old value 40
-0:6:5.302734395 DEBUG (5): Random value generated 19
-0:6:5.302734395 DEBUG (5): Don't send message with new value 318 and old value 264
-0:6:5.458984395 DEBUG (0): Random value generated 8
-0:6:5.458984395 DEBUG (0): 
-
-########################Epoch 6 completed#####################
-0:6:5.458984395 DEBUG (0): #### OUTPUT: 
-0:6:5.458984395 DEBUG (0): #### [SUM] = 436
-
-
-0:7:3.291015645 DEBUG (3): Random value generated 0
-0:7:3.291015645 DEBUG (3): Node: 3 , Parent: 2, sum: 0, depth: 3
-0:7:3.388671895 DEBUG (7): Random value generated 0
-0:7:3.388671895 DEBUG (7): Node: 7 , Parent: 2, sum: 0, depth: 3
-0:7:3.486328146 DEBUG (11): Random value generated 0
-0:7:3.486328146 DEBUG (11): Node: 11 , Parent: 10, sum: 0, depth: 3
-0:7:3.510742208 DEBUG (12): Random value generated 32
-0:7:3.510742208 DEBUG (12): Don't send message with new value 32 and old value 33
-0:7:3.535156271 DEBUG (13): Random value generated 0
-0:7:3.535156271 DEBUG (13): Node: 13 , Parent: 9, sum: 0, depth: 3
-0:7:3.544921895 DEBUG (2): Random value generated 18
-0:7:3.544921895 DEBUG (2): Node: 2 , Parent: 1, sum: 18, depth: 2
-0:7:3.559570333 DEBUG (14): Random value generated 32
-0:7:3.559570333 DEBUG (14): Don't send message with new value 32 and old value 47
-0:7:3.583984396 DEBUG (15): Random value generated 0
-0:7:3.583984396 DEBUG (15): Node: 15 , Parent: 10, sum: 0, depth: 3
-0:7:3.642578145 DEBUG (6): Random value generated 18
-0:7:3.642578145 DEBUG (6): Don't send message with new value 18 and old value 19
-0:7:3.691406270 DEBUG (8): Random value generated 32
-0:7:3.691406270 DEBUG (8): Don't send message with new value 32 and old value 41
-0:7:3.715820333 DEBUG (9): Random value generated 0
-0:7:3.715820333 DEBUG (9): Don't send message with new value 80 and old value 168
-0:7:3.740234396 DEBUG (10): Random value generated 32
-0:7:3.740234396 DEBUG (10): Don't send message with new value 32 and old value 90
-0:7:3.798828145 DEBUG (1): Random value generated 0
-0:7:3.798828145 DEBUG (1): Don't send message with new value 37 and old value 124
-0:7:3.872070332 DEBUG (4): Random value generated 18
-0:7:3.872070332 DEBUG (4): Don't send message with new value 18 and old value 40
-0:7:3.896484395 DEBUG (5): Random value generated 0
-0:7:3.896484395 DEBUG (5): Don't send message with new value 299 and old value 264
-0:7:4.052734395 DEBUG (0): Random value generated 49
-0:7:4.052734395 DEBUG (0): 
-
-########################Epoch 7 completed#####################
-0:7:4.052734395 DEBUG (0): #### OUTPUT: 
-0:7:4.052734395 DEBUG (0): #### [SUM] = 477
-
-
-0:8:1.884765645 DEBUG (3): Random value generated 34
-0:8:1.884765645 DEBUG (3): Node: 3 , Parent: 2, sum: 34, depth: 3
-0:8:1.982421895 DEBUG (7): Random value generated 19
-0:8:1.982421895 DEBUG (7): Node: 7 , Parent: 2, sum: 19, depth: 3
-0:8:2.080078146 DEBUG (11): Random value generated 4
-0:8:2.080078146 DEBUG (11): Node: 11 , Parent: 10, sum: 4, depth: 3
-0:8:2.104492208 DEBUG (12): Random value generated 12
-0:8:2.104492208 DEBUG (12): Don't send message with new value 12 and old value 33
-0:8:2.128906271 DEBUG (13): Random value generated 21
-0:8:2.128906271 DEBUG (13): Node: 13 , Parent: 9, sum: 21, depth: 3
-0:8:2.138671895 DEBUG (2): Random value generated 26
-0:8:2.138671895 DEBUG (2): Node: 2 , Parent: 1, sum: 79, depth: 2
-0:8:2.153320333 DEBUG (14): Random value generated 30
-0:8:2.153320333 DEBUG (14): Don't send message with new value 30 and old value 47
-0:8:2.177734396 DEBUG (15): Random value generated 38
-0:8:2.177734396 DEBUG (15): Node: 15 , Parent: 10, sum: 38, depth: 3
-0:8:2.236328145 DEBUG (6): Random value generated 10
-0:8:2.236328145 DEBUG (6): Don't send message with new value 10 and old value 19
-0:8:2.285156270 DEBUG (8): Random value generated 28
-0:8:2.285156270 DEBUG (8): Don't send message with new value 28 and old value 41
-0:8:2.309570333 DEBUG (9): Random value generated 36
-0:8:2.309570333 DEBUG (9): Don't send message with new value 137 and old value 168
-0:8:2.333984396 DEBUG (10): Random value generated 45
-0:8:2.333984396 DEBUG (10): Don't send message with new value 87 and old value 90
-0:8:2.392578145 DEBUG (1): Random value generated 17
-0:8:2.392578145 DEBUG (1): Don't send message with new value 115 and old value 124
-0:8:2.465820332 DEBUG (4): Random value generated 43
-0:8:2.465820332 DEBUG (4): Don't send message with new value 43 and old value 40
-0:8:2.490234395 DEBUG (5): Random value generated 2
-0:8:2.490234395 DEBUG (5): Don't send message with new value 301 and old value 264
-0:8:2.646484395 DEBUG (0): Random value generated 1
-0:8:2.646484395 DEBUG (0): 
-
-########################Epoch 8 completed#####################
-0:8:2.646484395 DEBUG (0): #### OUTPUT: 
-0:8:2.646484395 DEBUG (0): #### [SUM] = 429
-
-
-0:9:0.478515645 DEBUG (3): Random value generated 48
-0:9:0.478515645 DEBUG (3): Don't send message with new value 48 and old value 34
-0:9:0.576171895 DEBUG (7): Random value generated 11
-0:9:0.576171895 DEBUG (7): Don't send message with new value 11 and old value 19
-0:9:0.673828146 DEBUG (11): Random value generated 24
-0:9:0.673828146 DEBUG (11): Node: 11 , Parent: 10, sum: 24, depth: 3
-0:9:0.698242208 DEBUG (12): Random value generated 23
-0:9:0.698242208 DEBUG (12): Don't send message with new value 23 and old value 33
-0:9:0.722656271 DEBUG (13): Random value generated 23
-0:9:0.722656271 DEBUG (13): Don't send message with new value 23 and old value 21
-0:9:0.732421895 DEBUG (2): Random value generated 49
-0:9:0.732421895 DEBUG (2): Don't send message with new value 102 and old value 79
-0:9:0.747070333 DEBUG (14): Random value generated 23
-0:9:0.747070333 DEBUG (14): Don't send message with new value 23 and old value 47
-0:9:0.771484396 DEBUG (15): Random value generated 22
-0:9:0.771484396 DEBUG (15): Don't send message with new value 22 and old value 38
-0:9:0.830078145 DEBUG (6): Random value generated 11
-0:9:0.830078145 DEBUG (6): Don't send message with new value 11 and old value 19
-0:9:0.878906270 DEBUG (8): Random value generated 11
-0:9:0.878906270 DEBUG (8): Don't send message with new value 11 and old value 41
-0:9:0.903320333 DEBUG (9): Random value generated 10
-0:9:0.903320333 DEBUG (9): Don't send message with new value 111 and old value 168
-0:9:0.927734396 DEBUG (10): Random value generated 24
-0:9:0.927734396 DEBUG (10): Don't send message with new value 86 and old value 90
-0:9:0.986328145 DEBUG (1): Random value generated 49
-0:9:0.986328145 DEBUG (1): Don't send message with new value 147 and old value 124
-0:9:1.059570332 DEBUG (4): Random value generated 48
-0:9:1.059570332 DEBUG (4): Don't send message with new value 48 and old value 40
-0:9:1.083984395 DEBUG (5): Random value generated 12
-0:9:1.083984395 DEBUG (5): Don't send message with new value 311 and old value 264
-0:9:1.240234395 DEBUG (0): Random value generated 14
-0:9:1.240234395 DEBUG (0): 
-
-########################Epoch 9 completed#####################
-0:9:1.240234395 DEBUG (0): #### OUTPUT: 
-0:9:1.240234395 DEBUG (0): #### [SUM] = 442
-
-
-0:9:59.072265645 DEBUG (3): Random value generated 7
-0:9:59.072265645 DEBUG (3): Don't send message with new value 7 and old value 34
-0:9:59.169921895 DEBUG (7): Random value generated 15
-0:9:59.169921895 DEBUG (7): Don't send message with new value 15 and old value 19
-0:9:59.267578146 DEBUG (11): Random value generated 23
-0:9:59.267578146 DEBUG (11): Don't send message with new value 23 and old value 24
-0:9:59.291992208 DEBUG (12): Random value generated 25
-0:9:59.291992208 DEBUG (12): Don't send message with new value 25 and old value 33
-0:9:59.316406271 DEBUG (13): Random value generated 27
-0:9:59.316406271 DEBUG (13): Don't send message with new value 27 and old value 21
-0:9:59.326171895 DEBUG (2): Random value generated 5
-0:9:59.326171895 DEBUG (2): Don't send message with new value 58 and old value 79
-0:9:59.340820333 DEBUG (14): Random value generated 29
-0:9:59.340820333 DEBUG (14): Don't send message with new value 29 and old value 47
-0:9:59.365234396 DEBUG (15): Random value generated 30
-0:9:59.365234396 DEBUG (15): Don't send message with new value 30 and old value 38
-0:9:59.423828145 DEBUG (6): Random value generated 13
-0:9:59.423828145 DEBUG (6): Don't send message with new value 13 and old value 19
-0:9:59.472656270 DEBUG (8): Random value generated 17
-0:9:59.472656270 DEBUG (8): Don't send message with new value 17 and old value 41
-0:9:59.497070333 DEBUG (9): Random value generated 19
-0:9:59.497070333 DEBUG (9): Don't send message with new value 120 and old value 168
-0:9:59.521484396 DEBUG (10): Random value generated 21
-0:9:59.521484396 DEBUG (10): Don't send message with new value 83 and old value 90
-0:9:59.580078145 DEBUG (1): Random value generated 3
-0:9:59.580078145 DEBUG (1): Don't send message with new value 101 and old value 124
-0:9:59.653320332 DEBUG (4): Random value generated 9
-0:9:59.653320332 DEBUG (4): Don't send message with new value 9 and old value 40
-0:9:59.677734395 DEBUG (5): Random value generated 11
-0:9:59.677734395 DEBUG (5): Don't send message with new value 310 and old value 264
-0:9:59.833984395 DEBUG (0): Random value generated 45
-0:9:59.833984395 DEBUG (0): 
-
-########################Epoch 10 completed#####################
-0:9:59.833984395 DEBUG (0): #### OUTPUT: 
-0:9:59.833984395 DEBUG (0): #### [SUM] = 473
-
-
-0:10:57.666015645 DEBUG (3): Random value generated 35
-0:10:57.666015645 DEBUG (3): Don't send message with new value 35 and old value 34
-0:10:57.763671895 DEBUG (7): Random value generated 21
-0:10:57.763671895 DEBUG (7): Don't send message with new value 21 and old value 19
-0:10:57.861328146 DEBUG (11): Random value generated 20
-0:10:57.861328146 DEBUG (11): Don't send message with new value 20 and old value 24
-0:10:57.885742208 DEBUG (12): Random value generated 34
-0:10:57.885742208 DEBUG (12): Don't send message with new value 34 and old value 33
-0:10:57.910156271 DEBUG (13): Random value generated 13
-0:10:57.910156271 DEBUG (13): Don't send message with new value 13 and old value 21
-0:10:57.919921895 DEBUG (2): Random value generated 7
-0:10:57.919921895 DEBUG (2): Don't send message with new value 60 and old value 79
-0:10:57.934570333 DEBUG (14): Random value generated 27
-0:10:57.934570333 DEBUG (14): Don't send message with new value 27 and old value 47
-0:10:57.958984396 DEBUG (15): Random value generated 6
-0:10:57.958984396 DEBUG (15): Node: 15 , Parent: 10, sum: 6, depth: 3
-0:10:58.017578145 DEBUG (6): Random value generated 6
-0:10:58.017578145 DEBUG (6): Don't send message with new value 6 and old value 19
-0:10:58.066406270 DEBUG (8): Random value generated 49
-0:10:58.066406270 DEBUG (8): Don't send message with new value 49 and old value 41
-0:10:58.090820333 DEBUG (9): Random value generated 13
-0:10:58.090820333 DEBUG (9): Don't send message with new value 114 and old value 168
-0:10:58.115234396 DEBUG (10): Random value generated 42
-0:10:58.115234396 DEBUG (10): Don't send message with new value 72 and old value 90
-0:10:58.173828145 DEBUG (1): Random value generated 42
-0:10:58.173828145 DEBUG (1): Don't send message with new value 140 and old value 124
-0:10:58.247070332 DEBUG (4): Random value generated 49
-0:10:58.247070332 DEBUG (4): Don't send message with new value 49 and old value 40
-0:10:58.271484395 DEBUG (5): Random value generated 28
-0:10:58.271484395 DEBUG (5): Don't send message with new value 327 and old value 264
-0:10:58.427734395 DEBUG (0): Random value generated 48
-0:10:58.427734395 DEBUG (0): 
-
-########################Epoch 11 completed#####################
-0:10:58.427734395 DEBUG (0): #### OUTPUT: 
-0:10:58.427734395 DEBUG (0): #### [SUM] = 476
-
-
-0:11:56.259765645 DEBUG (3): Random value generated 32
-0:11:56.259765645 DEBUG (3): Don't send message with new value 32 and old value 34
-0:11:56.357421895 DEBUG (7): Random value generated 28
-0:11:56.357421895 DEBUG (7): Don't send message with new value 28 and old value 19
-0:11:56.455078146 DEBUG (11): Random value generated 24
-0:11:56.455078146 DEBUG (11): Don't send message with new value 24 and old value 24
-0:11:56.479492208 DEBUG (12): Random value generated 33
-0:11:56.479492208 DEBUG (12): Don't send message with new value 33 and old value 33
-0:11:56.503906271 DEBUG (13): Random value generated 29
-0:11:56.503906271 DEBUG (13): Don't send message with new value 29 and old value 21
-0:11:56.513671895 DEBUG (2): Random value generated 36
-0:11:56.513671895 DEBUG (2): Don't send message with new value 89 and old value 79
-0:11:56.528320333 DEBUG (14): Random value generated 24
-0:11:56.528320333 DEBUG (14): Don't send message with new value 24 and old value 47
-0:11:56.552734396 DEBUG (15): Random value generated 20
-0:11:56.552734396 DEBUG (15): Node: 15 , Parent: 10, sum: 20, depth: 3
-0:11:56.611328145 DEBUG (6): Random value generated 32
-0:11:56.611328145 DEBUG (6): Don't send message with new value 32 and old value 19
-0:11:56.660156270 DEBUG (8): Random value generated 37
-0:11:56.660156270 DEBUG (8): Don't send message with new value 37 and old value 41
-0:11:56.684570333 DEBUG (9): Random value generated 33
-0:11:56.684570333 DEBUG (9): Don't send message with new value 134 and old value 168
-0:11:56.708984396 DEBUG (10): Random value generated 28
-0:11:56.708984396 DEBUG (10): Don't send message with new value 72 and old value 90
-0:11:56.767578145 DEBUG (1): Random value generated 41
-0:11:56.767578145 DEBUG (1): Don't send message with new value 139 and old value 124
-0:11:56.840820332 DEBUG (4): Random value generated 41
-0:11:56.840820332 DEBUG (4): Don't send message with new value 41 and old value 40
-0:11:56.865234395 DEBUG (5): Random value generated 37
-0:11:56.865234395 DEBUG (5): Don't send message with new value 336 and old value 264
-0:11:57.021484395 DEBUG (0): Random value generated 40
-0:11:57.021484395 DEBUG (0): 
-
-########################Epoch 12 completed#####################
-0:11:57.021484395 DEBUG (0): #### OUTPUT: 
-0:11:57.021484395 DEBUG (0): #### [SUM] = 468
-
-
-0:12:54.853515645 DEBUG (3): Random value generated 45
-0:12:54.853515645 DEBUG (3): Don't send message with new value 45 and old value 34
-0:12:54.951171895 DEBUG (7): Random value generated 40
-0:12:54.951171895 DEBUG (7): Node: 7 , Parent: 2, sum: 40, depth: 3
-0:12:55.048828146 DEBUG (11): Random value generated 35
-0:12:55.048828146 DEBUG (11): Don't send message with new value 35 and old value 24
-0:12:55.073242208 DEBUG (12): Random value generated 34
-0:12:55.073242208 DEBUG (12): Don't send message with new value 34 and old value 33
-0:12:55.097656271 DEBUG (13): Random value generated 47
-0:12:55.097656271 DEBUG (13): Node: 13 , Parent: 9, sum: 47, depth: 3
-0:12:55.107421895 DEBUG (2): Random value generated 46
-0:12:55.107421895 DEBUG (2): Don't send message with new value 120 and old value 79
-0:12:55.122070333 DEBUG (14): Random value generated 46
-0:12:55.122070333 DEBUG (14): Don't send message with new value 46 and old value 47
-0:12:55.146484396 DEBUG (15): Random value generated 45
-0:12:55.146484396 DEBUG (15): Node: 15 , Parent: 10, sum: 45, depth: 3
-0:12:55.205078145 DEBUG (6): Random value generated 41
-0:12:55.205078145 DEBUG (6): Node: 6 , Parent: 1, sum: 41, depth: 2
-0:12:55.253906270 DEBUG (8): Random value generated 39
-0:12:55.253906270 DEBUG (8): Don't send message with new value 39 and old value 41
-0:12:55.278320333 DEBUG (9): Random value generated 38
-0:12:55.278320333 DEBUG (9): Don't send message with new value 165 and old value 168
-0:12:55.302734396 DEBUG (10): Random value generated 37
-0:12:55.302734396 DEBUG (10): Don't send message with new value 106 and old value 90
-0:12:55.361328145 DEBUG (1): Random value generated 47
-0:12:55.361328145 DEBUG (1): Don't send message with new value 167 and old value 124
-0:12:55.434570332 DEBUG (4): Random value generated 44
-0:12:55.434570332 DEBUG (4): Don't send message with new value 44 and old value 40
-0:12:55.458984395 DEBUG (5): Random value generated 42
-0:12:55.458984395 DEBUG (5): Don't send message with new value 341 and old value 264
-0:12:55.615234395 DEBUG (0): Random value generated 1
-0:12:55.615234395 DEBUG (0): 
-
-########################Epoch 13 completed#####################
-0:12:55.615234395 DEBUG (0): #### OUTPUT: 
-0:12:55.615234395 DEBUG (0): #### [SUM] = 429
-
-
-0:13:53.447265645 DEBUG (3): Random value generated 2
-0:13:53.447265645 DEBUG (3): Node: 3 , Parent: 2, sum: 2, depth: 3
-0:13:53.544921895 DEBUG (7): Random value generated 4
-0:13:53.544921895 DEBUG (7): Node: 7 , Parent: 2, sum: 4, depth: 3
-0:13:53.642578146 DEBUG (11): Random value generated 20
-0:13:53.642578146 DEBUG (11): Don't send message with new value 20 and old value 24
-0:13:53.666992208 DEBUG (12): Random value generated 24
-0:13:53.666992208 DEBUG (12): Don't send message with new value 24 and old value 33
-0:13:53.691406271 DEBUG (13): Random value generated 28
-0:13:53.691406271 DEBUG (13): Don't send message with new value 28 and old value 47
-0:13:53.701171895 DEBUG (2): Random value generated 48
-0:13:53.701171895 DEBUG (2): Don't send message with new value 54 and old value 79
-0:13:53.715820333 DEBUG (14): Random value generated 18
-0:13:53.715820333 DEBUG (14): Don't send message with new value 18 and old value 47
-0:13:53.740234396 DEBUG (15): Random value generated 22
-0:13:53.740234396 DEBUG (15): Don't send message with new value 22 and old value 45
-0:13:53.798828145 DEBUG (6): Random value generated 14
-0:13:53.798828145 DEBUG (6): Don't send message with new value 14 and old value 41
-0:13:53.847656270 DEBUG (8): Random value generated 8
-0:13:53.847656270 DEBUG (8): Node: 8 , Parent: 5, sum: 8, depth: 2
-0:13:53.872070333 DEBUG (9): Random value generated 12
-0:13:53.872070333 DEBUG (9): Don't send message with new value 139 and old value 168
-0:13:53.896484396 DEBUG (10): Random value generated 16
-0:13:53.896484396 DEBUG (10): Don't send message with new value 85 and old value 90
-0:13:53.955078145 DEBUG (1): Random value generated 44
-0:13:53.955078145 DEBUG (1): Don't send message with new value 164 and old value 124
-0:13:54.028320332 DEBUG (4): Random value generated 6
-0:13:54.028320332 DEBUG (4): Node: 4 , Parent: 0, sum: 6, depth: 1
-0:13:54.052734395 DEBUG (5): Random value generated 10
-0:13:54.052734395 DEBUG (5): Don't send message with new value 276 and old value 264
-0:13:54.208984395 DEBUG (0): Random value generated 1
-0:13:54.208984395 DEBUG (0): 
-
-########################Epoch 14 completed#####################
-0:13:54.208984395 DEBUG (0): #### OUTPUT: 
-0:13:54.208984395 DEBUG (0): #### [SUM] = 395
-
-
-0:14:52.041015645 DEBUG (3): Random value generated 46
-0:14:52.041015645 DEBUG (3): Node: 3 , Parent: 2, sum: 46, depth: 3
-0:14:52.138671895 DEBUG (7): Random value generated 42
-0:14:52.138671895 DEBUG (7): Node: 7 , Parent: 2, sum: 42, depth: 3
-0:14:52.236328146 DEBUG (11): Random value generated 38
-0:14:52.236328146 DEBUG (11): Don't send message with new value 38 and old value 24
-0:14:52.260742208 DEBUG (12): Random value generated 3
-0:14:52.260742208 DEBUG (12): Node: 12 , Parent: 9, sum: 3, depth: 3
-0:14:52.285156271 DEBUG (13): Random value generated 18
-0:14:52.285156271 DEBUG (13): Don't send message with new value 18 and old value 47
-0:14:52.294921895 DEBUG (2): Random value generated 31
-0:14:52.294921895 DEBUG (2): Don't send message with new value 119 and old value 79
-0:14:52.309570333 DEBUG (14): Random value generated 33
-0:14:52.309570333 DEBUG (14): Don't send message with new value 33 and old value 47
-0:14:52.333984396 DEBUG (15): Random value generated 48
-0:14:52.333984396 DEBUG (15): Don't send message with new value 48 and old value 45
-0:14:52.392578145 DEBUG (6): Random value generated 27
-0:14:52.392578145 DEBUG (6): Don't send message with new value 27 and old value 41
-0:14:52.441406270 DEBUG (8): Random value generated 7
-0:14:52.441406270 DEBUG (8): Don't send message with new value 7 and old value 8
-0:14:52.465820333 DEBUG (9): Random value generated 22
-0:14:52.465820333 DEBUG (9): Don't send message with new value 119 and old value 168
-0:14:52.490234396 DEBUG (10): Random value generated 37
-0:14:52.490234396 DEBUG (10): Don't send message with new value 106 and old value 90
-0:14:52.548828145 DEBUG (1): Random value generated 16
-0:14:52.548828145 DEBUG (1): Don't send message with new value 136 and old value 124
-0:14:52.622070332 DEBUG (4): Random value generated 11
-0:14:52.622070332 DEBUG (4): Node: 4 , Parent: 0, sum: 11, depth: 1
-0:14:52.646484395 DEBUG (5): Random value generated 12
-0:14:52.646484395 DEBUG (5): Don't send message with new value 278 and old value 264
-0:14:52.802734395 DEBUG (0): Random value generated 15
-0:14:52.802734395 DEBUG (0): 
-
-########################Epoch 15 completed#####################
-0:14:52.802734395 DEBUG (0): #### OUTPUT: 
-0:14:52.802734395 DEBUG (0): #### [SUM] = 414
 
 
